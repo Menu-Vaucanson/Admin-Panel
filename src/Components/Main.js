@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 
-import Home from './Components/Home';
+import Home from './Home.js';
+import MenuBar from './MenuBar.js';
+
 
 function Main() {
 	return (
-		<div>
-			<div className='App'>
-				<Routes>
-					<Route path='/' element={<Home />}></Route>
-				</Routes>
-			</div>
-		</div >
+		<div className='App'>
+			<MenuBar />
+			<Routes>
+				{/* <Route path='/' element={<Home />}></Route> */}
+			</Routes>
+		</div>
 	)
 }
 

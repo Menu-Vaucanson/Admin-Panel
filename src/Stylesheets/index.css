@@ -14,9 +14,16 @@
 }
 
 body {
-    font-family: "Fira Mono Regular";
+    font-family: "Fira Mono Regular", "Courier New";
     margin: 0;
     overflow-x: hidden;
+    color: black;
+}
+
+.App {
+    width: 100vw;
+    height: calc(100vh - 3vmax - 1.5vmax);
+    margin-top: calc(3vmax + 1.5vmax);
 }
 
 .MenuBar {
@@ -30,6 +37,7 @@ body {
 }
 
 .MenuBarTitle {
+    text-decoration: none;
     text-shadow: 0 0 2.5vmax #F5FEF5;
     color: #F5FEF5;
     font-size: 2.5vmax;
@@ -45,4 +53,19 @@ body {
     align-items: center;
     justify-content: center;
     margin-right: 1vw;
+}
+
+.Home {
+    width: 100vw;
+    height: calc(100vh - 3vmax - 1.5vmax);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PageTitle {
+    margin: 0 auto;
+    font-size: 4.5vh;
+    text-align: center;
+    margin-top: 2vh;
 }

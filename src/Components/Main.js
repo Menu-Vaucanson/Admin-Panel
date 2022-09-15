@@ -6,12 +6,13 @@ import MenuBar from './MenuBar.js';
 
 function Main() {
 	return (
-		<div className='App'>
-			<MenuBar />
-			<Routes>
-				{/* <Route path='/' element={<Home />}></Route> */}
-			</Routes>
-		</div>
+		<>
+			<MenuBar /><div className='App'>
+				<Routes>
+					<Route path='/' element={<Home />}></Route>
+				</Routes>
+			</div>
+		</>
 	)
 }
 

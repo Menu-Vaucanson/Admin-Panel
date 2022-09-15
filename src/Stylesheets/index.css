@@ -1,71 +1,106 @@
 @font-face {
-    font-family: "Fira Mono Regular";
-    src: url("/public/fonts/FiraMono-Regular.otf");
+	font-family: "Fira Mono Regular";
+	src: url("/public/fonts/FiraMono-Regular.otf");
 }
 
 @font-face {
-    font-family: "Fira Mono Bold";
-    src: url("/public/fonts/FiraMono-Bold.otf");
+	font-family: "Fira Mono Bold";
+	src: url("/public/fonts/FiraMono-Bold.otf");
 }
 
 @font-face {
-    font-family: "Fira Mono Medium";
-    src: url("/public/fonts/FiraMono-Medium.otf");
+	font-family: "Fira Mono Medium";
+	src: url("/public/fonts/FiraMono-Medium.otf");
 }
 
 body {
-    font-family: "Fira Mono Regular", "Courier New";
-    margin: 0;
-    overflow-x: hidden;
-    color: black;
+	font-family: "Fira Mono Regular", "Courier New";
+	margin: 0;
+	overflow-x: hidden;
+	color: black;
+	background-color: #403F4C;
+}
+
+a {
+	color: initial;
+	text-decoration: none;
 }
 
 .App {
-    width: 100vw;
-    height: calc(100vh - 3vmax - 1.5vmax);
-    margin-top: calc(3vmax + 1.5vmax);
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	margin-top: calc(3vmax + 1.5vmax);
 }
 
 .MenuBar {
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    background-color: #403F4C;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	background-color: #B3B3B3;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
 
 .MenuBarTitle {
-    text-decoration: none;
-    text-shadow: 0 0 2.5vmax #F5FEF5;
-    color: #F5FEF5;
-    font-size: 2.5vmax;
-    margin: 0 auto;
-    cursor: pointer;
+	text-decoration: none;
+	text-shadow: 0 0 2.5vmax black;
+	color: black;
+	font-size: 2.5vmax;
+	margin: 0 auto;
+	cursor: pointer;
+	width: calc(100vw - 6vw - 3vw);
+	margin-left: calc(3vw + 1.5vw);
+	text-align: center;
 }
 
 .MenuLogo {
-    width: 3.6vmax;
-    height: 3vmax;
-    padding: 0.75vmax;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1vw;
+	width: 3.6vmax;
+	height: 3vmax;
+	padding: 0.75vmax;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 1vw;
 }
 
 .Home {
-    width: 100vw;
-    height: calc(100vh - 3vmax - 1.5vmax);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .PageTitle {
-    margin: 0 auto;
-    font-size: 4.5vh;
-    text-align: center;
-    margin-top: 2vh;
+	margin: 0 auto;
+	font-size: 4.5vh;
+	text-align: center;
+	margin-top: 2vh;
+	color: #F5FEF5;
+}
+
+.HomeBoxes {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2vw;
+	margin: auto 0;
+}
+
+.homeButtons {
+	width: 30vw;
+	text-align: center;
+	background-color: #B3B3B3;
+	font-size: 4.5vh;
+	font-weight: bold;
+	border-radius: 2.5vh;
+	padding: 20vh 8vh;
+	cursor: pointer;
+	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
+	transition-duration: 300ms;
+}
+
+.homeButtons:hover {
+	box-shadow: 0 0 2.5vh rgba(0, 0, 0, 0.75);
 }

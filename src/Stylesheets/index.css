@@ -119,6 +119,13 @@ a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: #F5FEF5;
+	font-size: 4.5vh;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .infosButons {

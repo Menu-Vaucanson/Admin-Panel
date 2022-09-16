@@ -5,8 +5,8 @@ function Home() {
 		<div className="Home">
 			<div className="PageTitle">Bienvenue</div>
 			<div className="HomeBoxes">
-				<Link to='Infos' className='homeButtons'>Informations</Link>
-				<Link to='Admin' className='homeButtons'>Administration</Link>
+				<Link to='Infos' className='homeButtons yellow'>Informations</Link>
+				<Link to='Admin' className='homeButtons blue'>Administration</Link>
 			</div>
 		</div >
 	)

@@ -113,6 +113,14 @@ a {
 	align-items: center;
 }
 
+.Admin {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .infosButons {
 	width: 22vw;
 	text-align: center;
@@ -124,4 +132,57 @@ a {
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 300ms;
+	justify-content: space-around;
+	color: #F5FEF5;
+}
+
+.AdminBoxes {
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2vw;
+}
+
+.AdminBox {
+	background-color: #B3B3B3;
+	padding: 25vh 0;
+	width: 30vw;
+	font-size: 4.5vh;
+	font-weight: bold;
+	border-radius: 2.5vh;
+	cursor: pointer;
+	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
+	transition-duration: 300ms;
+	text-align: center;
+}
+
+.AdminBox:hover {
+	box-shadow: 0 0 2.5vh rgba(0, 0, 0, 0.75);
+}
+
+.E404 {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	color: #F5FEF5;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.green:hover {
+	background-color: #08A47C;
+}
+
+.blue:hover {
+	background-color: #4775FF;
+}
+
+.red:hover {
+	background-color: #E74855;
+}
+
+.yellow:hover {
+	background-color: #FFC482;
 }

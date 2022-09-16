@@ -104,3 +104,24 @@ a {
 .homeButtons:hover {
 	box-shadow: 0 0 2.5vh rgba(0, 0, 0, 0.75);
 }
+
+.Info {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.infosButons {
+	width: 22vw;
+	text-align: center;
+	background-color: #B3B3B3;
+	font-size: 4.5vh;
+	font-weight: bold;
+	border-radius: 2.5vh;
+	padding: 20vh 8vh;
+	cursor: pointer;
+	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
+	transition-duration: 300ms;
+}

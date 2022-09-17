@@ -330,7 +330,8 @@ a {
 	padding: 2vh 2vw;
 }
 
-.EnterMenuContent textarea {
+.EnterMenuContent textarea,
+.EnterMenuContent div {
 	width: 20vw;
 	height: 10vh;
 	padding: 2vh 2vw;
@@ -361,7 +362,7 @@ a {
 }
 
 .EnterMenuDay {
-	margin: auto;
+	margin: 1.2vh auto;
 	padding-left: 3vw;
 	font-weight: bold;
 }
@@ -379,7 +380,8 @@ a {
 	margin-bottom: 43vh;
 }
 
-.EnterMenuError textarea {
+.EnterMenuError textarea,
+.EnterMenuError div {
 	font-size: 1vmax;
 	resize: none;
 	text-align: center;
@@ -399,4 +401,9 @@ a {
 	background-color: #403F4C;
 	color: #F5FEF5;
 	font-size: 2vmax;
+}
+
+.EnterMenuDayTheme {
+	margin: 1.2vh auto;
+	font-weight: bold;
 }

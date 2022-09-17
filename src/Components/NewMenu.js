@@ -12,11 +12,11 @@ function NewMenu() {
 			}} defaultValue={date} className="MenuDateSelection" id="date" type="date" />
 		)
 	}
-	const change = (event) => {
-		window.sessionStorage.setItem(event.target.id, JSON.stringify(event.target.value));
-	}
 
 	function MenuContent({ evening, error }) {
+		const change = (event) => {
+			window.sessionStorage.setItem(event.target.id, JSON.stringify(event.target.value));
+		}
 		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
 		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
 		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
@@ -124,9 +124,98 @@ function NewMenu() {
 					</div>
 					{MenuContent2}
 				</div>
-			</div >
+			</div>
 		)
 	}
+
+	function SelectThemes() {
+		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
+		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
+		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
+		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
+		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
+		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
+		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
+		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+
+		const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
+		const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+
+		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
+		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+		if (isErrored1 == null) {
+			isErrored1 = false;
+		}
+		if (isErrored2 == null) {
+			isErrored2 = false;
+		}
+		const content = [];
+
+		if (isErrored1) {
+			if (error1) {
+				content.push(
+					<div className="EnterMenu">
+						<div className="EnterMenuHeader">
+							<div className="EnterMenuDayTheme">Midi</div>
+						</div>
+						<div className="EnterMenuError">
+							<div>{error1}</div>
+						</div>
+					</div>
+				);
+			}
+		} else {
+			content.push(
+				<div className="EnterMenu">
+					<div className="EnterMenuHeader">
+						<div className="EnterMenuDayTheme">Midi</div>
+					</div>
+					<div className="EnterMenuContent">
+						<div key={1}>{dish1}</div>
+						<div key={2}>{dish2}</div>
+						<div key={3}>{dish3}</div>
+						<div key={4}>{dish4}</div>
+					</div>
+				</div >
+			);
+		}
+
+		if (isErrored2) {
+			if (error2) {
+				content.push(
+					<div className="EnterMenu">
+						<div className="EnterMenuHeader">
+							<div className="EnterMenuDayTheme">Soir</div>
+						</div>
+						<div className="EnterMenuError">
+							<div>{error2}</div>
+						</div>
+					</div>
+				);
+			}
+		} else {
+			content.push(
+				<div className="EnterMenu">
+					<div className="EnterMenuHeader">
+						<div className="EnterMenuDayTheme">Soir</div>
+					</div>
+					<div className="EnterMenuContent">
+						<div key={1}>{dish1e}</div>
+						<div key={2}>{dish2e}</div>
+						<div key={3}>{dish3e}</div>
+						<div key={4}>{dish4e}</div>
+					</div>
+				</div>
+
+			);
+		}
+		return (
+			<div className="EnterMenuDiv">
+				{content}
+			</div>
+		);
+	}
+
 
 	function NavButton({ Next }) {
 		if (Next) {
@@ -156,6 +245,7 @@ function NewMenu() {
 	const [PrevButton, setPrevButton] = useState();
 	const [NextButton, setNextButton] = useState(<NavButton Next={true} />);
 
+
 	function next() {
 		setBarState(old => {
 			if (old === 1) {
@@ -165,7 +255,7 @@ function NewMenu() {
 				return 2;
 			} else if (old === 2) {
 				setTitle('Choix des thèmes');
-				setContent();
+				setContent(<SelectThemes />);
 				return 3;
 			} else if (old === 3) {
 				setNextButton();
@@ -190,7 +280,7 @@ function NewMenu() {
 			} else if (old === 4) {
 				setNextButton(<NavButton Next={true} />);
 				setTitle('Choix des thèmes');
-				setContent();
+				setContent(<SelectThemes />);
 				return 3;
 			}
 		});

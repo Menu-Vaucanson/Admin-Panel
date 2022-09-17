@@ -13,6 +13,10 @@
 	src: url("/public/fonts/FiraMono-Medium.otf");
 }
 
+*:focus {
+	outline: none;
+}
+
 body {
 	font-family: "Fira Mono Regular", "Courier New";
 	margin: 0;
@@ -194,58 +198,42 @@ a {
 	background-color: #FFC482;
 }
 
-.Index {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 5vh;
-	font-size: 5vh;
-	color: white;
-	background-color: #403F4C;
+.LoginPage {
 	width: 100vw;
 	height: 100vh;
-}
-
-.FormInput {
-	width: min-content;
-	height: 5vh;
-	margin: 0;
-	border: 0px solid white;
-	border-radius: 2vh;
-	background-color: #B3B3B3;
-	font-size: 4vh;
-	text-align: center;
-}
-
-.FormInput:focus {
-	outline: none;
-}
-
-.passwordBox {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 }
 
-.PasswordLogo {
+.LoginPage input {
+	margin-top: 10vh;
+	margin-bottom: 5vh;
+	background-color: #55555c;
+	border: none;
+	color: #F5FEF5;
+	font-size: 2vmax;
+	border-radius: 0.5vmax;
+	padding: 2vh 2vw;
+}
+
+.LoginTitle {
+	font-size: 5vmax;
+	color: #F5FEF5;
+	text-align: center;
+}
+
+.LoginButton {
+	background-color: #55555c;
+	text-align: center;
+	color: #F5FEF5;
+	font-size: 2vmax;
+	border-radius: 0.5vmax;
+	padding: 2vh 2vw;
+	cursor: pointer;
+}
+
+.LoginLogo {
 	width: 20vw;
-}
-
-.conectButon {
-	color: black;
-	font-size: 3vh;
-	width: 10vw;
-	background-color: #B3B3B3;
-	border-radius: 1vh;
-	padding: 0.5vh;
-	margin-top: 3vh;
-	text-align: center;
-}
-
-.passwordText {
-	font-size: 10vh;
-	text-align: center;
-	margin-bottom: 2vh;
 }

@@ -18,7 +18,7 @@ function Index() {
 			<div className='passwordText'>Bienvenue à l'administration <br /> du Menu Vaucanson</div>
 			<img className='PasswordLogo' src={Logo} alt='Logo' />
 			<div className='passwordBox'>
-				<input type='password' className='FormInput' placeholder='Mot de Passe' id='password' />
+				<input onKeyPress={(e) => e.key === 'Enter' && validatePassword()} type='password' className='FormInput' placeholder='Mot de Passe' id='password' />
 				<div className='conectButon' onClick={validatePassword}>Connexion</div>
 			</div>
 		</div >

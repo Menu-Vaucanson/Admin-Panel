@@ -6,7 +6,8 @@ import Infos from './Infos.js';
 import Admin from './Admin.js';
 import NewMenu from './NewMenu.js';
 import E404 from './E404.js';
-
+import NumbeRate from './NumberRate.js';
+import Vew from './Vew.js';
 
 function Main() {
 	return (
@@ -15,6 +16,8 @@ function Main() {
 				<Routes>
 					<Route path='/' element={<Home />}></Route>
 					<Route path='/Infos' element={<Infos />}></Route>
+					<Route path='/Infos/NumbeRate' element={<NumbeRate />}></Route>
+					<Route path='/Infos/Vew' element={<Vew />}></Route>
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>
 					<Route path='/*' element={<E404 />}></Route>

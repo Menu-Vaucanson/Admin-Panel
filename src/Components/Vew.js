@@ -76,12 +76,12 @@ function drawData(dataset) {
                         bottom: 5,
                     }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid strokeDasharray="10 10" />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />
-                    <Line type="monotone" dataKey="Date" stroke="#8884d8" activeDot={{ r: 8 }} />
-                    <Line type="monotone" dataKey="Number" stroke="#82ca9d" />
+                    <Line type="monotone" dataKey="Date" stroke="#08A47C" />
+                    <Line strokeWidth={3} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 3 }} />
                 </LineChart>
             </ResponsiveContainer>
         </>

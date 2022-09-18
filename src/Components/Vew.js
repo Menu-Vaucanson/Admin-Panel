@@ -1,6 +1,5 @@
-import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 function getData() {
     const dataSet = [
@@ -66,10 +65,9 @@ function drawData(dataset) {
             <div className='PageTitle'>
                 nombre de vue
             </div>
-            <div className='chart'>
+            {/* 100-4.5-4.5-2 */}
+            <ResponsiveContainer width="100%" height="89%">
                 <LineChart
-                    width={window.innerWidth}
-                    height={window.innerHeight * 0.82}
                     data={dataset}
                     margin={{
                         top: 5,
@@ -82,11 +80,10 @@ function drawData(dataset) {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip content={<CustomTooltip />} />
-                    {/* <Legend /> */}
-                    <Line type="monotone" dataKey="Date" stroke="#8884d8" />
+                    <Line type="monotone" dataKey="Date" stroke="#8884d8" activeDot={{ r: 8 }} />
                     <Line type="monotone" dataKey="Number" stroke="#82ca9d" />
                 </LineChart>
-            </div>
+            </ResponsiveContainer>
         </>
     )
 }

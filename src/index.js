@@ -10,7 +10,7 @@ import Main from './Components/Main';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const url = 'http://menuvox.fr:8081';
+const url = 'https://menuvox.fr:8081';
 
 function Send(token) {
 	return new Promise(resolve => {

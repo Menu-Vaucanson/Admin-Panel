@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import CustomCheck from './CustomCheck';
 import MenuProgressBar from "./MenuProgressBar";
+import getThemes from '../Themes/Selection';
+import '../Themes/Light';
 
 function NewMenu() {
 	function EnterDate() {
@@ -40,10 +42,10 @@ function NewMenu() {
 			}
 			return (
 				<div className="EnterMenuContent">
-					<textarea key={1} onChange={change} id='dish1e' defaultValue={dish1e} spellCheck={true}></textarea>
-					<textarea key={2} onChange={change} id='dish2e' defaultValue={dish2e} spellCheck={true}></textarea>
-					<textarea key={3} onChange={change} id='dish3e' defaultValue={dish3e} spellCheck={true}></textarea>
-					<textarea key={4} onChange={change} id='dish4e' defaultValue={dish4e} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={1} onChange={change} id='dish1e' defaultValue={dish1e} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={2} onChange={change} id='dish2e' defaultValue={dish2e} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={3} onChange={change} id='dish3e' defaultValue={dish3e} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={4} onChange={change} id='dish4e' defaultValue={dish4e} spellCheck={true}></textarea>
 				</div>
 			)
 		} else {
@@ -57,10 +59,10 @@ function NewMenu() {
 			}
 			return (
 				<div className="EnterMenuContent">
-					<textarea key={1} onChange={change} id='dish1' defaultValue={dish1} spellCheck={true}></textarea>
-					<textarea key={2} onChange={change} id='dish2' defaultValue={dish2} spellCheck={true}></textarea>
-					<textarea key={3} onChange={change} id='dish3' defaultValue={dish3} spellCheck={true}></textarea>
-					<textarea key={4} onChange={change} id='dish4' defaultValue={dish4} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={1} onChange={change} id='dish1' defaultValue={dish1} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={2} onChange={change} id='dish2' defaultValue={dish2} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={3} onChange={change} id='dish3' defaultValue={dish3} spellCheck={true}></textarea>
+					<textarea className="EnterMenuContentContent" key={4} onChange={change} id='dish4' defaultValue={dish4} spellCheck={true}></textarea>
 				</div>
 			)
 		}
@@ -149,12 +151,53 @@ function NewMenu() {
 		if (isErrored2 == null) {
 			isErrored2 = false;
 		}
+
+		const themes = getThemes();
+
+		const initial = 'DishStyleNone';
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style')) ? JSON.parse(window.sessionStorage.getItem('dish1Style')) : initial;
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style')) ? JSON.parse(window.sessionStorage.getItem('dish2Style')) : initial;
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style')) ? JSON.parse(window.sessionStorage.getItem('dish3Style')) : initial;
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style')) ? JSON.parse(window.sessionStorage.getItem('dish4Style')) : initial;
+
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle')) : initial;
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle')) : initial;
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle')) : initial;
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle')) : initial;
+		const [theme1, setTheme1] = useState(theme1Default);
+		const [theme2, setTheme2] = useState(theme2Default);
+		const [theme3, setTheme3] = useState(theme3Default);
+		const [theme4, setTheme4] = useState(theme4Default);
+		const [theme1e, setTheme1e] = useState(theme1eDefault);
+		const [theme2e, setTheme2e] = useState(theme2eDefault);
+		const [theme3e, setTheme3e] = useState(theme3eDefault);
+		const [theme4e, setTheme4e] = useState(theme4eDefault);
+
+
+		function changeTheme(id, callback) {
+			const theme = document.getElementById(id).firstChild.value;
+			const classes = document.getElementById(id).className.split(' ');
+			classes[classes.length - 1] = 'DishStyle' + theme;
+			window.sessionStorage.setItem(id + 'Style', JSON.stringify(classes[classes.length - 1]));
+			callback(classes.join(' '));
+		}
+
+		function Select({ id, callback }) {
+			return (
+				<select onChange={() => changeTheme(id, callback)} className="SelectTheme">
+					{themes.map((theme, i) => {
+						return <option key={i} value={theme.name}>{theme.title}</option>
+					})}
+				</select>
+			);
+		}
+
 		const content = [];
 
 		if (isErrored1) {
 			if (error1) {
 				content.push(
-					<div className="EnterMenu">
+					<div className="EnterMenu" key={1}>
 						<div className="EnterMenuHeader">
 							<div className="EnterMenuDayTheme">Midi</div>
 						</div>
@@ -166,15 +209,27 @@ function NewMenu() {
 			}
 		} else {
 			content.push(
-				<div className="EnterMenu">
+				<div className="EnterMenu" key={1}>
 					<div className="EnterMenuHeader">
 						<div className="EnterMenuDayTheme">Midi</div>
 					</div>
 					<div className="EnterMenuContent">
-						<div key={1}>{dish1}</div>
-						<div key={2}>{dish2}</div>
-						<div key={3}>{dish3}</div>
-						<div key={4}>{dish4}</div>
+						<div id='dish1' className={"EnterMenuContentContent " + theme1} key={1}>
+							<Select callback={setTheme1} id='dish1' />
+							<div className="MenuContentText">{dish1}</div>
+						</div>
+						<div id='dish2' className={"EnterMenuContentContent " + theme2} key={2}>
+							<Select callback={setTheme2} id='dish2' />
+							<div className="MenuContentText">{dish2}</div>
+						</div>
+						<div id='dish3' className={"EnterMenuContentContent " + theme3} key={3}>
+							<Select callback={setTheme3} id='dish3' />
+							<div className="MenuContentText">{dish3}</div>
+						</div>
+						<div id='dish4' className={"EnterMenuContentContent " + theme4} key={4}>
+							<Select callback={setTheme4} id='dish4' />
+							<div className="MenuContentText">{dish4}</div>
+						</div>
 					</div>
 				</div >
 			);
@@ -183,7 +238,7 @@ function NewMenu() {
 		if (isErrored2) {
 			if (error2) {
 				content.push(
-					<div className="EnterMenu">
+					<div className="EnterMenu" key={2}>
 						<div className="EnterMenuHeader">
 							<div className="EnterMenuDayTheme">Soir</div>
 						</div>
@@ -195,15 +250,27 @@ function NewMenu() {
 			}
 		} else {
 			content.push(
-				<div className="EnterMenu">
+				<div className="EnterMenu" key={2}>
 					<div className="EnterMenuHeader">
 						<div className="EnterMenuDayTheme">Soir</div>
 					</div>
 					<div className="EnterMenuContent">
-						<div key={1}>{dish1e}</div>
-						<div key={2}>{dish2e}</div>
-						<div key={3}>{dish3e}</div>
-						<div key={4}>{dish4e}</div>
+						<div id='dish1e' className={"EnterMenuContentContent " + theme1e} key={1}>
+							<Select callback={setTheme1e} id='dish1e' />
+							<div className="MenuContentText">{dish1e}</div>
+						</div>
+						<div id='dish2e' className={"EnterMenuContentContent " + theme2e} key={2}>
+							<Select callback={setTheme2e} id='dish2e' />
+							<div className="MenuContentText">{dish2e}</div>
+						</div>
+						<div id='dish3e' className={"EnterMenuContentContent " + theme3e} key={3}>
+							<Select callback={setTheme3e} id='dish3e' />
+							<div className="MenuContentText">{dish3e}</div>
+						</div>
+						<div id='dish4e' className={"EnterMenuContentContent " + theme4e} key={4}>
+							<Select callback={setTheme4e} id='dish4e' />
+							<div className="MenuContentText">{dish4e}</div>
+						</div>
 					</div>
 				</div>
 
@@ -259,7 +326,7 @@ function NewMenu() {
 				return 3;
 			} else if (old === 3) {
 				setNextButton();
-				setTitle('Validation');
+				setTitle('Choix des thèmes sombres');
 				setContent();
 				return 4;
 			}

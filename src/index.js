@@ -21,7 +21,6 @@ function Send(token) {
 			if (typeof response == 'undefined') {
 				resolve(null);
 			} else {
-				console.log(response.data);
 				resolve(true);
 			}
 		});

@@ -3,7 +3,9 @@ import { useState } from "react";
 import CustomCheck from './CustomCheck';
 import MenuProgressBar from "./MenuProgressBar";
 import getThemes from '../Themes/Selection';
+import getThemesDark from '../Themes/SelectionDark';
 import '../Themes/Light';
+import '../Themes/Dark';
 
 function NewMenu() {
 	function EnterDate() {
@@ -283,6 +285,173 @@ function NewMenu() {
 		);
 	}
 
+	function SelectThemesDark() {
+		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
+		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
+		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
+		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
+		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
+		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
+		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
+		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+
+		const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
+		const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+
+		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
+		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+		if (isErrored1 == null) {
+			isErrored1 = false;
+		}
+		if (isErrored2 == null) {
+			isErrored2 = false;
+		}
+
+		const themes = getThemesDark();
+
+		const initial = 'DishStyleNone';
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark')) : initial;
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark')) : initial;
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark')) : initial;
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark')) : initial;
+
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) : initial;
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) : initial;
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) : initial;
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) : initial;
+		const [theme1, setTheme1] = useState(theme1Default);
+		const [theme2, setTheme2] = useState(theme2Default);
+		const [theme3, setTheme3] = useState(theme3Default);
+		const [theme4, setTheme4] = useState(theme4Default);
+		const [theme1e, setTheme1e] = useState(theme1eDefault);
+		const [theme2e, setTheme2e] = useState(theme2eDefault);
+		const [theme3e, setTheme3e] = useState(theme3eDefault);
+		const [theme4e, setTheme4e] = useState(theme4eDefault);
+
+
+		function changeTheme(id, callback) {
+			const theme = document.getElementById(id).firstChild.value;
+			const classes = document.getElementById(id).className.split(' ');
+			classes[classes.length - 1] = 'DishStyle' + theme;
+			window.sessionStorage.setItem(id + 'Styledark', JSON.stringify(classes[classes.length - 1]));
+			callback(classes.join(' '));
+		}
+
+		function Select({ id, callback }) {
+			return (
+				<select onChange={() => changeTheme(id, callback)} className="SelectTheme">
+					{themes.map((theme, i) => {
+						return <option key={i} value={theme.name}>{theme.title}</option>
+					})}
+				</select>
+			);
+		}
+
+		const content = [];
+
+		if (isErrored1) {
+			if (error1) {
+				content.push(
+					<div className="EnterMenu" key={1}>
+						<div className="EnterMenuHeader">
+							<div className="EnterMenuDayTheme">Midi</div>
+						</div>
+						<div className="EnterMenuError">
+							<div>{error1}</div>
+						</div>
+					</div>
+				);
+			}
+		} else {
+			content.push(
+				<div className="EnterMenu" key={1}>
+					<div className="EnterMenuHeader">
+						<div className="EnterMenuDayTheme">Midi</div>
+					</div>
+					<div className="EnterMenuContent">
+						<div id='dish1' className={"EnterMenuContentContent " + theme1} key={1}>
+							<Select callback={setTheme1} id='dish1' />
+							<div className="MenuContentText">{dish1}</div>
+						</div>
+						<div id='dish2' className={"EnterMenuContentContent " + theme2} key={2}>
+							<Select callback={setTheme2} id='dish2' />
+							<div className="MenuContentText">{dish2}</div>
+						</div>
+						<div id='dish3' className={"EnterMenuContentContent " + theme3} key={3}>
+							<Select callback={setTheme3} id='dish3' />
+							<div className="MenuContentText">{dish3}</div>
+						</div>
+						<div id='dish4' className={"EnterMenuContentContent " + theme4} key={4}>
+							<Select callback={setTheme4} id='dish4' />
+							<div className="MenuContentText">{dish4}</div>
+						</div>
+					</div>
+				</div >
+			);
+		}
+
+		if (isErrored2) {
+			if (error2) {
+				content.push(
+					<div className="EnterMenu" key={2}>
+						<div className="EnterMenuHeader">
+							<div className="EnterMenuDayTheme">Soir</div>
+						</div>
+						<div className="EnterMenuError">
+							<div>{error2}</div>
+						</div>
+					</div>
+				);
+			}
+		} else {
+			content.push(
+				<div className="EnterMenu" key={2}>
+					<div className="EnterMenuHeader">
+						<div className="EnterMenuDayTheme">Soir</div>
+					</div>
+					<div className="EnterMenuContent">
+						<div id='dish1e' className={"EnterMenuContentContent " + theme1e} key={1}>
+							<Select callback={setTheme1e} id='dish1e' />
+							<div className="MenuContentText">{dish1e}</div>
+						</div>
+						<div id='dish2e' className={"EnterMenuContentContent " + theme2e} key={2}>
+							<Select callback={setTheme2e} id='dish2e' />
+							<div className="MenuContentText">{dish2e}</div>
+						</div>
+						<div id='dish3e' className={"EnterMenuContentContent " + theme3e} key={3}>
+							<Select callback={setTheme3e} id='dish3e' />
+							<div className="MenuContentText">{dish3e}</div>
+						</div>
+						<div id='dish4e' className={"EnterMenuContentContent " + theme4e} key={4}>
+							<Select callback={setTheme4e} id='dish4e' />
+							<div className="MenuContentText">{dish4e}</div>
+						</div>
+					</div>
+				</div>
+
+			);
+		}
+		return (
+			<div className="EnterMenuDiv">
+				{content}
+			</div>
+		);
+	}
+
+	function valid() {
+
+	}
+
+
+	function ValidButton() {
+		return (
+			<div className="ValidButtonNav" onClick={valid}>
+				<svg xmlns="http://www.w3.org/2000/svg" width="4vmax" height="4vmax" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+					<polyline points="20 6 9 17 4 12"></polyline>
+				</svg>
+			</div>
+		)
+	}
 
 	function NavButton({ Next }) {
 		if (Next) {
@@ -293,7 +462,7 @@ function NewMenu() {
 						</div>
 					</div>
 				</div>
-			)
+			);
 		}
 
 		return (
@@ -303,7 +472,7 @@ function NewMenu() {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 
 	const [Title, setTitle] = useState('Choix de la date');
@@ -325,9 +494,9 @@ function NewMenu() {
 				setContent(<SelectThemes />);
 				return 3;
 			} else if (old === 3) {
-				setNextButton();
+				setNextButton(<ValidButton />);
 				setTitle('Choix des thèmes sombres');
-				setContent();
+				setContent(<SelectThemesDark />);
 				return 4;
 			}
 		});

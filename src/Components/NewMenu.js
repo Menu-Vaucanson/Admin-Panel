@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 
 import CustomCheck from './CustomCheck';
@@ -74,13 +75,13 @@ function NewMenu() {
 		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
 		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
 		if (isErrored1 == null) {
-			isErrored1 = false;
+			isErrored1 = 0;
 		}
 		if (isErrored2 == null) {
-			isErrored2 = false;
+			isErrored2 = 0;
 		}
-		const [Check1, setCheck1] = useState(!isErrored1);
-		const [Check2, setCheck2] = useState(!isErrored2);
+		const [Check1, setCheck1] = useState(isErrored1 ? 0 : 1);
+		const [Check2, setCheck2] = useState(isErrored2 ? 0 : 1);
 		const [MenuContent1, setMenuContent1] = useState(<MenuContent evening={false} error={isErrored1} />);
 		const [MenuContent2, setMenuContent2] = useState(<MenuContent evening={true} error={isErrored2} />);
 
@@ -89,11 +90,11 @@ function NewMenu() {
 				if (old) {
 					window.sessionStorage.setItem('isErrored1', JSON.stringify(true));
 					setMenuContent1(<MenuContent evening={false} error={true} />);
-					return !old;
+					return 0;
 				} else {
 					window.sessionStorage.setItem('isErrored1', JSON.stringify(false));
 					setMenuContent1(<MenuContent evening={false} error={false} />);
-					return !old;
+					return 1;
 				}
 			});
 		}
@@ -103,11 +104,11 @@ function NewMenu() {
 				if (old) {
 					window.sessionStorage.setItem('isErrored2', JSON.stringify(true));
 					setMenuContent2(<MenuContent evening={true} error={true} />);
-					return !old;
+					return 0;
 				} else {
 					window.sessionStorage.setItem('isErrored2', JSON.stringify(false));
 					setMenuContent2(<MenuContent evening={true} error={false} />);
-					return !old;
+					return 1;
 				}
 			});
 		}
@@ -233,7 +234,7 @@ function NewMenu() {
 							<div className="MenuContentText">{dish4}</div>
 						</div>
 					</div>
-				</div >
+				</div>
 			);
 		}
 
@@ -438,18 +439,13 @@ function NewMenu() {
 		);
 	}
 
-	function valid() {
-
-	}
-
-
 	function ValidButton() {
 		return (
-			<div className="ValidButtonNav" onClick={valid}>
+			<Link to={'/NewMenuValid'} className="ValidButtonNav">
 				<svg xmlns="http://www.w3.org/2000/svg" width="4vmax" height="4vmax" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 					<polyline points="20 6 9 17 4 12"></polyline>
 				</svg>
-			</div>
+			</Link>
 		)
 	}
 

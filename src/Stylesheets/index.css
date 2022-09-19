@@ -449,3 +449,36 @@ a {
 	border-radius: 1vmax;
 	cursor: pointer;
 }
+
+.NewMenuValid {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.NewMenuValidHeader {
+	width: 100vw;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2vw;
+	color: #F5FEF5;
+	font-size: 3vh;
+	text-align: center;
+}
+
+.NewMenuValidBody {
+	display: flex;
+	gap: 2vw;
+}
+
+.smallDot {
+	border-radius: 50%;
+	background-color: black;
+	width: 0.6vw;
+	height: 0.6vw;
+}

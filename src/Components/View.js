@@ -3,10 +3,19 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 
+function find(array, query) {
+	let index = null
+	array.forEach((element, i) => {
+		if (new Date(element.Date).toLocaleDateString() === query) {
+			index = i;
+		}
+	});
+	return index;
+}
+
 function getData() {
-	return new Promise(async (resolve) => {
-		await axios.post('https://menuvox.fr:8081/logs/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-			console.log(res);
+	return new Promise(async (resolve, reject) => {
+		await axios.post('https://menuvox.fr:8081/logs/8', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 			let dataset = []
 			res.data.data.forEach(element => {
 				const date = new Date(element.date);
@@ -18,18 +27,13 @@ function getData() {
 				}
 			});
 			resolve(Array.from(dataset));
+		}).catch(err => {
+			console.log(err);
+			resolve(null);
 		});
 	});
 }
-function find(array, query) {
-	let index = null
-	array.forEach((element, i) => {
-		if (new Date(element.Date).toLocaleDateString() === query) {
-			index = i;
-		}
-	});
-	return index;
-}
+
 function drawData(dataset) {
 
 	const CustomTooltip = ({ active, payload }) => {
@@ -77,9 +81,13 @@ function View() {
 	const [View, setView] = useState(<div>Récuperation des données...</div>);
 
 	useEffect(() => {
-		getData().then(test => {
-			setView(drawData(test));
-		})
+		getData().then(data => {
+			if (data) {
+				setView(drawData(data));
+			} else {
+				setView(<div>une erreur est survenu</div>)
+			}
+		});
 	}, [setView]);
 
 

@@ -6,27 +6,30 @@ import { useState, useEffect } from 'react';
 function getData() {
 	return new Promise(async (resolve) => {
 		await axios.post('https://menuvox.fr:8081/logs/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-			let dataset = new Map()
+			console.log(res);
+			let dataset = []
 			res.data.data.forEach(element => {
-				const date = new Date(element.date).toLocaleDateString();
-				if (dataset.get(date)) {
-					dataset.set(date, parseInt(dataset.get(date)) + 1);
+				const date = new Date(element.date);
+				const index = find(dataset, date.toLocaleDateString());
+				if (index != null) {
+					dataset[index].Number = dataset[index].Number + 1
 				} else {
-					dataset.set(date, 1);
-				}
-			});
-			dataset = Array.from(dataset).map(data => {
-				return {
-					Date: data[0],
-					Number: data[1]
-
+					dataset.push({ Date: date, Number: 1 })
 				}
 			});
 			resolve(Array.from(dataset));
 		});
 	});
 }
-
+function find(array, query) {
+	let index = null
+	array.forEach((element, i) => {
+		if (new Date(element.Date).toLocaleDateString() === query) {
+			index = i;
+		}
+	});
+	return index;
+}
 function drawData(dataset) {
 
 	const CustomTooltip = ({ active, payload }) => {
@@ -35,7 +38,7 @@ function drawData(dataset) {
 			const value = payload[0].payload.Number;
 			return (
 				<div className="custom-tooltip">
-					{`${date.getFullYear()}/${date.getMonth()}/${date.getDay()} : ${value}`}
+					{`${date.toLocaleDateString()} : ${value}`}
 				</div>
 			);
 		}

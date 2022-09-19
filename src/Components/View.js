@@ -6,16 +6,22 @@ import { useState, useEffect } from 'react';
 function getData() {
 	return new Promise(async (resolve) => {
 		await axios.post('https://menuvox.fr:8081/logs/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-			const dataset = new Map()
+			let dataset = new Map()
 			res.data.data.forEach(element => {
-				const date = new Date(element.date).getFullYear() + '/' + new Date(element.date).getMonth() + '/' + new Date(element.date).getDate();
+				const date = new Date(element.date).toLocaleDateString();
 				if (dataset.get(date)) {
 					dataset.set(date, parseInt(dataset.get(date)) + 1);
 				} else {
 					dataset.set(date, 1);
 				}
 			});
-			console.log(Array.from(dataset));
+			dataset = Array.from(dataset).map(data => {
+				return {
+					Date: data[0],
+					Number: data[1]
+
+				}
+			});
 			resolve(Array.from(dataset));
 		});
 	});

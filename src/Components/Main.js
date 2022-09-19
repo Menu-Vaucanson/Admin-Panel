@@ -17,7 +17,7 @@ function Main() {
 					<Route path='/' element={<Home />}></Route>
 					<Route path='/Infos' element={<Infos />}></Route>
 					<Route path='/Infos/NumbeRate' element={<NumbeRate />}></Route>
-					<Route path='/Infos/Vew' element={<View />}></Route>
+					<Route path='/Infos/View' element={<View />}></Route>
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>
 					<Route path='/*' element={<E404 />}></Route>

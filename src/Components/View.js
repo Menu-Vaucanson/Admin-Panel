@@ -15,7 +15,7 @@ function find(array, query) {
 
 function getData() {
 	return new Promise(async (resolve, reject) => {
-		await axios.post('https://menuvox.fr:8081/logs/8', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+		await axios.post('https://menuvox.fr:8081/logs/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 			let dataset = []
 			res.data.data.forEach(element => {
 				const date = new Date(element.date);
@@ -41,7 +41,7 @@ function drawData(dataset) {
 			const date = new Date(payload[0].payload.Date);
 			const value = payload[0].payload.Number;
 			return (
-				<div className="custom-tooltip">
+				<div className="customTooltip">
 					{`${date.toLocaleDateString()} : ${value}`}
 				</div>
 			);
@@ -54,23 +54,22 @@ function drawData(dataset) {
 			<div className='PageTitle'>
 				Nombre de vue
 			</div>
-			{/* 100-4.5-4.5-2 */}
 			<ResponsiveContainer width="100%" height="89%">
 				<LineChart
 					data={dataset}
 					margin={{
 						top: 5,
-						right: 30,
-						left: 20,
 						bottom: 5,
+						right: 30,
+						left: 0
 					}}
 				>
 					<CartesianGrid strokeDasharray="10 10" />
-					<XAxis dataKey="name" />
-					<YAxis />
+					<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} />
+					<YAxis dataKey="Number" />
 					<Tooltip content={<CustomTooltip />} />
 					<Line type="monotone" dataKey="Date" stroke="#08A47C" />
-					<Line strokeWidth={3} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 3 }} />
+					<Line strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} />
 				</LineChart>
 			</ResponsiveContainer>
 		</>
@@ -78,14 +77,22 @@ function drawData(dataset) {
 }
 
 function View() {
-	const [View, setView] = useState(<div>Récuperation des données...</div>);
+	const [View, setView] = useState(
+		<div className='ChartContainer'>
+			<div className='ChartEror'>Récuperation des données...</div >
+		</div>
+	);
 
 	useEffect(() => {
 		getData().then(data => {
 			if (data) {
-				setView(drawData(data));
+				setView(drawData(data))
 			} else {
-				setView(<div>une erreur est survenu</div>)
+				setView(
+					<div className='ChartContainer'>
+						<div className='ChartEror'>Une erreur est survenue</div>
+					</div>
+				)
 			}
 		});
 	}, [setView]);

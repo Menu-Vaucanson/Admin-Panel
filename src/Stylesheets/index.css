@@ -260,12 +260,13 @@ a {
 	height: 100vh;
 }
 
-.custom-tooltip {
+.customTooltip {
 	background-color: #B3B3B3;
 	padding: 1vh;
 	border-radius: 2vh;
 	border: none;
 	outline: none;
+	font-size: 2vh;
 }
 
 .chart {
@@ -313,4 +314,21 @@ a {
 
 .LoginLogo {
 	width: 20vw;
+}
+
+.ChartEror {
+	width: 20vw;
+	height: max-content;
+	text-align: center;
+	color: #F5FEF5;
+	font-size: 5vh;
+}
+
+.ChartContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 80vh;
+
 }

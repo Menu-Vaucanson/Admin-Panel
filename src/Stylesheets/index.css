@@ -134,18 +134,26 @@ a {
 }
 
 .infosButons {
-	width: 22vw;
+	width: 15vw;
 	text-align: center;
-	background-color: #B3B3B3;
 	font-size: 4.5vh;
 	font-weight: bold;
+	color: black;
+}
+
+.infoBox {
+	width: 15vw;
+	height: 16vh;
+	background-color: #B3B3B3;
 	border-radius: 2.5vh;
 	padding: 20vh 8vh;
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 300ms;
 	justify-content: space-around;
-	color: #F5FEF5;
+	display: flex;
+	align-items: center;
+
 }
 
 .AdminBoxes {
@@ -197,6 +205,139 @@ a {
 
 .yellow:hover {
 	background-color: #FFC482;
+}
+
+.Index {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 5vh;
+	font-size: 5vh;
+	color: white;
+	background-color: #403F4C;
+	width: 100vw;
+	height: 100vh;
+}
+
+.FormInput {
+	width: min-content;
+	height: 5vh;
+	margin: 0;
+	border: 0px solid white;
+	border-radius: 2vh;
+	background-color: #B3B3B3;
+	font-size: 4vh;
+	text-align: center;
+}
+
+.FormInput:focus {
+	outline: none;
+}
+
+.passwordBox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.PasswordLogo {
+	width: 20vw;
+}
+
+.conectButon {
+	color: black;
+	font-size: 3vh;
+	width: 10vw;
+	background-color: #B3B3B3;
+	border-radius: 1vh;
+	padding: 0.5vh;
+	margin-top: 3vh;
+	text-align: center;
+}
+
+.passwordText {
+	font-size: 10vh;
+	text-align: center;
+	margin-bottom: 2vh;
+}
+
+.NumberRate {
+	width: 100vw;
+	height: 100vh;
+}
+
+.customTooltip {
+	background-color: #B3B3B3;
+	padding: 1vh;
+	border-radius: 2vh;
+	border: none;
+	outline: none;
+	font-size: 2vh;
+}
+
+.chart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.LoginPage {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.LoginPage input {
+	margin-top: 10vh;
+	margin-bottom: 5vh;
+	background-color: #55555c;
+	border: none;
+	color: #F5FEF5;
+	font-size: 2vmax;
+	border-radius: 0.5vmax;
+	padding: 2vh 2vw;
+}
+
+.LoginTitle {
+	font-size: 5vmax;
+	color: #F5FEF5;
+	text-align: center;
+}
+
+.LoginButton {
+	background-color: #55555c;
+	text-align: center;
+	color: #F5FEF5;
+	font-size: 2vmax;
+	border-radius: 0.5vmax;
+	padding: 2vh 2vw;
+	cursor: pointer;
+}
+
+.LoginLogo {
+	width: 20vw;
+}
+
+.ChartEror {
+	width: 20vw;
+	height: max-content;
+	text-align: center;
+	color: #F5FEF5;
+	font-size: 5vh;
+}
+
+.ChartContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 80vh;
 }
 
 .NewMenu {

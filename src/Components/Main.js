@@ -9,6 +9,7 @@ import E404 from './E404.js';
 import AverageRate from './AverageRate.js';
 import View from './View.js';
 import NumberRate from './NumberRate.js';
+import VieuAndNumber from './VieuAndNumber.js';
 
 function Main() {
 	return (
@@ -19,6 +20,7 @@ function Main() {
 					<Route path='/Infos' element={<Infos />}></Route>
 					<Route path='/Infos/AverageRate' element={<AverageRate />}></Route>
 					<Route path='/Infos/NumberRate' element={<NumberRate />}></Route>
+					<Route path='/Infos/VieuAndNumber' element={<VieuAndNumber />}></Route>
 					<Route path='/Infos/View' element={<View />}></Route>
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>

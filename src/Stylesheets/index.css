@@ -133,20 +133,27 @@ a {
 }
 
 .infosButons {
-	width: 22vw;
+	width: 15vw;
 	text-align: center;
-	background-color: #B3B3B3;
 	font-size: 4.5vh;
 	font-weight: bold;
+	color: black;
+}
+
+.infoBox {
+	width: 15vw;
+	height: 16vh;
+	background-color: #B3B3B3;
 	border-radius: 2.5vh;
 	padding: 20vh 8vh;
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 300ms;
 	justify-content: space-around;
-	color: black;
-}
+	display: flex;
+	align-items: center;
 
+}
 
 .AdminBoxes {
 	width: 100vw;

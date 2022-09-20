@@ -6,7 +6,7 @@ function NumberRate() {
 
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
-			<div className='ChartEror'>Récuperation des données...</div >
+			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
 

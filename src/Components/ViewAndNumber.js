@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
+
 function VieuAndNumber() {
 	function drawData(dataset) {
 		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
@@ -47,7 +48,7 @@ function VieuAndNumber() {
 
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
-			<div className='ChartEror'>Récuperation des données...</div >
+			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
 	useEffect(() => {

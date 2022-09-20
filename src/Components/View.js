@@ -35,24 +35,26 @@ function View() {
 				<div className='PageTitle'>
 					Nombre de vue
 				</div>
-				<ResponsiveContainer width="100%" height="89%">
-					<LineChart
-						data={dataset}
-						margin={{
-							top: 5,
-							bottom: 5,
-							right: 30,
-							left: 0
-						}}
-					>
-						<CartesianGrid strokeDasharray="10 10" />
-						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-						<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-						<Tooltip content={<CustomTooltip />} />
-						<Line type="monotone" dataKey="Date" stroke="#08A47C" />
-						<Line strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} />
-					</LineChart>
-				</ResponsiveContainer>
+				<div className='ChartContainer'>
+					<ResponsiveContainer width="100%" height="89%">
+						<LineChart
+							data={dataset}
+							margin={{
+								top: 5,
+								bottom: 5,
+								right: 30,
+								left: 0
+							}}
+						>
+							<CartesianGrid strokeDasharray="10 10" />
+							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<Tooltip content={<CustomTooltip />} />
+							<Line type="monotone" dataKey="Date" stroke="#08A47C" />
+							<Line strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} />
+						</LineChart>
+					</ResponsiveContainer>
+				</div>
 			</>
 		)
 	}

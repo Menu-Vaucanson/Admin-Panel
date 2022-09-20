@@ -30,14 +30,16 @@ function AverageRate() {
 					<div className='PageTitle'>
 						Moyene de note
 					</div>
-					<ResponsiveContainer width="100%" height="89%">
-						<BarChart width={150} height={40} data={dataset}>
-							<Bar dataKey="Average" fill="#FFC482" />
-							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-							<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-							<Tooltip cursor={false} content={<CustomTooltip />} />
-						</BarChart>
-					</ResponsiveContainer>
+					<div className='ChartContainer'>
+						<ResponsiveContainer width="100%" height="89%">
+							<BarChart width={150} height={40} data={dataset}>
+								<Bar dataKey="Average" fill="#FFC482" />
+								<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+								<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+								<Tooltip cursor={false} content={<CustomTooltip />} />
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
 				</>
 			)
 		}

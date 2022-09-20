@@ -323,6 +323,7 @@ a {
 	justify-content: center;
 	flex-direction: column;
 	height: 80vh;
+	width: 100vw;
 }
 
 .NewMenu {

@@ -487,9 +487,17 @@ a {
 	width: 100vw;
 	height: calc(100vh - 3vmax - 1.5vmax);
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	color: #F5FEF5;
 	font-size: 3vh;
+	gap: 5vh;
+}
+
+.MenuSentButton {
+	background-color: #B3B3B3;
+	padding: 2vh 2vw;
+	border-radius: 0.5vw;
 }

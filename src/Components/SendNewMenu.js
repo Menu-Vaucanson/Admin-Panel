@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const url = 'https://menuvox.fr:8081/';
 
@@ -156,7 +157,6 @@ function setDatas() {
 }
 
 function SendNewMenu() {
-
 	const [Content, setContent] = useState('Envoi en cours...');
 
 	useEffect(() => {
@@ -171,11 +171,20 @@ function SendNewMenu() {
 			});
 		}
 		SendMenu(setDatas()).then(res => {
+			window.sessionStorage.clear();
 			if (res) {
-				setContent('Envoyé !');
-				window.sessionStorage.clear();
+				setContent(
+					<>
+						<div>Envoyé !</div>
+						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
+					</>
+				);
 			} else {
-				setContent('Erreur, le menu n\'a pas pu être distribué, consultez la console pour plus d\'infos.');
+				setContent(
+					<>
+						<div>Erreur, le menu n'a pas pu être distribué, consultez la console pour plus d'infos.</div>
+						<Link to={'/'} className='MenuSentButton'> Retourner au menu</Link>
+					</>);
 			}
 		})
 	}, [setContent]);

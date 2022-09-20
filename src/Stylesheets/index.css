@@ -501,3 +501,25 @@ a {
 	padding: 2vh 2vw;
 	border-radius: 0.5vw;
 }
+
+.DeleteMenu {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.MenuDateSelectionDelete {
+	border-radius: 0.3vmax;
+	border: none;
+	height: 5vh;
+	background-color: #403F4C;
+	color: #F5FEF5;
+	font-size: 2vmax;
+}
+
+.DeleteMenuMessage {
+	color: #F5FEF5;
+	font-size: 2vmax;
+}

@@ -45,10 +45,11 @@ function NumbeRate() {
 	useEffect(() => {
 		function getData() {
 			return new Promise(async (resolve) => {
-				await axios.post('https://menuvox.fr:8081/rates/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+				const D = new Date();
+				await axios.post('https://menuvox.fr:8081/rates/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 					let dataset = []
 					res.data.data.forEach(element => {
-						const date = new Date(2022, 8, element[0]);
+						const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
 						let average = 0
 						element[1].forEach((rate, i) => {
 							if (!i) return;
@@ -60,6 +61,17 @@ function NumbeRate() {
 						dataset.push({ Date: date, Average: average })
 
 					})
+					dataset.sort((a, b) => {
+						const nameA = a.Date;
+						const nameB = b.Date;
+						if (nameA < nameB) {
+							return -1;
+						}
+						if (nameA > nameB) {
+							return 1;
+						}
+						return 0;
+					});
 					resolve(dataset);
 				}).catch(err => {
 					console.log(err);

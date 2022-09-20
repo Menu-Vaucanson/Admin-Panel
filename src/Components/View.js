@@ -58,7 +58,7 @@ function View() {
 	}
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
-			<div className='ChartEror'>Récuperation des données...</div >
+			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
 
@@ -90,7 +90,7 @@ function View() {
 			} else {
 				setView(
 					<div className='ChartContainer'>
-						<div className='ChartEror'>Une erreur est survenue</div>
+						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				)
 			}

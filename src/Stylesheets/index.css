@@ -246,17 +246,6 @@ a {
 	width: 20vw;
 }
 
-.conectButon {
-	color: black;
-	font-size: 3vh;
-	width: 10vw;
-	background-color: #B3B3B3;
-	border-radius: 1vh;
-	padding: 0.5vh;
-	margin-top: 3vh;
-	text-align: center;
-}
-
 .passwordText {
 	font-size: 10vh;
 	text-align: center;
@@ -324,7 +313,7 @@ a {
 	width: 20vw;
 }
 
-.ChartEror {
+.ChartError {
 	width: 20vw;
 	height: max-content;
 	text-align: center;

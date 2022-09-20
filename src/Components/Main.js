@@ -5,11 +5,15 @@ import Home from './Home.js';
 import Infos from './Infos.js';
 import Admin from './Admin.js';
 import NewMenu from './NewMenu.js';
+import NewMenuValid from './NewMenuValid.js';
 import E404 from './E404.js';
 import AverageRate from './AverageRate.js';
 import View from './View.js';
 import NumberRate from './NumberRate.js';
 import VieuAndNumber from './VieuAndNumber.js';
+import SendNewMenu from './SendNewMenu.js';
+import DeleteMenu from './DeleteMenu.js';
+import DeleteMenuValid from './DeleteMenuValid.js';
 
 function Main() {
 	return (
@@ -24,6 +28,10 @@ function Main() {
 					<Route path='/Infos/View' element={<View />}></Route>
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>
+					<Route path='/NewMenuValid' element={<NewMenuValid />}></Route>
+					<Route path='/SendNewMenu' element={<SendNewMenu />}></Route>
+					<Route path='/DeleteMenu' element={<DeleteMenu />}></Route>
+					<Route path='/DeleteMenuValid' element={<DeleteMenuValid />}></Route>
 					<Route path='/*' element={<E404 />}></Route>
 				</Routes>
 			</div>

@@ -3,39 +3,6 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import { useState, useEffect } from 'react';
 
 function AverageRate() {
-	const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-	function drawData(dataset) {
-
-		const CustomTooltip = ({ active, payload }) => {
-			if (active && payload && payload.length) {
-				const date = new Date(payload[0].payload.Date);
-				const value = payload[0].payload.Average;
-				return (
-					<div className="customTooltip">
-						{`${dateToText[date.getDay()]} : ${value}`}
-					</div>
-				);
-			}
-			return null;
-		};
-
-		return (
-			<>
-				<div className='PageTitle'>
-					Moyene de note
-				</div>
-				<ResponsiveContainer width="100%" height="89%">
-					<BarChart width={150} height={40} data={dataset}>
-						<Bar dataKey="Average" fill="#FFC482" />
-						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-						<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-						<Tooltip cursor={false} content={<CustomTooltip />} />
-					</BarChart>
-				</ResponsiveContainer>
-			</>
-		)
-	}
-
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
 			<div className='ChartEror'>Récuperation des données...</div >
@@ -43,6 +10,37 @@ function AverageRate() {
 	);
 
 	useEffect(() => {
+		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+		function drawData(dataset) {
+			const CustomTooltip = ({ active, payload }) => {
+				if (active && payload && payload.length) {
+					const date = new Date(payload[0].payload.Date);
+					const value = payload[0].payload.Average;
+					return (
+						<div className="customTooltip">
+							{`${dateToText[date.getDay()]} : ${value}`}
+						</div>
+					);
+				}
+				return null;
+			};
+
+			return (
+				<>
+					<div className='PageTitle'>
+						Moyene de note
+					</div>
+					<ResponsiveContainer width="100%" height="89%">
+						<BarChart width={150} height={40} data={dataset}>
+							<Bar dataKey="Average" fill="#FFC482" />
+							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<Tooltip cursor={false} content={<CustomTooltip />} />
+						</BarChart>
+					</ResponsiveContainer>
+				</>
+			)
+		}
 		function getData() {
 			return new Promise(async (resolve) => {
 				const D = new Date();

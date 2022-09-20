@@ -10,7 +10,7 @@ import E404 from './E404.js';
 import AverageRate from './AverageRate.js';
 import View from './View.js';
 import NumberRate from './NumberRate.js';
-import VieuAndNumber from './VieuAndNumber.js';
+import VieuAndNumber from './ViewAndNumber.js';
 import SendNewMenu from './SendNewMenu.js';
 import DeleteMenu from './DeleteMenu.js';
 import DeleteMenuValid from './DeleteMenuValid.js';

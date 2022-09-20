@@ -36,8 +36,8 @@ function NumberRate() {
                     >
                         <defs>
                             <linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                                <stop offset="5%" stopColor="#4775FF" stopOpacity={0.4} />
+                                <stop offset="95%" stopColor="#4775FF" stopOpacity={0} />
                             </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" />

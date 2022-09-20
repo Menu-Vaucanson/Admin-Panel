@@ -5,8 +5,8 @@ function Infos() {
 			<div className="PageTitle">Fréquentation</div>
 			<div className="HomeBoxes">
 				<Link to='NumberRate' className='infosButons blue'>Nombre de note</Link>
-				<Link to='AverageRate' className='infosButons yellow'>Moyene de note</Link>
-				<Link to='View' className='infosButons green'>visite</Link>
+				<Link to='AverageRate' className='infosButons yellow'>Moyenne des notes</Link>
+				<Link to='View' className='infosButons green'>Visites</Link>
 			</div>
 		</div >
 	)

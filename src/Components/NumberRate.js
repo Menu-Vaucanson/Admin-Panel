@@ -3,53 +3,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function NumberRate() {
-    const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-    function drawData(dataset) {
-
-        const CustomTooltip = ({ active, payload }) => {
-            if (active && payload && payload.length) {
-                const date = new Date(payload[0].payload.Date);
-                const value = payload[0].payload.Number;
-                return (
-                    <div className="customTooltip">
-                        {`${dateToText[date.getDay()]} : ${value}`}
-                    </div>
-                );
-            }
-            return null;
-        };
-        console.log(dataset);
-        return (
-            <>
-                <div className='PageTitle'>
-                    Nombre de note
-                </div>
-                <ResponsiveContainer width="100%" height="89%">
-                    <AreaChart
-                        data={dataset}
-                        margin={{
-                            top: 10,
-                            right: 30,
-                            left: 0,
-                            bottom: 0,
-                        }}
-                    >
-                        <defs>
-                            <linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
-                                <stop offset="5%" stopColor="#4775FF" stopOpacity={0.4} />
-                                <stop offset="95%" stopColor="#4775FF" stopOpacity={0} />
-                            </linearGradient>
-                        </defs>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey={(v) => new Date(v.Date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-                        <YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-                        <Tooltip cursor={false} content={<CustomTooltip />} />
-                        <Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
-                    </AreaChart>
-                </ResponsiveContainer>
-            </>
-        )
-    }
 
     const [Rate, setRate] = useState(
         <div className='ChartContainer'>
@@ -58,6 +11,53 @@ function NumberRate() {
     );
 
     useEffect(() => {
+        const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        function drawData(dataset) {
+
+            const CustomTooltip = ({ active, payload }) => {
+                if (active && payload && payload.length) {
+                    const date = new Date(payload[0].payload.Date);
+                    const value = payload[0].payload.Number;
+                    return (
+                        <div className="customTooltip">
+                            {`${dateToText[date.getDay()]} : ${value}`}
+                        </div>
+                    );
+                }
+                return null;
+            };
+            console.log(dataset);
+            return (
+                <>
+                    <div className='PageTitle'>
+                        Nombre de note
+                    </div>
+                    <ResponsiveContainer width="100%" height="89%">
+                        <AreaChart
+                            data={dataset}
+                            margin={{
+                                top: 10,
+                                right: 30,
+                                left: 0,
+                                bottom: 0,
+                            }}
+                        >
+                            <defs>
+                                <linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
+                                    <stop offset="5%" stopColor="#4775FF" stopOpacity={0.4} />
+                                    <stop offset="95%" stopColor="#4775FF" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey={(v) => new Date(v.Date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+                            <YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+                            <Tooltip cursor={false} content={<CustomTooltip />} />
+                            <Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </>
+            )
+        }
         function getData() {
             return new Promise(async (resolve) => {
                 const D = new Date();

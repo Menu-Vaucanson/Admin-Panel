@@ -66,7 +66,8 @@ function View() {
 	useEffect(() => {
 		function getData() {
 			return new Promise(async (resolve) => {
-				await axios.post('https://menuvox.fr:8081/logs/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+				const D = new Date();
+				await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 					let dataset = []
 					res.data.data.forEach(element => {
 						const date = new Date(element.date);

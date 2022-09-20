@@ -1,17 +1,5 @@
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import CustomCheck from './CustomCheck';
-
-const url = 'https://menuvox.fr:8081/';
-
-function SendMenu(data) {
-	return new Promise(resolve => {
-		axios.post(url + `menus/${data.date.split('/')[1]}/${data.date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt')), menu: data }).catch(err => {
-			console.log(err);
-		}).then(res => {
-			resolve(res);
-		})
-	});
-}
 
 
 function RenderMenu() {
@@ -153,9 +141,6 @@ function NewMenuValid() {
 	}
 
 
-	const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
-	const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
-
 	const theme1 = JSON.parse(window.sessionStorage.getItem('dish1Style'));
 	const theme2 = JSON.parse(window.sessionStorage.getItem('dish2Style'));
 	const theme3 = JSON.parse(window.sessionStorage.getItem('dish3Style'));
@@ -267,126 +252,14 @@ function NewMenuValid() {
 		</div>
 	)
 
-	function Valid() {
-		const d = date.split('-');
-		const data = {
-			error: isErrored1 ? 1 : 0,
-			errorEvening: isErrored2 ? 1 : 0,
-			date: new Date(d[0], d[1] - 1, d[2]).toLocaleDateString()
-		}
-
-		if (!isErrored1) {
-			data.menu = [
-				{
-					"name": "Entrée",
-					'content': dish1
-				},
-				{
-					"name": "Plat",
-					'content': dish2
-				},
-				{
-					"name": "Légume",
-					'content': dish3
-				},
-				{
-					"name": "Dessert",
-					'content': dish4
-				}
-			]
-
-			if (theme1) {
-				data.menu[0].style = theme1.replace('DishStyle', '');
-			}
-			if (theme2) {
-				data.menu[1].style = theme2.replace('DishStyle', '');
-			}
-			if (theme3) {
-				data.menu[2].style = theme3.replace('DishStyle', '');
-			}
-			if (theme4) {
-				data.menu[3].style = theme4.replace('DishStyle', '');
-			}
-
-			if (theme1Dark) {
-				data.menu[0].styleDark = theme1Dark.replace('DishStyle', '');
-			}
-			if (theme2Dark) {
-				data.menu[1].styleDark = theme2Dark.replace('DishStyle', '');
-			}
-			if (theme3Dark) {
-				data.menu[2].styleDark = theme3Dark.replace('DishStyle', '');
-			}
-			if (theme4Dark) {
-				data.menu[3].styleDark = theme4Dark.replace('DishStyle', '');
-			}
-		} else {
-			if (error1) {
-				data.errorMessage = error1;
-			}
-		}
-
-		if (!isErrored2) {
-			data.evening = [
-				{
-					"name": "Entrée",
-					'content': dish1e
-				},
-				{
-					"name": "Plat",
-					'content': dish2e
-				},
-				{
-					"name": "Légume",
-					'content': dish3e
-				},
-				{
-					"name": "Dessert",
-					'content': dish4e
-				}
-			]
-			if (theme1e) {
-				data.evening[0].style = theme1e.replace('DishStyle', '');
-			}
-			if (theme2e) {
-				data.evening[1].style = theme2e.replace('DishStyle', '');
-			}
-			if (theme3e) {
-				data.evening[2].style = theme3e.replace('DishStyle', '');
-			}
-			if (theme4e) {
-				data.evening[3].style = theme4e.replace('DishStyle', '');
-			}
-
-			if (theme1eDark) {
-				data.evening[0].styleDark = theme1eDark.replace('DishStyle', '');
-			}
-			if (theme2eDark) {
-				data.evening[1].styleDark = theme2eDark.replace('DishStyle', '');
-			}
-			if (theme3eDark) {
-				data.evening[2].styleDark = theme3eDark.replace('DishStyle', '');
-			}
-			if (theme4eDark) {
-				data.evening[3].styleDark = theme4eDark.replace('DishStyle', '');
-			}
-		} else {
-			if (error1) {
-				data.errorEveningMessage = error2;
-			}
-		}
-
-		SendMenu(data);
-	}
-
 	let button = '';
 	if (valid) {
 		button = (
-			<div className="ValidButtonNav" onClick={Valid}>
+			<Link to={'/SendNewMenu'} className="ValidButtonNav">
 				<svg xmlns="http://www.w3.org/2000/svg" width="4vmax" height="4vmax" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 					<polyline points="20 6 9 17 4 12"></polyline>
 				</svg>
-			</div>
+			</Link>
 		)
 	}
 

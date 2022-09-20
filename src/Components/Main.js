@@ -7,6 +7,7 @@ import Admin from './Admin.js';
 import NewMenu from './NewMenu.js';
 import NewMenuValid from './NewMenuValid.js';
 import E404 from './E404.js';
+import SendNewMenu from './SendNewMenu.js';
 
 
 function Main() {
@@ -19,6 +20,7 @@ function Main() {
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>
 					<Route path='/NewMenuValid' element={<NewMenuValid />}></Route>
+					<Route path='/SendNewMenu' element={<SendNewMenu />}></Route>
 					<Route path='/*' element={<E404 />}></Route>
 				</Routes>
 			</div>

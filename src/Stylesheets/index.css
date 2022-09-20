@@ -482,3 +482,14 @@ a {
 	width: 0.6vw;
 	height: 0.6vw;
 }
+
+.SendNewMenu {
+	width: 100vw;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #F5FEF5;
+	font-size: 3vh;
+}

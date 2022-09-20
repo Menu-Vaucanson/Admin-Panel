@@ -1,4 +1,4 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ function NumberRate() {
         const CustomTooltip = ({ active, payload }) => {
             if (active && payload && payload.length) {
                 const date = new Date(payload[0].payload.Date);
-                const value = payload[0].payload.Average;
+                const value = payload[0].payload.Number;
                 return (
                     <div className="customTooltip">
                         {`${dateToText[date.getDay()]} : ${value}`}
@@ -18,20 +18,30 @@ function NumberRate() {
             }
             return null;
         };
-
+        console.log(dataset);
         return (
             <>
                 <div className='PageTitle'>
                     Nombre de note
                 </div>
                 <ResponsiveContainer width="100%" height="89%">
-                    <BarChart width={150} height={40} data={dataset}>
-                        <Bar dataKey="Average" fill="#8884d8" />
+                    <AreaChart
+                        data={dataset}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} />
-                        <YAxis dataKey="Average" />
-                        <Tooltip cursor={false} content={<CustomTooltip />} />
-                    </BarChart>
+                        <YAxis dataKey="Number" />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="Number" stroke="#4775FF" fill="#4775FF" />
+                    </AreaChart>
                 </ResponsiveContainer>
+                );
             </>
         )
     }
@@ -51,7 +61,7 @@ function NumberRate() {
                     res.data.data.forEach(element => {
                         const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
                         let number = element[1].length;
-                        dataset.push({ Date: date, Average: number })
+                        dataset.push({ Date: date, Number: number })
 
                     })
                     dataset.sort((a, b) => {

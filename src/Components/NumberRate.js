@@ -34,14 +34,19 @@ function NumberRate() {
                             bottom: 0,
                         }}
                     >
+                        <defs>
+                            <linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
+                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                            </linearGradient>
+                        </defs>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} />
-                        <YAxis dataKey="Number" />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="Number" stroke="#4775FF" fill="#4775FF" />
+                        <XAxis dataKey={(v) => new Date(v.Date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+                        <YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+                        <Tooltip cursor={false} content={<CustomTooltip />} />
+                        <Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
                     </AreaChart>
                 </ResponsiveContainer>
-                );
             </>
         )
     }

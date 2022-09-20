@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 
 function AverageRate() {
@@ -27,8 +27,8 @@ function AverageRate() {
 				<ResponsiveContainer width="100%" height="89%">
 					<BarChart width={150} height={40} data={dataset}>
 						<Bar dataKey="Average" fill="#8884d8" />
-						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} />
-						<YAxis dataKey="Average" />
+						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+						<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 						<Tooltip cursor={false} content={<CustomTooltip />} />
 					</BarChart>
 				</ResponsiveContainer>

@@ -47,8 +47,8 @@ function View() {
 						}}
 					>
 						<CartesianGrid strokeDasharray="10 10" />
-						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} />
-						<YAxis dataKey="Number" />
+						<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+						<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 						<Tooltip content={<CustomTooltip />} />
 						<Line type="monotone" dataKey="Date" stroke="#08A47C" />
 						<Line strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} />

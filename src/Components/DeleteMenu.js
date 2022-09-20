@@ -34,6 +34,7 @@ function DeleteMenu() {
 
 	function click() {
 		date = date.split('-');
+		window.sessionStorage.setItem('date', JSON.stringify(date[2] + '/' + date[1] + '/' + date[0]));
 		setContent(
 			<div className='DeleteMenuMessage'>
 				Êtes-vous sûr de vouloir supprimer le menu du {date[2]}/{date[1]}/{date[0]} ?

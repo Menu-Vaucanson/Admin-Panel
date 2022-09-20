@@ -3,6 +3,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 import { useState, useEffect } from 'react';
 
 function NumbeRate() {
+	const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
 	function drawData(dataset) {
 
 		const CustomTooltip = ({ active, payload }) => {
@@ -11,7 +12,7 @@ function NumbeRate() {
 				const value = payload[0].payload.Average;
 				return (
 					<div className="customTooltip">
-						{`${date.toLocaleDateString()} : ${value}`}
+						{`${dateToText[date.getDay()]} : ${value}`}
 					</div>
 				);
 			}
@@ -47,7 +48,7 @@ function NumbeRate() {
 				await axios.post('https://menuvox.fr:8081/rates/9', { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 					let dataset = []
 					res.data.data.forEach(element => {
-						const date = new Date(2022, 9, element[0]);
+						const date = new Date(2022, 8, element[0]);
 						let average = 0
 						element[1].forEach((rate, i) => {
 							if (!i) return;

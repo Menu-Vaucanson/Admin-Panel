@@ -231,10 +231,6 @@ a {
 	text-align: center;
 }
 
-.FormInput:focus {
-	outline: none;
-}
-
 .passwordBox {
 	display: flex;
 	align-items: center;

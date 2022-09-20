@@ -84,7 +84,7 @@ function AverageRate() {
 			} else {
 				setRate(
 					<div className='ChartContainer'>
-						<div className='ChartEror'>Une erreur est survenue</div>
+						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				)
 			}

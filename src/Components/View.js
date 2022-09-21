@@ -75,7 +75,6 @@ function View() {
 				const D = new Date();
 				await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 					let dataset = []
-					console.log(res.data.data);
 					res.data.data.forEach(element => {
 						const date = new Date(element.date);
 						const index = find(dataset, date.toLocaleDateString());

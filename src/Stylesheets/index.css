@@ -13,6 +13,16 @@
 	src: url("/public/fonts/FiraMono-Medium.otf");
 }
 
+@keyframes rotate {
+	from {
+		transform: rotate(-360deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 *:focus {
 	outline: none;
 }
@@ -676,4 +686,20 @@ a {
 
 .Chart div {
 	margin: 0;
+}
+
+.refreshIcon {
+	background-color: #08A47C;
+	width: 5vh;
+	height: 5vh;
+	position: absolute;
+	top: calc(3vmax + 1.5vmax + 2vh);
+	right: 1.5vw;
+}
+
+.rotate {
+	animation-duration: 4000ms;
+	animation-name: rotate;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }

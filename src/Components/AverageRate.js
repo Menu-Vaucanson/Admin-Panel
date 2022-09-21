@@ -52,7 +52,6 @@ function AverageRate() {
 						const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
 						let average = 0
 						element[1].forEach((rate, i) => {
-							if (!i) return;
 							average += rate.rate;
 						});
 						if (average) {

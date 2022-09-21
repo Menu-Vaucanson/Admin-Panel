@@ -14,11 +14,13 @@ import VieuAndNumber from './ViewAndNumber.js';
 import SendNewMenu from './SendNewMenu.js';
 import DeleteMenu from './DeleteMenu.js';
 import DeleteMenuValid from './DeleteMenuValid.js';
+import Platform from './Platform.js';
 
 function Main() {
 	return (
 		<>
-			<MenuBar /><div className='App'>
+			<MenuBar />
+			<div className='App'>
 				<Routes>
 					<Route path='/' element={<Home />}></Route>
 					<Route path='/Infos' element={<Infos />}></Route>
@@ -26,6 +28,7 @@ function Main() {
 					<Route path='/Infos/NumberRate' element={<NumberRate />}></Route>
 					<Route path='/Infos/VieuAndNumber' element={<VieuAndNumber />}></Route>
 					<Route path='/Infos/View' element={<View />}></Route>
+					<Route path='/Infos/Platform' element={<Platform />}></Route>
 					<Route path='/Admin' element={<Admin />}></Route>
 					<Route path='/NewMenu' element={<NewMenu />}></Route>
 					<Route path='/NewMenuValid' element={<NewMenuValid />}></Route>

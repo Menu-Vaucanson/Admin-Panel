@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Logo from '../Assets/Logo.png';
+import Logo from '../Assets/Logo.svg';
 import Logout from '../Assets/logout.svg';
 
 function MenuBar() {

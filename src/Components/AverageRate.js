@@ -28,7 +28,7 @@ function AverageRate() {
 			return (
 				<>
 					<div className='PageTitle'>
-						Moyene de note
+						Moyenne de note
 					</div>
 					<div className='ChartContainer'>
 						<ResponsiveContainer width="100%" height="89%">

@@ -46,12 +46,22 @@ function VieuAndNumber() {
 								bottom: 5,
 							}}
 						>
+							<defs>
+								<linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="5%" stopColor="#8884d8" stopOpacity={0.4} />
+									<stop offset="95%" stopColor="#8884d8" stopOpacity={0.1} />
+								</linearGradient>
+								<linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="5%" stopColor="#82ca9d" stopOpacity={0.4} />
+									<stop offset="95%" stopColor="#82ca9d" stopOpacity={0.1} />
+								</linearGradient>
+							</defs>
 							<CartesianGrid strokeDasharray="3 3" />
 							<XAxis dataKey={(v) => new Date(v.date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis />
 							<Tooltip content={<CustomTooltip />} />
-							<Area type="monotone" dataKey="view" stroke="#08A47C" fill="#08A47C" activeDot={{ r: 8 }} />
-							<Area type="monotone" dataKey="rate" stroke="#4775FF" fill="#4775FF" activeDot={{ r: 8 }} />
+							<Area type="monotone" dataKey="view" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+							<Area type="monotone" dataKey="rate" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
 						</AreaChart>
 					</ResponsiveContainer>
 				</div>

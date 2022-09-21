@@ -91,6 +91,7 @@ a {
 	justify-content: center;
 	gap: 2vw;
 	margin: auto 0;
+	flex-wrap: wrap;
 }
 
 .homeButtons {
@@ -134,7 +135,7 @@ a {
 }
 
 .infosButons {
-	width: 15vw;
+	width: 20vw;
 	text-align: center;
 	font-size: 4.5vh;
 	font-weight: bold;
@@ -142,7 +143,7 @@ a {
 }
 
 .infoBox {
-	width: 15vw;
+	width: 20vw;
 	height: 16vh;
 	background-color: #B3B3B3;
 	border-radius: 2.5vh;

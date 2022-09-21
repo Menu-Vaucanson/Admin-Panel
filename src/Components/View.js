@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 
 
@@ -37,7 +37,7 @@ function View() {
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
-						<LineChart
+						<AreaChart
 							data={dataset}
 							margin={{
 								top: 5,
@@ -46,13 +46,18 @@ function View() {
 								left: 0
 							}}
 						>
+							<defs>
+								<linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
+									<stop offset="95%" stopColor="#08A47C" stopOpacity={0} />
+								</linearGradient>
+
+							</defs>
 							<CartesianGrid strokeDasharray="10 10" />
 							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
-							<Line type="monotone" dataKey="Date" stroke="#08A47C" />
-							<Line strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} />
-						</LineChart>
+							<Area strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
+						</AreaChart>
 					</ResponsiveContainer>
 				</div>
 			</>

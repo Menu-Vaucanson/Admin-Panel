@@ -67,7 +67,7 @@ a {
 }
 
 .LogoutButton {
-	height: 4.5vmax;
+	height: 3vmax;
 	width: 3.6vmax;
 	padding: 0.75vmax;
 	margin-left: 1vw;
@@ -101,7 +101,6 @@ a {
 
 .homeButtons {
 	width: 30vw;
-	text-align: center;
 	background-color: #B3B3B3;
 	font-size: 4.5vh;
 	font-weight: bold;
@@ -109,11 +108,17 @@ a {
 	padding: 20vh 8vh;
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
-	transition-duration: 300ms;
+	transition-duration: 200ms;
+	height: 16vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 .homeButtons:hover {
-	box-shadow: 0 0 2.5vh rgba(0, 0, 0, 0.75);
+	width: 40vw;
+	height: 20vh;
 }
 
 .Info {
@@ -159,7 +164,12 @@ a {
 	justify-content: space-around;
 	display: flex;
 	align-items: center;
+	transition-duration: 200ms;
+}
 
+.infoBox:hover {
+	width: 30vw;
+	height: 20vh;
 }
 
 .AdminBoxes {
@@ -179,12 +189,17 @@ a {
 	border-radius: 2.5vh;
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
-	transition-duration: 300ms;
+	transition-duration: 200ms;
 	text-align: center;
+	height: 16vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .AdminBox:hover {
-	box-shadow: 0 0 2.5vh rgba(0, 0, 0, 0.75);
+	width: 40vw;
+	height: 20vh;
 }
 
 .E404 {

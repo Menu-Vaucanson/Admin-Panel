@@ -6,7 +6,6 @@ function VieuAndNumber() {
 	function drawData(dataset) {
 		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 		const CustomTooltip = ({ active, payload }) => {
-			console.log(payload);
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.date);
 				let rate = payload[0].payload.rate;
@@ -14,14 +13,13 @@ function VieuAndNumber() {
 				if (typeof view == 'undefined') {
 					view = '';
 				} else {
-					view = `vue :${view}`;
+					view = `vues: ${view}`;
 				}
 				if (typeof rate == 'undefined') {
 					rate = '';
 				} else {
-					rate = `nombre note:${rate} `
+					rate = `notes: ${rate} `
 				}
-				console.log(view, rate);
 				return (
 					<div className="customTooltip">
 						{`${dateToText[date.getDay()]} ${view} ${rate} `}
@@ -46,16 +44,6 @@ function VieuAndNumber() {
 								bottom: 5,
 							}}
 						>
-							{/* <defs>
-								<linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-									<stop offset="5%" stopColor="#8884d8" stopOpacity={0.4} />
-									<stop offset="95%" stopColor="#8884d8" stopOpacity={0.1} />
-								</linearGradient>
-								<linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-									<stop offset="5%" stopColor="#82ca9d" stopOpacity={0.4} />
-									<stop offset="95%" stopColor="#82ca9d" stopOpacity={0.1} />
-								</linearGradient>
-							</defs> */}
 							<CartesianGrid strokeDasharray="3 3" />
 							<XAxis dataKey={(v) => new Date(v.date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis />
@@ -86,10 +74,8 @@ function VieuAndNumber() {
 				});
 			});
 		}
-		//end of numberOfRate
 		getData().then(data => {
 			if (data) {
-				console.log(data);
 				setView(
 					drawData(data)
 				)

@@ -15,7 +15,7 @@ function MenuBar() {
 			<Link to='/' className='MenuBarTitle'>Menu Vaucanson Admin</Link>
 			<img className='MenuLogo' src={Logo} alt='Logo' />
 		</div >
-	)
+	);
 }
 
 

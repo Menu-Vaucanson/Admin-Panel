@@ -87,6 +87,7 @@ a {
 	text-align: center;
 	margin: 2vh 0;
 	color: #F5FEF5;
+	font-weight: bold;
 }
 
 .HomeBoxes {
@@ -558,8 +559,8 @@ a {
 }
 
 .SelectTheme {
-	width: 2vh;
-	height: 2vh;
+	width: 2.5vh;
+	height: 2.5vh;
 	background-color: #D9D9D9;
 	cursor: pointer;
 	border: none;

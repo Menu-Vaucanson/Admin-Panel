@@ -2,10 +2,13 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import RefreshComp from './RefreshComp';
+
 function NumberRate() {
+
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
-			<div className='refreshIcon rotate'></div>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
@@ -26,7 +29,7 @@ function NumberRate() {
 		};
 		return (
 			<div className='Chart'>
-				<div className='refreshIcon'></div>
+				<RefreshComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombre de note
 				</div>
@@ -67,8 +70,7 @@ function NumberRate() {
 					const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
 					let number = element[1].length;
 					dataset.push({ Date: date, Number: number })
-
-				})
+				});
 				dataset.sort((a, b) => {
 					const nameA = a.Date;
 					const nameB = b.Date;
@@ -87,14 +89,16 @@ function NumberRate() {
 			});
 		});
 	}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	function refresh() {
-		getData().then(data => {
+		return getData().then(data => {
 			if (data) {
 				setRate(drawData(data));
 			} else {
 				setRate(
 					<div className='ChartContainer'>
-						<div className='refreshIcon'></div>
+						<RefreshComp callback={refresh} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);
@@ -103,15 +107,24 @@ function NumberRate() {
 	}
 
 	useEffect(() => {
-		refresh();
-	}, [refresh]);
+		getData().then(data => {
+			if (data) {
+				setRate(drawData(data));
+			} else {
+				setRate(
+					<div className='ChartContainer'>
+						<RefreshComp callback={refresh} />
+						<div className='ChartError'>Une erreur est survenue</div>
+					</div>
+				);
+			}
+		});
+		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 
-	return (
-		<div>
-			{Rate}
-		</div>
-	);
+	return Rate;
 }
 
-export default NumberRate()
+export default NumberRate;

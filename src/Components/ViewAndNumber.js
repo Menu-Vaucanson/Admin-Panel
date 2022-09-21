@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
+import RefreshComp from './RefreshComp';
 
 function VieuAndNumber() {
 	function drawData(dataset) {
@@ -30,6 +31,7 @@ function VieuAndNumber() {
 		};
 		return (
 			<div className='Chart'>
+				<RefreshComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombre de note
 				</div>
@@ -59,35 +61,44 @@ function VieuAndNumber() {
 
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
-	useEffect(() => {
-		function getData() {
-			return new Promise(async (resolve) => {
-				const D = new Date();
-				await axios.post('https://menuvox.fr:8081/ratesLogs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-					resolve(res.data.data);
-				}).catch(err => {
-					console.log(err);
-					resolve(null);
-				});
+	function getData() {
+		return new Promise(async (resolve) => {
+			const D = new Date();
+			await axios.post('https://menuvox.fr:8081/ratesLogs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+				resolve(res.data.data);
+			}).catch(err => {
+				console.log(err);
+				resolve(null);
 			});
-		}
-		getData().then(data => {
+		});
+	}
+
+	function refresh() {
+		return getData().then(data => {
 			if (data) {
-				setView(
-					drawData(data)
-				);
+				setView(drawData(data));
 			} else {
 				setView(
 					<div className='ChartContainer'>
+						<RefreshComp callback={refresh} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);
 			}
 		});
-	}, [setView]);
+	}
+
+	useEffect(() => {
+		refresh();
+		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+
 	return View;
 }
 export default VieuAndNumber;

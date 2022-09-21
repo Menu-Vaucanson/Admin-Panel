@@ -15,11 +15,11 @@
 
 @keyframes rotate {
 	from {
-		transform: rotate(-360deg);
+		transform: rotate(360deg);
 	}
 
 	to {
-		transform: rotate(360deg);
+		transform: rotate(-360deg);
 	}
 }
 
@@ -287,7 +287,7 @@ a {
 .customTooltip {
 	background-color: #B3B3B3;
 	padding: 1vh;
-	border-radius: 2vh;
+	border-radius: 0.5vw;
 	border: none;
 	outline: none;
 	font-size: 2vh;
@@ -689,16 +689,18 @@ a {
 }
 
 .refreshIcon {
-	background-color: #08A47C;
-	width: 5vh;
-	height: 5vh;
+	width: 6vh;
+	height: 6vh;
 	position: absolute;
-	top: calc(3vmax + 1.5vmax + 2vh);
+	top: 9.5vh;
 	right: 1.5vw;
+	cursor: pointer;
+	padding: 2vh 2vh;
+	border-radius: 50%;
 }
 
 .rotate {
-	animation-duration: 4000ms;
+	animation-duration: 2000ms;
 	animation-name: rotate;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;

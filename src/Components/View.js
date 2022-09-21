@@ -3,6 +3,7 @@ import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 
+import RefreshComp from './RefreshComp';
 
 function View() {
 	function find(array, query) {
@@ -16,7 +17,6 @@ function View() {
 	}
 
 	function drawData(dataset) {
-
 		const CustomTooltip = ({ active, payload }) => {
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
@@ -32,6 +32,7 @@ function View() {
 
 		return (
 			<div className='Chart'>
+				<RefreshComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombre de vue
 				</div>
@@ -65,45 +66,53 @@ function View() {
 	}
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
 
-	useEffect(() => {
-		function getData() {
-			return new Promise(async (resolve) => {
-				const D = new Date();
-				await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-					let dataset = []
-					res.data.data.forEach(element => {
-						const date = new Date(element.date);
-						const index = find(dataset, date.toLocaleDateString());
-						if (index != null) {
-							dataset[index].Number = dataset[index].Number + 1
-						} else {
-							dataset.push({ Date: date, Number: 1 })
-						}
-					});
-					resolve(Array.from(dataset));
-				}).catch(err => {
-					console.log(err);
-					resolve(null);
+	function getData() {
+		return new Promise(async (resolve) => {
+			const D = new Date();
+			await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+				let dataset = []
+				res.data.data.forEach(element => {
+					const date = new Date(element.date);
+					const index = find(dataset, date.toLocaleDateString());
+					if (index != null) {
+						dataset[index].Number = dataset[index].Number + 1
+					} else {
+						dataset.push({ Date: date, Number: 1 })
+					}
 				});
+				resolve(Array.from(dataset));
+			}).catch(err => {
+				console.log(err);
+				resolve(null);
 			});
-		}
-		getData().then(data => {
+		});
+	}
+
+	function refresh() {
+		return getData().then(data => {
 			if (data) {
-				setView(drawData(data))
+				setView(drawData(data));
 			} else {
 				setView(
 					<div className='ChartContainer'>
+						<RefreshComp callback={refresh} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
-				)
+				);
 			}
 		});
-	}, [setView]);
+	}
 
+	useEffect(() => {
+		refresh();
+		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return View;
 }

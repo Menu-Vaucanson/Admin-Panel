@@ -28,7 +28,7 @@ function NumberRate() {
 			};
 			console.log(dataset);
 			return (
-				<>
+				<div className='Chart'>
 					<div className='PageTitle'>
 						Nombre de note
 					</div>
@@ -57,7 +57,7 @@ function NumberRate() {
 							</AreaChart>
 						</ResponsiveContainer>
 					</div>
-				</>
+				</div>
 			)
 		}
 		function getData() {

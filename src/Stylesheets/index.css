@@ -83,10 +83,9 @@ a {
 }
 
 .PageTitle {
-	margin: 0 auto;
 	font-size: 4.5vh;
 	text-align: center;
-	margin-top: 2vh;
+	margin: 2vh 0;
 	color: #F5FEF5;
 }
 
@@ -95,8 +94,8 @@ a {
 	align-items: center;
 	justify-content: center;
 	gap: 2vw;
-	margin: auto 0;
 	flex-wrap: wrap;
+	margin: auto 0;
 }
 
 .homeButtons {
@@ -281,13 +280,6 @@ a {
 	border: none;
 	outline: none;
 	font-size: 2vh;
-}
-
-.chart {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
 }
 
 .LoginPage {
@@ -670,4 +662,17 @@ a {
 .DeleteMenuMessage {
 	color: #F5FEF5;
 	font-size: 2vmax;
+}
+
+.Chart {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	height: calc(100vh - 3vmax - 1.5vmax);
+	width: 100vw;
+}
+
+.Chart div {
+	margin: 0;
 }

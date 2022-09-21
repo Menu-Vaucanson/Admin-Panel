@@ -29,7 +29,7 @@ function VieuAndNumber() {
 			return null;
 		};
 		return (
-			<>
+			<div className='Chart'>
 				<div className='PageTitle'>
 					Nombre de note
 				</div>
@@ -53,7 +53,7 @@ function VieuAndNumber() {
 						</AreaChart>
 					</ResponsiveContainer>
 				</div>
-			</>
+			</div>
 		)
 	}
 
@@ -78,13 +78,13 @@ function VieuAndNumber() {
 			if (data) {
 				setView(
 					drawData(data)
-				)
+				);
 			} else {
 				setView(
 					<div className='ChartContainer'>
-						<div className='ChartEror'>Une erreur est survenue</div>
+						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
-				)
+				);
 			}
 		});
 	}, [setView]);

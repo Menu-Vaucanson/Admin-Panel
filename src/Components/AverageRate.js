@@ -26,7 +26,7 @@ function AverageRate() {
 			};
 
 			return (
-				<>
+				<div className='Chart'>
 					<div className='PageTitle'>
 						Moyenne de note
 					</div>
@@ -40,7 +40,7 @@ function AverageRate() {
 							</BarChart>
 						</ResponsiveContainer>
 					</div>
-				</>
+				</div>
 			)
 		}
 		function getData() {

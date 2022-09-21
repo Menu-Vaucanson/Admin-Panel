@@ -31,7 +31,7 @@ function View() {
 		};
 
 		return (
-			<>
+			<div className='Chart'>
 				<div className='PageTitle'>
 					Nombre de vue
 				</div>
@@ -60,7 +60,7 @@ function View() {
 						</AreaChart>
 					</ResponsiveContainer>
 				</div>
-			</>
+			</div>
 		)
 	}
 	const [View, setView] = useState(

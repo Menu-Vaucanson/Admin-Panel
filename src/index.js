@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-import Logo from './Assets/Logo.png';
+import Logo from './Assets/Logo.svg';
 import './Stylesheets/index.css';
 import Main from './Components/Main';
 

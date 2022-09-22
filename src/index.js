@@ -63,7 +63,7 @@ function LoginPage() {
 	function click() {
 		const token = document.getElementById('password').value;
 		if (token === '') return;
-		setButtonText('Connection...');
+		setButtonText('Connexion...');
 		Send(token).then(res => {
 			if (res === true) {
 				window.localStorage.setItem('jwt', JSON.stringify(token));
@@ -76,7 +76,7 @@ function LoginPage() {
 				setButtonText('Mauvais mot de passe');
 			}
 			setTimeout(() => {
-				setButtonText('Connection');
+				setButtonText('Connexion');
 			}, 1000);
 		})
 	}

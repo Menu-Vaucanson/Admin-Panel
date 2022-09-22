@@ -713,3 +713,10 @@ a {
 	color: #F5FEF5;
 	font-size: 2vmax;
 }
+
+.LoginError {
+	color: #F5FEF5;
+	font-size: 2vmax;
+	padding: 1vh 0;
+	height: 6vh;
+}

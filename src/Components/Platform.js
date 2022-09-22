@@ -1,96 +1,150 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import RefreshComp from './RefreshComp';
+
+const renderActiveShape = (props) => {
+	const RADIAN = Math.PI / 180;
+	const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+	const sin = Math.sin(-RADIAN * midAngle);
+	const cos = Math.cos(-RADIAN * midAngle);
+	const sx = cx + (outerRadius + 10) * cos;
+	const sy = cy + (outerRadius + 10) * sin;
+	const mx = cx + (outerRadius + 30) * cos;
+	const my = cy + (outerRadius + 30) * sin;
+	const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+	const ey = my;
+	const textAnchor = cos >= 0 ? 'start' : 'end';
+
+	return (
+		<g>
+			<text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+				{payload.name}
+			</text>
+			<Sector
+				cx={cx}
+				cy={cy}
+				innerRadius={innerRadius}
+				outerRadius={outerRadius}
+				startAngle={startAngle}
+				endAngle={endAngle}
+				fill={fill}
+			/>
+			<Sector
+				cx={cx}
+				cy={cy}
+				startAngle={startAngle}
+				endAngle={endAngle}
+				innerRadius={outerRadius + 6}
+				outerRadius={outerRadius + 10}
+				fill={fill}
+			/>
+			<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+			<circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#F5FEF5">{value}</text>
+			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#F5FEF5">
+				{(percent * 100).toFixed(2)}%
+			</text>
+		</g>
+	);
+};
+
+
 function Platform() {
-	function drawData(dataSet) {
-		const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-		const RADIAN = Math.PI / 180;
-		const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-			const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-			const x = cx + radius * Math.cos(-midAngle * RADIAN);
-			const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-			return (
-				<text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-					{`${(percent * 100).toFixed(0)}%`}
-				</text>
-			);
+	function DrawData({ data }) {
+		const [ActiveIndex, setActiveIndex] = useState('');
+		function onPieEnter(_, index) {
+			setActiveIndex(index);
 		};
+
 		return (
-			<div className='Chart'>
-				<div className='PageTitle'>
-					Nombre de vue
-				</div>
-				<div className='ChartContainer'>
-					<ResponsiveContainer width="100%" height="100%">
-						<PieChart>
-							<Pie
-								data={dataSet}
-								cx="50%"
-								cy="50%"
-								labelLine={false}
-								label={renderCustomizedLabel}
-								outerRadius={80}
-								fill="#8884d8"
-								dataKey="value"
-							>
-								{dataSet.map((entry, index) => (
-									<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-								))}
-							</Pie>
-						</PieChart>
-					</ResponsiveContainer>
-				</div>
+			<div className='ChartContainer'>
+				<RefreshComp callback={refresh} />
+				<div className='PageTitle'>Plateformes</div >
+				<ResponsiveContainer width="100%" height="100%">
+					<PieChart width={400} height={400}>
+						<Pie
+							activeIndex={ActiveIndex}
+							activeShape={renderActiveShape}
+							data={data}
+							innerRadius={120}
+							outerRadius={210}
+							fill="#08A47C"
+							dataKey="value"
+							onMouseEnter={onPieEnter}
+						/>
+					</PieChart>
+				</ResponsiveContainer>
 			</div>
 		);
 	}
 
-
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
-	useEffect(() => {
-		function getData() {
-			return new Promise(async (resolve) => {
-				const D = new Date();
-				await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-					let pc = 0;
-					let mobile = 0;
-					let other = 0;
-					res.data.data.forEach(element => {
-						if (typeof element.pc != 'undefined' && element.pc) {
-							pc++;
-						} else if (typeof element.pc != 'undefined' && !element.pc) {
-							mobile++;
-						} else {
-							other++;
-						}
-					});
-					const dataSet = [{ name: 'pc', value: pc }, { name: 'mobile', value: mobile }, { name: 'autre', value: other }]
-					resolve(dataSet);
-				}).catch(err => {
-					console.log(err);
-					resolve(null);
+
+	function getData() {
+		return new Promise(async (resolve) => {
+			const D = new Date();
+			await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+				const data = [
+					{
+						name: 'PC',
+						value: 0
+					}, {
+						name: 'Mobile',
+						value: 0
+					}, {
+						name: 'Autre',
+						value: 0
+					}
+				];
+				res.data.data.forEach(d => {
+					if (d.pc === true) {
+						data[0].value++;
+					} else if (d.pc === false) {
+						data[1].value++;
+					} else {
+						data[2].value++;
+					}
 				});
+				resolve(data);
+			}).catch(err => {
+				console.log(err);
+				resolve(null);
 			});
-		}
-		getData().then(data => {
+		});
+	}
+
+	function refresh() {
+		return getData().then(data => {
 			if (data) {
-				setView(drawData(data));
+				setView(<DrawData data={data} />);
 			} else {
 				setView(
 					<div className='ChartContainer'>
+						<RefreshComp callback={refresh} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
-				)
+				);
 			}
 		});
-	}, [setView]);
+	}
 
+	useEffect(() => {
+		refresh();
+		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return View;
 }
+
+
+
+
 export default Platform;

@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import RefreshComp from './RefreshComp';
+import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
 import MonthComp from './calendarComp';
 
 function View() {
 
-	const Months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+
 
 	function find(array, query) {
 		let index = null
@@ -20,7 +21,7 @@ function View() {
 		return index;
 	}
 
-	function drawData(dataset, month) {
+	function drawData(dataset) {
 		const CustomTooltip = ({ active, payload }) => {
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
@@ -59,7 +60,7 @@ function View() {
 
 							</defs>
 							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={v => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
 							<Area strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
@@ -71,6 +72,7 @@ function View() {
 	}
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
@@ -97,10 +99,12 @@ function View() {
 	}
 
 	function refresh(month) {
+		startRefreshAnimation();
 		if (typeof month == 'undefined') {
 			month = new Date().getMonth() + 1;
 		}
 		return getData(month).then(data => {
+			stopRefreshAnimation();
 			if (data) {
 				if (data === 404) {
 					setView(
@@ -108,12 +112,12 @@ function View() {
 							<RefreshComp callback={refresh} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
-								Aucune donnée n'est disponible pour {Months[month - 1].toLowerCase()}
+								Aucune donnée n'est disponible pour {Months[month].toLowerCase()}
 							</div>
 						</div>
 					);
 				} else {
-					setView(drawData(data, month));
+					setView(drawData(data));
 				}
 			} else {
 				setView(
@@ -128,7 +132,6 @@ function View() {
 
 	useEffect(() => {
 		refresh();
-		MonthComp(refresh);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

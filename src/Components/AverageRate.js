@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
-import RefreshComp from './RefreshComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './calendarComp';
 
 function AverageRate() {
+
+	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
@@ -28,6 +33,7 @@ function AverageRate() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} />
+				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Moyenne de note
 				</div>
@@ -44,15 +50,16 @@ function AverageRate() {
 			</div>
 		)
 	}
-	function getData() {
+
+	function getData(month) {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 				let dataset = []
 				res.data.data.forEach(element => {
 					const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
 					let average = 0
-					element[1].forEach((rate, i) => {
+					element[1].forEach(rate => {
 						average += rate.rate;
 					});
 					if (average) {
@@ -75,15 +82,32 @@ function AverageRate() {
 				resolve(dataset);
 			}).catch(err => {
 				console.log(err);
-				resolve(null);
+				resolve(err.request.status);
 			});
 		});
 	}
 
-	function refresh() {
-		return getData().then(data => {
+	function refresh(month) {
+		startRefreshAnimation();
+		if (typeof month == 'undefined') {
+			month = new Date().getMonth() + 1;
+		}
+		return getData(month).then(data => {
+			stopRefreshAnimation();
 			if (data) {
-				setRate(drawData(data))
+				if (data === 404) {
+					setRate(
+						<div className='ChartContainer'>
+							<RefreshComp callback={refresh} />
+							<MonthComp callback={refresh} />
+							<div className='ChartError'>
+								Aucune donnée n'est disponible pour {Months[month].toLowerCase()}
+							</div>
+						</div>
+					);
+				} else {
+					setRate(drawData(data));
+				}
 			} else {
 				setRate(
 					<div className='ChartContainer'>

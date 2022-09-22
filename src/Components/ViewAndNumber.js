@@ -1,9 +1,13 @@
 import axios from 'axios';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
-import RefreshComp from './RefreshComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './calendarComp';
 
 function VieuAndNumber() {
+	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+
+
 	function drawData(dataset) {
 		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 		const CustomTooltip = ({ active, payload }) => {
@@ -32,6 +36,7 @@ function VieuAndNumber() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} />
+				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombre de note
 				</div>
@@ -61,25 +66,42 @@ function VieuAndNumber() {
 
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
+			<RefreshComp callback={refresh} />
 			<div className='ChartError'>Récuperation des données...</div >
 		</div>
 	);
-	function getData() {
+	function getData(month) {
 		return new Promise(async (resolve) => {
-			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/ratesLogs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/ratesLogs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 				resolve(res.data.data);
 			}).catch(err => {
 				console.log(err);
-				resolve(null);
+				resolve(err.request.status);
 			});
 		});
 	}
 
-	function refresh() {
-		return getData().then(data => {
+	function refresh(month) {
+		startRefreshAnimation();
+		if (typeof month == 'undefined') {
+			month = new Date().getMonth() + 1;
+		}
+		return getData(month).then(data => {
+			stopRefreshAnimation();
 			if (data) {
-				setView(drawData(data));
+				if (data === 404) {
+					setView(
+						<div className='ChartContainer'>
+							<RefreshComp callback={refresh} />
+							<MonthComp callback={refresh} />
+							<div className='ChartError'>
+								Aucune donnée n'est disponible pour {Months[month].toLowerCase()}
+							</div>
+						</div>
+					);
+				} else {
+					setView(drawData(data));
+				}
 			} else {
 				setView(
 					<div className='ChartContainer'>

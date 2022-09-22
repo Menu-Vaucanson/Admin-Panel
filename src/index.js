@@ -32,6 +32,20 @@ function LoginPage() {
 
 	const oldToken = JSON.parse(window.localStorage.getItem('jwt'));
 
+	function LoginPageComp() {
+		return (
+			<div className='LoginPage'>
+				<div className='LoginTitle'>Bienvenue à l'administration de Menu Vaucanson</div>
+				<img className='LoginLogo' src={Logo} alt='Logo' />
+				<input onKeyUp={(e) => {
+					if (e.key === 'Enter') click();
+				}} type="password" placeholder='Mot de passe' id='password'></input>
+				{LoginError}
+				<div className='LoginButton' onClick={click}>Se connecter</div>
+			</div>
+		);
+	}
+
 	if (oldToken) {
 		Send(oldToken).then(res => {
 			if (res) {
@@ -41,15 +55,9 @@ function LoginPage() {
 					</BrowserRouter >
 				);
 			} else {
-				<div className='LoginPage'>
-					<div className='LoginTitle'>Bienvenue à l'administration de Menu Vaucanson</div>
-					<img className='LoginLogo' src={Logo} alt='Logo' />
-					<input onKeyUp={(e) => {
-						if (e.key === 'Enter') click();
-					}} type="password" placeholder='Mot de passe' id='password'></input>
-					{LoginError}
-					<div className='LoginButton' onClick={click}>Se connecter</div>
-				</div>
+				root.render(
+					<LoginPageComp />
+				);
 			}
 		});
 		return (
@@ -80,16 +88,7 @@ function LoginPage() {
 	}
 
 	return (
-		<div className='LoginPage'>
-			<div className='LoginTitle'>Bienvenue à l'administration de Menu Vaucanson</div>
-			<img className='LoginLogo' src={Logo} alt='Logo' />
-			<input onKeyUp={(e) => {
-				setLoginError(<div className='LoginError'></div>);
-				if (e.key === 'Enter') click();
-			}} type="password" placeholder='Mot de passe' id='password'></input>
-			{LoginError}
-			<div className='LoginButton' onClick={click}>Se connecter</div>
-		</div>
+		<LoginPageComp />
 	);
 }
 

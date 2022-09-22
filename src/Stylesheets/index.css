@@ -111,6 +111,7 @@ a {
 
 .homeButtons {
 	width: 30vw;
+	height: 16vh;
 	background-color: #B3B3B3;
 	font-size: 4.5vh;
 	font-weight: bold;
@@ -119,7 +120,6 @@ a {
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 200ms;
-	height: 16vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -127,7 +127,7 @@ a {
 }
 
 .homeButtons:hover {
-	width: 40vw;
+	width: 34vw;
 	height: 20vh;
 }
 
@@ -155,7 +155,7 @@ a {
 }
 
 .infosButons {
-	width: 20vw;
+	width: max-content;
 	text-align: center;
 	font-size: 4.5vh;
 	font-weight: bold;
@@ -163,11 +163,11 @@ a {
 }
 
 .infoBox {
-	width: 20vw;
+	width: 26vw;
 	height: 16vh;
 	background-color: #B3B3B3;
 	border-radius: 2.5vh;
-	padding: 20vh 8vh;
+	padding: 20vh 2vw;
 	cursor: pointer;
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 300ms;
@@ -194,6 +194,7 @@ a {
 	background-color: #B3B3B3;
 	padding: 25vh 0;
 	width: 30vw;
+	height: 16vh;
 	font-size: 4.5vh;
 	font-weight: bold;
 	border-radius: 2.5vh;
@@ -201,14 +202,13 @@ a {
 	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
 	transition-duration: 200ms;
 	text-align: center;
-	height: 16vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .AdminBox:hover {
-	width: 40vw;
+	width: 34vw;
 	height: 20vh;
 }
 

@@ -42,7 +42,7 @@ function LoginPage() {
 				);
 			} else {
 				<div className='LoginPage'>
-					<div className='LoginTitle'>Bienvenue a l'administration de Menu Vaucanson</div>
+					<div className='LoginTitle'>Bienvenue à l'administration de Menu Vaucanson</div>
 					<img className='LoginLogo' src={Logo} alt='Logo' />
 					<input onKeyUp={(e) => {
 						if (e.key === 'Enter') click();
@@ -81,7 +81,7 @@ function LoginPage() {
 
 	return (
 		<div className='LoginPage'>
-			<div className='LoginTitle'>Bienvenue a l'administration de Menu Vaucanson</div>
+			<div className='LoginTitle'>Bienvenue à l'administration de Menu Vaucanson</div>
 			<img className='LoginLogo' src={Logo} alt='Logo' />
 			<input onKeyUp={(e) => {
 				setLoginError(<div className='LoginError'></div>);

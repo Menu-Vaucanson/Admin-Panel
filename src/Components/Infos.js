@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 function Infos() {
 	return (
 		<div className="Info">
-			<div className="PageTitle">Fréquentation</div>
+			<div className="PageTitle">Statistiques</div>
 			<div className="HomeBoxes">
 				<Link to='NumberRate' className='infoBox blue'><div className='infosButons'>Nombre de notes</div></Link>
 				<Link to='AverageRate' className='infoBox yellow'><div className='infosButons'>Moyenne des notes</div></Link>

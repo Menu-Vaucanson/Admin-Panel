@@ -34,7 +34,7 @@ function View() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} />
-				<CalendarComp />
+				<CalendarComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombre de vue du {month}
 				</div>

@@ -722,3 +722,17 @@ a {
 	padding: 1vh 0;
 	height: 6vh;
 }
+
+.legendTickLine {
+	background-color: #E74855;
+	width: 2vmax;
+	height: 0.2vmax;
+}
+
+.legend {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 2vmax;
+	color: #F5FEF5;
+}

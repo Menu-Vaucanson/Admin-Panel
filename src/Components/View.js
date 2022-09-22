@@ -4,9 +4,12 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState, useEffect } from 'react';
 
 import RefreshComp from './RefreshComp';
-import CalendarComp from './calendarComp';
+import MonthComp from './calendarComp';
 
 function View() {
+
+	const Months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
 	function find(array, query) {
 		let index = null
 		array.forEach((element, i) => {
@@ -34,9 +37,9 @@ function View() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} />
-				<CalendarComp callback={refresh} />
+				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Nombre de vue du {month}
+					Nombre de vue
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -88,18 +91,30 @@ function View() {
 				resolve(Array.from(dataset));
 			}).catch(err => {
 				console.log(err);
-				resolve(null);
+				resolve(err.request.status);
 			});
 		});
 	}
 
 	function refresh(month) {
-		if (!month) {
+		if (typeof month == 'undefined') {
 			month = new Date().getMonth() + 1;
 		}
 		return getData(month).then(data => {
 			if (data) {
-				setView(drawData(data), month);
+				if (data === 404) {
+					setView(
+						<div className='ChartContainer'>
+							<RefreshComp callback={refresh} />
+							<MonthComp callback={refresh} />
+							<div className='ChartError'>
+								Aucune donnée n'est disponible pour {Months[month - 1].toLowerCase()}
+							</div>
+						</div>
+					);
+				} else {
+					setView(drawData(data, month));
+				}
 			} else {
 				setView(
 					<div className='ChartContainer'>
@@ -113,7 +128,7 @@ function View() {
 
 	useEffect(() => {
 		refresh();
-		CalendarComp(refresh);
+		MonthComp(refresh);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

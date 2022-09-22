@@ -1,10 +1,12 @@
-function CalendarComp({ callback }) {
+function MonthComp({ callback }) {
+	function change() {
+		const date = document.getElementById("month").value.split('-');
+		callback(new Date(date[0], date[1]).getMonth());
+	}
+
 	return (
-		<input onChange={() => {
-			const date = document.getElementById("month").value;
-			callback(date.split('-')[2]);
-		}} className="monthSelection" id="month" type="month" />
+		<input onChange={change} className="monthSelection" id="month" type="month" />
 	)
 }
 
-export default CalendarComp;
+export default MonthComp;

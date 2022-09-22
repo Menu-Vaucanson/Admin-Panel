@@ -4,6 +4,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState, useEffect } from 'react';
 
 import RefreshComp from './RefreshComp';
+import CalendarComp from './calendarComp';
 
 function View() {
 	function find(array, query) {
@@ -16,7 +17,7 @@ function View() {
 		return index;
 	}
 
-	function drawData(dataset) {
+	function drawData(dataset, month) {
 		const CustomTooltip = ({ active, payload }) => {
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
@@ -33,8 +34,9 @@ function View() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} />
+				<CalendarComp />
 				<div className='PageTitle'>
-					Nombre de vue
+					Nombre de vue du {month}
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -70,10 +72,9 @@ function View() {
 		</div>
 	);
 
-	function getData() {
+	function getData(month) {
 		return new Promise(async (resolve) => {
-			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/logs/' + (D.getMonth() + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 				let dataset = []
 				res.data.data.forEach(element => {
 					const date = new Date(element.date);
@@ -92,10 +93,13 @@ function View() {
 		});
 	}
 
-	function refresh() {
-		return getData().then(data => {
+	function refresh(month) {
+		if (!month) {
+			month = new Date().getMonth() + 1;
+		}
+		return getData(month).then(data => {
 			if (data) {
-				setView(drawData(data));
+				setView(drawData(data), month);
 			} else {
 				setView(
 					<div className='ChartContainer'>
@@ -109,6 +113,7 @@ function View() {
 
 	useEffect(() => {
 		refresh();
+		CalendarComp(refresh);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

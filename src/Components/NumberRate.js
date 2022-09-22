@@ -118,7 +118,7 @@ function NumberRate() {
 				);
 			}
 		});
-		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
+		//!\\ Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

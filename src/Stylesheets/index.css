@@ -705,3 +705,12 @@ a {
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+
+.monthSelection {
+	border-radius: 0.3vmax;
+	border: none;
+	height: 5vh;
+	background-color: #403F4C;
+	color: #F5FEF5;
+	font-size: 2vmax;
+}

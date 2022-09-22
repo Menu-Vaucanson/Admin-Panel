@@ -28,7 +28,7 @@ function Send(token) {
 }
 
 function LoginPage() {
-	const [ButtonText, setButtonText] = useState('Se connecter');
+	const [LoginError, setLoginError] = useState(<div className='LoginError'></div>);
 
 	const oldToken = JSON.parse(window.localStorage.getItem('jwt'));
 
@@ -47,7 +47,8 @@ function LoginPage() {
 					<input onKeyUp={(e) => {
 						if (e.key === 'Enter') click();
 					}} type="password" placeholder='Mot de passe' id='password'></input>
-					<div className='LoginButton' onClick={click}>{ButtonText}</div>
+					{LoginError}
+					<div className='LoginButton' onClick={click}>Se connecter</div>
 				</div>
 			}
 		});
@@ -63,7 +64,7 @@ function LoginPage() {
 	function click() {
 		const token = document.getElementById('password').value;
 		if (token === '') return;
-		setButtonText('Connexion...');
+		setLoginError(<div className='LoginError'>Connexion...</div>);
 		Send(token).then(res => {
 			if (res === true) {
 				window.localStorage.setItem('jwt', JSON.stringify(token));
@@ -71,14 +72,11 @@ function LoginPage() {
 					<BrowserRouter>
 						<Main />
 					</BrowserRouter >
-				)
+				);
 			} else {
-				setButtonText('Mauvais mot de passe');
+				setLoginError(<div className='LoginError'>Mauvais mot de passe</div>);
 			}
-			setTimeout(() => {
-				setButtonText('Connexion');
-			}, 1000);
-		})
+		});
 	}
 
 	return (
@@ -86,13 +84,15 @@ function LoginPage() {
 			<div className='LoginTitle'>Bienvenue a l'administration de Menu Vaucanson</div>
 			<img className='LoginLogo' src={Logo} alt='Logo' />
 			<input onKeyUp={(e) => {
+				setLoginError(<div className='LoginError'></div>);
 				if (e.key === 'Enter') click();
 			}} type="password" placeholder='Mot de passe' id='password'></input>
-			<div className='LoginButton' onClick={click}>{ButtonText}</div>
+			{LoginError}
+			<div className='LoginButton' onClick={click}>Se connecter</div>
 		</div>
 	);
 }
 
 root.render(
 	<LoginPage />
-)
+);

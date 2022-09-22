@@ -304,7 +304,6 @@ a {
 
 .LoginPage input {
 	margin-top: 10vh;
-	margin-bottom: 5vh;
 	background-color: #55555c;
 	border: none;
 	color: #F5FEF5;
@@ -704,4 +703,11 @@ a {
 	animation-name: rotate;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
+}
+
+.LoginError {
+	color: #F5FEF5;
+	font-size: 2vmax;
+	padding: 1vh 0;
+	height: 6vh;
 }

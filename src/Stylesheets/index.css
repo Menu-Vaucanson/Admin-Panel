@@ -714,6 +714,7 @@ a {
 	background-color: #403F4C;
 	color: #F5FEF5;
 	font-size: 2vmax;
+	z-index: 2;
 }
 
 .LoginError {

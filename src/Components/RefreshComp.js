@@ -1,12 +1,20 @@
 import Refresh from '../Assets/arrow.svg';
 
+function stopRefreshAnimation() {
+	document.getElementById('RefreshButton').className = 'refreshIcon';
+}
+
+function startRefreshAnimation() {
+	document.getElementById('RefreshButton').className = 'refreshIcon rotate';
+}
+
 function RefreshComp({ callback }) {
+
 	function click() {
-		const element = document.getElementById('RefreshButton');
-		element.className = 'refreshIcon rotate';
+		startRefreshAnimation();
 		callback().then(() => {
-			element.className = 'refreshIcon';
-		});
+			stopRefreshAnimation();
+		})
 	}
 
 	return (
@@ -14,4 +22,5 @@ function RefreshComp({ callback }) {
 	);
 }
 
+export { stopRefreshAnimation, startRefreshAnimation };
 export default RefreshComp;

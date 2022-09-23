@@ -157,16 +157,15 @@ function NewMenu() {
 
 		const themes = getThemes();
 
-		const initial = 'DishStyleNone';
-		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style')) ? JSON.parse(window.sessionStorage.getItem('dish1Style')) : initial;
-		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style')) ? JSON.parse(window.sessionStorage.getItem('dish2Style')) : initial;
-		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style')) ? JSON.parse(window.sessionStorage.getItem('dish3Style')) : initial;
-		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style')) ? JSON.parse(window.sessionStorage.getItem('dish4Style')) : initial;
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style')) ? JSON.parse(window.sessionStorage.getItem('dish1Style')) : 'DishStyleblue';
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style')) ? JSON.parse(window.sessionStorage.getItem('dish2Style')) : 'DishStylered';
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style')) ? JSON.parse(window.sessionStorage.getItem('dish3Style')) : 'DishStylegreen';
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style')) ? JSON.parse(window.sessionStorage.getItem('dish4Style')) : 'DishStyleyellow';
 
-		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle')) : initial;
-		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle')) : initial;
-		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle')) : initial;
-		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle')) : initial;
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle')) : 'DishStyleblue';
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle')) : 'DishStylered';
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle')) : 'DishStylegreen';
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle')) : 'DishStyleyellow';
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);
@@ -310,16 +309,15 @@ function NewMenu() {
 
 		const themes = getThemesDark();
 
-		const initial = 'DishStyleNone';
-		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark')) : initial;
-		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark')) : initial;
-		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark')) : initial;
-		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark')) : initial;
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark')) : 'DishStyleblueDark';
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark')) : 'DishStyleredDark';
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark')) : 'DishStylegreenDark';
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark')) : 'DishStyleyellowDark';
 
-		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) : initial;
-		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) : initial;
-		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) : initial;
-		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) : initial;
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) : 'DishStyleblueDark';
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) : 'DishStyleredDark';
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) : 'DishStylegreenDark';
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) : 'DishStyleyellowDark';
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);

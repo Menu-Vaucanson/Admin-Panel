@@ -495,7 +495,6 @@ a {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	word-break: break-all;
 }
 
 .MenuContentText {

@@ -2,9 +2,9 @@ import axios from 'axios';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './calendarComp';
+import MonthComp from './CalendarComp';
 
-function VieuAndNumber() {
+function ViewAndNumber() {
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 
@@ -122,4 +122,4 @@ function VieuAndNumber() {
 
 	return View;
 }
-export default VieuAndNumber;
+export default ViewAndNumber;

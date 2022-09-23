@@ -4,7 +4,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useState } from 'react';
 
 import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
-import MonthComp from './calendarComp';
+import MonthComp from './CalendarComp';
 
 function View() {
 

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
-import MonthComp from './calendarComp';
+
+import MonthComp from './CalendarComp';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 function Platform() {

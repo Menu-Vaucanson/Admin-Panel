@@ -52,7 +52,7 @@ function ViewAndNumber() {
 							}}
 						>
 							<CartesianGrid strokeDasharray="3 3" />
-							<XAxis dataKey={(v) => new Date(v.date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => new Date(v.date).getDate()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis />
 							<Tooltip content={<CustomTooltip />} />
 							<Area type="monotone" dataKey="view" stroke="#8884d8" fillOpacity={0.8} fill="#8884d8" />

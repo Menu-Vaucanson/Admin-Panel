@@ -14,7 +14,7 @@ function View() {
 	function find(array, query) {
 		let index = null
 		array.forEach((element, i) => {
-			if (new Date(element.Date).toLocaleDateString() === query) {
+			if (new Date(element.Date).getDate() === query) {
 				index = i;
 			}
 		});
@@ -61,7 +61,7 @@ function View() {
 
 							</defs>
 							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={v => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={v => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
 							<Area strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
@@ -84,7 +84,7 @@ function View() {
 				let dataset = []
 				res.data.data.forEach(element => {
 					const date = new Date(element.date);
-					const index = find(dataset, date.toLocaleDateString());
+					const index = find(dataset, date.getDate());
 					if (index != null) {
 						dataset[index].Number = dataset[index].Number + 1
 					} else {

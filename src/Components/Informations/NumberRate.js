@@ -55,7 +55,7 @@ function NumberRate() {
 								</linearGradient>
 							</defs>
 							<CartesianGrid strokeDasharray="3 3" />
-							<XAxis dataKey={(v) => new Date(v.Date).toLocaleDateString()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => new Date(v.Date).getDate()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />

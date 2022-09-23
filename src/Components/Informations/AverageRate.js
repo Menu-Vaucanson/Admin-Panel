@@ -50,7 +50,7 @@ function AverageRate() {
 							}}
 						>
 							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={(v) => v = new Date(v.Date).toLocaleDateString()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Bar dataKey="Average" fill="#FFC482" />

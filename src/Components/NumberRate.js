@@ -71,7 +71,7 @@ function NumberRate() {
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
 				let dataset = []
 				res.data.data.forEach(element => {
-					const date = new Date(D.getFullYear(), month, element[0]);
+					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let number = element[1].length;
 					dataset.push({ Date: date, Number: number })
 				});

@@ -1,4 +1,4 @@
-import Refresh from '../Assets/arrow.svg';
+import Refresh from '../../Assets/arrow.svg';
 
 function stopRefreshAnimation() {
 	document.getElementById('RefreshButton').className = 'refreshIcon';

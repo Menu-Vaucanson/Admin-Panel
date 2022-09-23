@@ -3,10 +3,10 @@ import { useState } from "react";
 
 import CustomCheck from './CustomCheck';
 import MenuProgressBar from "./MenuProgressBar";
-import getThemes from '../Themes/Selection';
-import getThemesDark from '../Themes/SelectionDark';
-import '../Themes/Light';
-import '../Themes/Dark';
+import getThemes from '../../Themes/Selection';
+import getThemesDark from '../../Themes/SelectionDark';
+import '../../Themes/Light';
+import '../../Themes/Dark';
 
 function NewMenu() {
 	function EnterDate() {

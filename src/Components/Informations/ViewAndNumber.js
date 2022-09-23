@@ -95,7 +95,7 @@ function ViewAndNumber() {
 							<RefreshComp callback={refresh} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
-								Aucune donnée n'est disponible pour {Months[month].toLowerCase()}
+								Aucune donnée n'est disponible pour {Months[month]}
 							</div>
 						</div>
 					);

@@ -23,12 +23,13 @@ function View() {
 
 	function drawData(dataset) {
 		const CustomTooltip = ({ active, payload }) => {
+			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
 				const value = payload[0].payload.Number;
 				return (
 					<div className="customTooltip">
-						{`${date.toLocaleDateString()} : ${value}`}
+						{`${dateToText[date.getDay()]}: ${value}`}
 					</div>
 				);
 			}

@@ -9,6 +9,6 @@ function Home() {
 				<Link to='Admin' className='homeButtons blue'>Administration</Link>
 			</div>
 		</div >
-	)
+	);
 }
 export default Home;

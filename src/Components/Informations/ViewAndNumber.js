@@ -38,7 +38,7 @@ function ViewAndNumber() {
 				<RefreshComp callback={refresh} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Nombre de note
+					Nombres de note
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -68,7 +68,7 @@ function ViewAndNumber() {
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
 			<RefreshComp callback={refresh} />
-			<div className='ChartError'>Récuperation des données...</div >
+			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
 	function getData(month) {

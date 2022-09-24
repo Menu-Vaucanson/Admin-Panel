@@ -736,3 +736,22 @@ a {
 	gap: 2vmax;
 	color: #F5FEF5;
 }
+
+.ping {
+	width: 10vw;
+	height: 3vh;
+	position: absolute;
+	top: 11vh;
+	right: -15vw;
+	cursor: default;
+	padding: 2vh 2vh;
+	background-color: #08A47C;
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	border-radius: 2vh;
+}
+
+.pingText {
+	text-align: center;
+}

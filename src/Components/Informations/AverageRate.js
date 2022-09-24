@@ -11,7 +11,7 @@ function AverageRate() {
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
 			<RefreshComp callback={refresh} />
-			<div className='ChartError'>Récuperation des données...</div >
+			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
 

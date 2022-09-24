@@ -12,7 +12,7 @@ function NumberRate() {
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
 			<RefreshComp callback={refresh} />
-			<div className='ChartError'>Récuperation des données...</div >
+			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
 
@@ -35,7 +35,7 @@ function NumberRate() {
 				<RefreshComp callback={refresh} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Nombre de note
+					Nombres de note
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">

@@ -18,12 +18,12 @@ function ViewAndNumber() {
 				if (typeof view == 'undefined') {
 					view = '';
 				} else {
-					view = `vues: ${view}`;
+					view = `Vues: ${view}`;
 				}
 				if (typeof rate == 'undefined') {
 					rate = '';
 				} else {
-					rate = `notes: ${rate} `
+					rate = `Notes: ${rate} `
 				}
 				return (
 					<div className="customTooltip">
@@ -53,11 +53,11 @@ function ViewAndNumber() {
 						>
 							<CartesianGrid strokeDasharray="3 3" />
 							<XAxis dataKey={(v) => new Date(v.date).getDate()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-							<YAxis yAxisId="right" orientation="right" type="number" dataKey="rate" />
-							<YAxis yAxisId="left" type="number" dataKey="view" />
+							<YAxis stroke='#82CA9D' yAxisId="right" orientation="right" type="number" dataKey="rate" />
+							<YAxis stroke='#8884D8' yAxisId="left" type="number" dataKey="view" />
 							<Tooltip content={<CustomTooltip />} />
-							<Area yAxisId="left" type="monotone" dataKey="view" stroke="#8884d8" fillOpacity={0.6} fill="#8884d8" />
-							<Area yAxisId="right" type="monotone" dataKey="rate" stroke="#82ca9d" fillOpacity={0.6} fill="#82ca9d" />
+							<Area yAxisId="left" type="monotone" dataKey="view" stroke="#8884d8" fillOpacity={0.6} fill="#8884D8" />
+							<Area yAxisId="right" type="monotone" dataKey="rate" stroke="#82ca9d" fillOpacity={0.6} fill="#82CA9D" />
 						</AreaChart>
 					</ResponsiveContainer>
 				</div>

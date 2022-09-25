@@ -73,6 +73,7 @@ a {
 	align-items: center;
 	justify-content: space-between;
 	height: 4.5vmax;
+	z-index: 2;
 }
 
 .MenuBarTitle {

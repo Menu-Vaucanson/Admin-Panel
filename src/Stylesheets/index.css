@@ -750,6 +750,18 @@ a {
 	align-items: center;
 	justify-items: center;
 	border-radius: 2vh;
+	animation-duration: 1000ms;
+}
+
+.Animate {
+	transition-duration: 500ms;
+	transform: translate(-22vw);
+
+}
+
+.stopAnimate {
+	transition-duration: 500ms;
+	transform: translate(22vw);
 }
 
 .pingText {

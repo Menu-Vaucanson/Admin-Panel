@@ -7,11 +7,13 @@ import MonthComp from './CalendarComp';
 
 function NumberRate() {
 
+	const color = '#4775FF';
+
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 	const [Rate, setRate] = useState(
 		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} />
+			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
@@ -32,7 +34,7 @@ function NumberRate() {
 		};
 		return (
 			<div className='Chart'>
-				<RefreshComp callback={refresh} />
+				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombres de note
@@ -105,7 +107,7 @@ function NumberRate() {
 				if (data === 404) {
 					setRate(
 						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} />
+							<RefreshComp callback={refresh} pingColor={color} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
 								Aucune donnée n'est disponible pour {Months[month]}
@@ -118,7 +120,7 @@ function NumberRate() {
 			} else {
 				setRate(
 					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} />
+						<RefreshComp callback={refresh} pingColor={color} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);

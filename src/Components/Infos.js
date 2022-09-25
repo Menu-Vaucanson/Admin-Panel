@@ -8,7 +8,7 @@ function Infos() {
 				<Link to='AverageRate' className='infoBox yellow'><div className='infosButons'>Moyennes des notes</div></Link>
 				<Link to='View' className='infoBox green'><div className='infosButons'>Visites</div></Link>
 				<Link to='ViewAndNumber' className='infoBox red'> <div className='infosButons'> Vues et notes</div></Link>
-				<Link to='Platform' className='infoBox blue'><div className='infosButons'>Platformes</div></Link>
+				<Link to='Platform' className='infoBox green'><div className='infosButons'>Platformes</div></Link>
 			</div >
 		</div >
 	)

@@ -2,33 +2,29 @@ import Refresh from '../../Assets/arrow.svg';
 import { useState } from 'react';
 function stopRefreshAnimation() {
 	document.getElementById('RefreshButton').className = 'refreshIcon';
-	document.getElementById('ping').className = 'ping Animate';
-	sleep(3000, () => (document.getElementById('ping').className = 'ping stopAnimate'))
-}
-
-async function sleep(milliseconds, callback) {
-	await new Promise(resolve => setTimeout(resolve, milliseconds));
-	callback();
 }
 
 function startRefreshAnimation() {
 	document.getElementById('RefreshButton').className = 'refreshIcon rotate';
 }
 
-function RefreshComp({ callback }) {
-	const [ping, setPing] = useState(
-		<div className='ping' id='ping'>
-			<div className='pingText'>fait en 0 ms</div>
-		</div>
-	);
+function RefreshComp({ callback, pingColor }) {
+	const [ping, setPing] = useState(<div style={{ backgroundColor: pingColor }} id='ping' className='ping'>0ms</div>);
 
 	function click() {
 		const timestart = new Date();
 		startRefreshAnimation();
 		callback().then(() => {
+			const ping = new Date().getTime() - timestart.getTime();
+			setPing(
+				<div style={{ backgroundColor: pingColor }} className='ping' id='ping'>{ping}ms</div>
+			);
+			const element = document.getElementById('ping');
+			element.className = 'ping';
+			void element.offsetWidth;
+			element.className = 'ping PingAnimate';
 			stopRefreshAnimation();
-			printPing(timestart, new Date(), setPing);
-		})
+		});
 	}
 
 	return (
@@ -40,12 +36,6 @@ function RefreshComp({ callback }) {
 }
 
 
-function printPing(time1, time2, setPing) {
-	const ping = new Date(time2).getTime() - new Date(time1).getTime();
-	setPing(
-		<div className='ping' id='ping'><div className='pingText'>fait en {ping} ms</div></div>
-	)
-}
 
 export { stopRefreshAnimation, startRefreshAnimation };
 export default RefreshComp;

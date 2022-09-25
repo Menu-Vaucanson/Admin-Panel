@@ -5,6 +5,9 @@ import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './Refr
 import MonthComp from './CalendarComp';
 
 function ViewAndNumber() {
+
+	const color = '#E74855';
+
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 
@@ -35,7 +38,7 @@ function ViewAndNumber() {
 		};
 		return (
 			<div className='Chart'>
-				<RefreshComp callback={refresh} />
+				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombres de note
@@ -67,7 +70,7 @@ function ViewAndNumber() {
 
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} />
+			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
@@ -93,7 +96,7 @@ function ViewAndNumber() {
 				if (data === 404) {
 					setView(
 						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} />
+							<RefreshComp callback={refresh} pingColor={color} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
 								Aucune donnée n'est disponible pour {Months[month]}
@@ -106,7 +109,7 @@ function ViewAndNumber() {
 			} else {
 				setView(
 					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} />
+						<RefreshComp callback={refresh} pingColor={color} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);

@@ -23,6 +23,24 @@
 	}
 }
 
+@keyframes popUp {
+	0% {
+		transform: translateY(0vh);
+	}
+
+	30% {
+		transform: translateY(22vh);
+	}
+
+	70% {
+		transform: translateY(22vh);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
 *:focus {
 	outline: none;
 }
@@ -736,32 +754,22 @@ a {
 }
 
 .ping {
-	width: 10vw;
-	height: 3vh;
+	width: max-content;
+	height: max-content;
 	position: absolute;
-	top: 11vh;
-	right: -15vw;
+	top: -10vh;
+	right: 8vw;
 	cursor: default;
 	padding: 2vh 2vh;
-	background-color: #08A47C;
+	background-color: #D9D9D9;
 	display: flex;
 	align-items: center;
 	justify-items: center;
-	border-radius: 2vh;
-	animation-duration: 1000ms;
-}
-
-.Animate {
-	transition-duration: 500ms;
-	transform: translate(-22vw);
-
-}
-
-.stopAnimate {
-	transition-duration: 500ms;
-	transform: translate(22vw);
-}
-
-.pingText {
 	text-align: center;
+	border-radius: 1vh;
+}
+
+.PingAnimate {
+	animation-duration: 2000ms;
+	animation-name: popUp;
 }

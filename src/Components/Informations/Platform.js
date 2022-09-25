@@ -7,6 +7,8 @@ import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './Refr
 
 function Platform() {
 
+	const color = '#08A47C';
+
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 	function renderActiveShape(props) {
@@ -63,7 +65,7 @@ function Platform() {
 
 		return (
 			<div className='Chart'>
-				<RefreshComp callback={refresh} />
+				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Plateformes
@@ -90,7 +92,7 @@ function Platform() {
 
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} />
+			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
@@ -138,7 +140,7 @@ function Platform() {
 				if (data === 404) {
 					setView(
 						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} />
+							<RefreshComp callback={refresh} pingColor={color} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
 								Aucune donnée n'est disponible pour {Months[month]}
@@ -151,7 +153,7 @@ function Platform() {
 			} else {
 				setView(
 					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} />
+						<RefreshComp callback={refresh} pingColor={color} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);

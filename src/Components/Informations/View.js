@@ -8,6 +8,8 @@ import MonthComp from './CalendarComp';
 
 function View() {
 
+	const color = "#08A47C";
+
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 
@@ -38,7 +40,7 @@ function View() {
 
 		return (
 			<div className='Chart'>
-				<RefreshComp callback={refresh} />
+				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Nombres de vues
@@ -73,7 +75,7 @@ function View() {
 	}
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} />
+			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
@@ -110,7 +112,7 @@ function View() {
 				if (data === 404) {
 					setView(
 						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} />
+							<RefreshComp callback={refresh} pingColor={color} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
 								Aucune donnée n'est disponible pour {Months[month]}
@@ -123,7 +125,7 @@ function View() {
 			} else {
 				setView(
 					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} />
+						<RefreshComp callback={refresh} pingColor={color} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
 				);

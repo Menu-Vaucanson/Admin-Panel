@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import React from 'react';
 
 import MenuBar from './MenuBar';
 import Home from './Home';

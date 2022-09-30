@@ -1,49 +1,47 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState } from 'react';
-
-import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
+import React, { useState, useEffect } from 'react';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './CalendarComp';
 
-function View() {
+function ViewAndNumber() {
 
-	const color = "#08A47C";
+	const color: string = '#E74855';
 
-	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+	const Months: Array<string> = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-
-	function find(array, query) {
-		let index = null
-		array.forEach((element, i) => {
-			if (new Date(element.Date).getDate() === query) {
-				index = i;
-			}
-		});
-		return index;
-	}
 
 	function drawData(dataset) {
-		const CustomTooltip = ({ active, payload }) => {
-			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+		const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+		const CustomTooltip = ({ active?, payload?}) => {
 			if (active && payload && payload.length) {
-				const date = new Date(payload[0].payload.Date);
-				const value = payload[0].payload.Number;
+				const date: Date = new Date(payload[0].payload.date);
+				let rate: string = payload[0].payload.rate;
+				let view: string = payload[0].payload.view;
+				if (typeof view == 'undefined') {
+					view = '';
+				} else {
+					view = `Vues: ${view}`;
+				}
+				if (typeof rate == 'undefined') {
+					rate = '';
+				} else {
+					rate = `Notes: ${rate} `
+				}
 				return (
 					<div className="customTooltip">
-						{`${dateToText[date.getDay()]}: ${value}`}
+						{`${dateToText[date.getDay()]} ${view} ${rate} `}
 					</div>
 				);
 			}
 			return null;
 		};
-
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Nombres de vues
+					Nombres de note
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -51,49 +49,35 @@ function View() {
 							data={dataset}
 							margin={{
 								top: 5,
-								bottom: 5,
 								right: 30,
-								left: 0
+								left: 20,
+								bottom: 5,
 							}}
 						>
-							<defs>
-								<linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
-									<stop offset="95%" stopColor="#08A47C" stopOpacity={0} />
-								</linearGradient>
-
-							</defs>
-							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={v => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
-							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<CartesianGrid strokeDasharray="3 3" />
+							<XAxis dataKey={(v) => new Date(v.date).getDate()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<YAxis stroke='#82CA9D' yAxisId="right" orientation="right" type="number" dataKey="rate" />
+							<YAxis stroke='#8884D8' yAxisId="left" type="number" dataKey="view" />
 							<Tooltip content={<CustomTooltip />} />
-							<Area strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
+							<Area yAxisId="left" type="monotone" dataKey="view" stroke="#8884d8" fillOpacity={0.6} fill="#8884D8" />
+							<Area yAxisId="right" type="monotone" dataKey="rate" stroke="#82ca9d" fillOpacity={0.6} fill="#82CA9D" />
 						</AreaChart>
 					</ResponsiveContainer>
 				</div>
 			</div>
 		)
 	}
+
 	const [View, setView] = useState(
 		<div className='ChartContainer'>
 			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
 	);
-
-	function getData(month) {
+	function getData(month: string) {
 		return new Promise(async (resolve) => {
-			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-				let dataset = []
-				res.data.data.forEach(element => {
-					const date = new Date(element.date);
-					const index = find(dataset, date.getDate());
-					if (index != null) {
-						dataset[index].Number = dataset[index].Number + 1
-					} else {
-						dataset.push({ Date: date, Number: 1 })
-					}
-				});
-				resolve(Array.from(dataset));
+			await axios.post('https://menuvox.fr:8081/ratesLogs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+				resolve(res.data.data);
 			}).catch(err => {
 				console.log(err);
 				resolve(err.request.status);
@@ -139,7 +123,7 @@ function View() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+
 	return View;
 }
-
-export default View;
+export default ViewAndNumber;

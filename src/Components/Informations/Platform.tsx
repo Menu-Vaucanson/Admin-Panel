@@ -1,3 +1,4 @@
+import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
@@ -7,22 +8,22 @@ import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './Refr
 
 function Platform() {
 
-	const color = '#08A47C';
+	const color: string = '#08A47C';
 
-	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+	const Months: Array<string> = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 	function renderActiveShape(props) {
-		const RADIAN = Math.PI / 180;
+		const RADIAN: number = Math.PI / 180;
 		const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
-		const sin = Math.sin(-RADIAN * midAngle);
-		const cos = Math.cos(-RADIAN * midAngle);
-		const sx = cx + (outerRadius + 10) * cos;
-		const sy = cy + (outerRadius + 10) * sin;
-		const mx = cx + (outerRadius + 30) * cos;
-		const my = cy + (outerRadius + 30) * sin;
-		const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-		const ey = my;
-		const textAnchor = cos >= 0 ? 'start' : 'end';
+		const sin: number = Math.sin(-RADIAN * midAngle);
+		const cos: number = Math.cos(-RADIAN * midAngle);
+		const sx: number = cx + (outerRadius + 10) * cos;
+		const sy: number = cy + (outerRadius + 10) * sin;
+		const mx: number = cx + (outerRadius + 30) * cos;
+		const my: number = cy + (outerRadius + 30) * sin;
+		const ex: number = mx + (cos >= 0 ? 1 : -1) * 22;
+		const ey: number = my;
+		const textAnchor: string = cos >= 0 ? 'start' : 'end';
 
 		return (
 			<g>
@@ -99,8 +100,8 @@ function Platform() {
 
 	function getData(month) {
 		return new Promise(async (resolve) => {
-			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-				const data = [
+			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+				const data: Array<{ name: string, value: number }> = [
 					{
 						name: 'PC',
 						value: 0
@@ -112,7 +113,7 @@ function Platform() {
 						value: 0
 					}
 				];
-				res.data.data.forEach(d => {
+				res.data.data.forEach((d: { pc: boolean; }) => {
 					if (d.pc === true) {
 						data[0].value++;
 					} else if (d.pc === false) {
@@ -129,7 +130,7 @@ function Platform() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month?) {
 		startRefreshAnimation();
 		if (typeof month == 'undefined') {
 			month = new Date().getMonth() + 1;

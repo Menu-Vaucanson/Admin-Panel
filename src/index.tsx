@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-
+// @ts-ignore
 import Logo from './Assets/Logo.svg';
 import './Stylesheets/index.css';
 import Main from './Components/Main';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const url = 'https://menuvox.fr:8081';
+const url: string = 'https://menuvox.fr:8081';
 
-function Send(token) {
+function Send(token: string) {
 	return new Promise(resolve => {
 		axios.post(`${url}/login`, { 'jwt': token }).catch(err => {
 			console.log(err);
@@ -26,11 +26,10 @@ function Send(token) {
 		});
 	});
 }
-
 function LoginPage() {
 	const [LoginError, setLoginError] = useState(<div className='LoginError'></div>);
 
-	const oldToken = JSON.parse(window.localStorage.getItem('jwt'));
+	const oldToken: string = JSON.parse(window.localStorage.getItem('jwt') as string);
 
 	function LoginPageComp() {
 		return (
@@ -70,7 +69,7 @@ function LoginPage() {
 	}
 
 	function click() {
-		const token = document.getElementById('password').value;
+		const token: string = (document.getElementById('password') as HTMLInputElement).value;
 		if (token === '') return;
 		setLoginError(<div className='LoginError'>Connexion...</div>);
 		Send(token).then(res => {

@@ -1,4 +1,4 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 import React from 'react';
 import axios from 'axios';
@@ -21,7 +21,7 @@ function NumberRate() {
 
 	function drawData(dataset) {
 		const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-		const CustomTooltip = ({ active, payload }) => {
+		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 			if (active && payload && payload.length) {
 				const date: Date = new Date(payload[0].payload.Date);
 				const value: number = payload[0].payload.Number;

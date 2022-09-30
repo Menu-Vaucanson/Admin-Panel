@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import React, { useState, useEffect } from 'react';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './CalendarComp';
+
 
 function ViewAndNumber() {
 
@@ -10,10 +11,13 @@ function ViewAndNumber() {
 
 	const Months: Array<string> = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-
+	interface ICustomToolip {
+		active: any;
+		payload: any;
+	}
 	function drawData(dataset) {
 		const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-		const CustomTooltip = ({ active?, payload?}) => {
+		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 			if (active && payload && payload.length) {
 				const date: Date = new Date(payload[0].payload.date);
 				let rate: string = payload[0].payload.rate;
@@ -85,7 +89,7 @@ function ViewAndNumber() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month?) {
 		startRefreshAnimation();
 		if (typeof month == 'undefined') {
 			month = new Date().getMonth() + 1;

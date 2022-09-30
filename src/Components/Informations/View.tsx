@@ -24,7 +24,7 @@ function View() {
 	}
 
 	function drawData(dataset) {
-		const CustomTooltip = ({ active, payload }) => {
+		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 			const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);

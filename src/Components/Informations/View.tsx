@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState } from 'react';
 
-import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+// @ts-ignore
+import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
 
 function View() {
 

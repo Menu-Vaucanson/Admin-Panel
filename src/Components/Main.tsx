@@ -1,21 +1,36 @@
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 
-import MenuBar from './MenuBar';
-import Home from './Home';
-import Infos from './Infos';
-import Admin from './Admin';
-import NewMenu from './MenuCreation/NewMenu';
-import NewMenuValid from './MenuCreation/NewMenuValid';
-import E404 from './E404';
-import AverageRate from './Informations/AverageRate';
-import View from './Informations/View';
-import NumberRate from './Informations/NumberRate';
-import ViewAndNumber from './Informations/ViewAndNumber';
-import SendNewMenu from './MenuCreation/SendNewMenu';
-import DeleteMenu from './MenuCreation/DeleteMenu';
-import DeleteMenuValid from './MenuCreation/DeleteMenuValid';
-import Platform from './Informations/Platform';
+// @ts-ignore
+import MenuBar from './MenuBar.tsx';
+// @ts-ignore
+import Home from './Home.tsx';
+// @ts-ignore
+import Infos from './Infos.tsx';
+// @ts-ignore
+import Admin from './Admin.tsx';
+// @ts-ignore
+import NewMenu from './MenuCreation/NewMenu.tsx';
+// @ts-ignore
+import NewMenuValid from './MenuCreation/NewMenuValid.tsx';
+// @ts-ignore
+import E404 from './E404.tsx';
+// @ts-ignore
+import AverageRate from './Informations/AverageRate.tsx';
+// @ts-ignore
+import View from './Informations/View.tsx';
+// @ts-ignore
+import NumberRate from './Informations/NumberRate.tsx';
+// @ts-ignore
+import ViewAndNumber from './Informations/ViewAndNumber.tsx';
+// @ts-ignore
+import SendNewMenu from './MenuCreation/SendNewMenu.tsx';
+// @ts-ignore
+import DeleteMenu from './MenuCreation/DeleteMenu.tsx';
+// @ts-ignore
+import DeleteMenuValid from './MenuCreation/DeleteMenuValid.tsx';
+// @ts-ignore
+import Platform from './Informations/Platform.tsx';
 
 function Main() {
 	return (

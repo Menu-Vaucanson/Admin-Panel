@@ -1,7 +1,7 @@
 import React from 'react';
 function MonthComp({ callback }) {
 	function change() {
-		const date: Array<string> = (document.getElementById("month") as HTMLInputElement).value.split('-');
+		const date = (document.getElementById("month") as HTMLInputElement).value.split('-');
 		callback(new Date(Number(date[0]), Number(date[1])).getMonth());
 	}
 

@@ -1,16 +1,16 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import './Stylesheets/index.css';
+// @ts-ignore
+import Main from './Components/Main.tsx';
 // @ts-ignore
 import Logo from './Assets/Logo.svg';
-import './Stylesheets/index.css';
-import Main from './Components/Main';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const url: string = 'https://menuvox.fr:8081';
+const url = 'https://menuvox.fr:8081';
 
 function Send(token: string) {
 	return new Promise(resolve => {
@@ -29,7 +29,7 @@ function Send(token: string) {
 function LoginPage() {
 	const [LoginError, setLoginError] = useState(<div className='LoginError'></div>);
 
-	const oldToken: string = JSON.parse(window.localStorage.getItem('jwt') as string);
+	const oldToken = JSON.parse(window.localStorage.getItem('jwt') as string);
 
 	function LoginPageComp() {
 		return (
@@ -69,7 +69,7 @@ function LoginPage() {
 	}
 
 	function click() {
-		const token: string = (document.getElementById('password') as HTMLInputElement).value;
+		const token = (document.getElementById('password') as HTMLInputElement).value;
 		if (token === '') return;
 		setLoginError(<div className='LoginError'>Connexion...</div>);
 		Send(token).then(res => {

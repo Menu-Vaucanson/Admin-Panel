@@ -6,7 +6,7 @@ const url: string = 'https://menuvox.fr:8081/';
 
 
 function DeleteMenuValid() {
-	const [Content, setContent] = useState('Suppression en cours...');
+	const [Content, setContent] = useState(<>Suppression en cours...</>);
 
 	useEffect(() => {
 		const date: string = JSON.parse(window.sessionStorage.getItem('date') as string);

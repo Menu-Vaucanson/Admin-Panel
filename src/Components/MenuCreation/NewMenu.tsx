@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import react, { useState } from "react";
+import React, { useState } from "react";
 
-import CustomCheck from './CustomCheck';
-import MenuProgressBar from "./MenuProgressBar";
+// @ts-ignore
+import CustomCheck from './CustomCheck.tsx';
+// @ts-ignore
+import MenuProgressBar from "./MenuProgressBar.tsx";
 import getThemes from '../../Themes/Selection';
 import getThemesDark from '../../Themes/SelectionDark';
 import '../../Themes/Light';
@@ -10,7 +12,7 @@ import '../../Themes/Dark';
 
 function NewMenu() {
 	function EnterDate() {
-		const date: string = JSON.parse(window.sessionStorage.getItem('date') as string);
+		const date = JSON.parse(window.sessionStorage.getItem('date') as string);
 		return (
 			<input onChange={() => {
 				window.sessionStorage.setItem('date', JSON.stringify((document.getElementById("date") as HTMLInputElement).value))
@@ -19,20 +21,20 @@ function NewMenu() {
 	}
 
 	function MenuContent({ evening, error }) {
-		const change = (event) => {
+		const change = (event: any) => {
 			window.sessionStorage.setItem(event.target.id, JSON.stringify(event.target.value));
 		}
-		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
-		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
-		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
-		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
-		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
-		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
-		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
-		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
+		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2') as string);
+		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3') as string);
+		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4') as string);
+		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e') as string);
+		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e') as string);
+		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e') as string);
+		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e') as string);
 
-		const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
-		const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+		const error1 = JSON.parse(window.sessionStorage.getItem('error1') as string);
+		const error2 = JSON.parse(window.sessionStorage.getItem('error2') as string);
 
 		if (evening) {
 			if (error) {
@@ -72,8 +74,8 @@ function NewMenu() {
 	}
 
 	function EnterMenu() {
-		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
-		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1') as string);
+		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2') as string);
 		if (isErrored1 == null) {
 			isErrored1 = 0;
 		}
@@ -134,20 +136,20 @@ function NewMenu() {
 	}
 
 	function SelectThemes() {
-		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
-		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
-		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
-		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
-		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
-		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
-		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
-		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
+		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2') as string);
+		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3') as string);
+		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4') as string);
+		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e') as string);
+		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e') as string);
+		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e') as string);
+		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e') as string);
 
-		const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
-		const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+		const error1 = JSON.parse(window.sessionStorage.getItem('error1') as string);
+		const error2 = JSON.parse(window.sessionStorage.getItem('error2') as string);
 
-		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
-		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1') as string);
+		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2') as string);
 		if (isErrored1 == null) {
 			isErrored1 = false;
 		}
@@ -157,15 +159,15 @@ function NewMenu() {
 
 		const themes = getThemes();
 
-		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style')) ? JSON.parse(window.sessionStorage.getItem('dish1Style')) : 'DishStyleblue';
-		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style')) ? JSON.parse(window.sessionStorage.getItem('dish2Style')) : 'DishStylered';
-		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style')) ? JSON.parse(window.sessionStorage.getItem('dish3Style')) : 'DishStylegreen';
-		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style')) ? JSON.parse(window.sessionStorage.getItem('dish4Style')) : 'DishStyleyellow';
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish1Style') as string) : 'DishStyleblue';
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish2Style') as string) : 'DishStylered';
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish3Style') as string) : 'DishStylegreen';
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish4Style') as string) : 'DishStyleyellow';
 
-		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle')) : 'DishStyleblue';
-		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle')) : 'DishStylered';
-		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle')) : 'DishStylegreen';
-		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle')) : 'DishStyleyellow';
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) : 'DishStyleblue';
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) : 'DishStylered';
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) : 'DishStylegreen';
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) : 'DishStyleyellow';
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);
@@ -176,9 +178,9 @@ function NewMenu() {
 		const [theme4e, setTheme4e] = useState(theme4eDefault);
 
 
-		function changeTheme(id, callback) {
-			const theme = document.getElementById(id).firstChild.value;
-			const classes = document.getElementById(id).className.split(' ');
+		function changeTheme(id: string, callback: Function) {
+			const theme = (document.getElementById(id) as any).firstChild.value;
+			const classes = (document.getElementById(id) as any).className.split(' ');
 			classes[classes.length - 1] = 'DishStyle' + theme;
 			window.sessionStorage.setItem(id + 'Style', JSON.stringify(classes[classes.length - 1]));
 			callback(classes.join(' '));
@@ -194,7 +196,7 @@ function NewMenu() {
 			);
 		}
 
-		const content = [];
+		const content: Array<any> = [];
 
 		if (isErrored1) {
 			if (error1) {
@@ -286,20 +288,20 @@ function NewMenu() {
 	}
 
 	function SelectThemesDark() {
-		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
-		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
-		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
-		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
-		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
-		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
-		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
-		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
+		const dish2 = JSON.parse(window.sessionStorage.getItem('dish2') as string);
+		const dish3 = JSON.parse(window.sessionStorage.getItem('dish3') as string);
+		const dish4 = JSON.parse(window.sessionStorage.getItem('dish4') as string);
+		const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e') as string);
+		const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e') as string);
+		const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e') as string);
+		const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e') as string);
 
-		const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
-		const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+		const error1 = JSON.parse(window.sessionStorage.getItem('error1') as string);
+		const error2 = JSON.parse(window.sessionStorage.getItem('error2') as string);
 
-		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
-		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+		let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1') as string);
+		let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2') as string);
 		if (isErrored1 == null) {
 			isErrored1 = false;
 		}
@@ -309,15 +311,15 @@ function NewMenu() {
 
 		const themes = getThemesDark();
 
-		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark')) : 'DishStyleblueDark';
-		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark')) : 'DishStyleredDark';
-		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark')) : 'DishStylegreenDark';
-		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark')) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark')) : 'DishStyleyellowDark';
+		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark') as string) : 'DishStyleblueDark';
+		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark') as string) : 'DishStyleredDark';
+		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark') as string) : 'DishStylegreenDark';
+		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark') as string) : 'DishStyleyellowDark';
 
-		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark')) : 'DishStyleblueDark';
-		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark')) : 'DishStyleredDark';
-		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark')) : 'DishStylegreenDark';
-		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark')) : 'DishStyleyellowDark';
+		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark') as string) : 'DishStyleblueDark';
+		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark') as string) : 'DishStyleredDark';
+		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark') as string) : 'DishStylegreenDark';
+		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string) : 'DishStyleyellowDark';
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);
@@ -328,9 +330,9 @@ function NewMenu() {
 		const [theme4e, setTheme4e] = useState(theme4eDefault);
 
 
-		function changeTheme(id, callback) {
-			const theme = document.getElementById(id).firstChild.value;
-			const classes = document.getElementById(id).className.split(' ');
+		function changeTheme(id: string, callback: Function) {
+			const theme = (document.getElementById(id) as any).firstChild.value;
+			const classes = (document.getElementById(id) as any).className.split(' ');
 			classes[classes.length - 1] = 'DishStyle' + theme;
 			window.sessionStorage.setItem(id + 'Styledark', JSON.stringify(classes[classes.length - 1]));
 			callback(classes.join(' '));
@@ -346,7 +348,7 @@ function NewMenu() {
 			);
 		}
 
-		const content = [];
+		const content: Array<any> = [];
 
 		if (isErrored1) {
 			if (error1) {
@@ -471,8 +473,8 @@ function NewMenu() {
 
 	const [Title, setTitle] = useState('Choix de la date');
 	const [BarState, setBarState] = useState(1);
-	const [Content, setContent] = useState(<EnterDate date={JSON.parse(window.sessionStorage.getItem('date'))} />);
-	const [PrevButton, setPrevButton] = useState();
+	const [Content, setContent] = useState(<EnterDate />);
+	const [PrevButton, setPrevButton] = useState(<></>);
 	const [NextButton, setNextButton] = useState(<NavButton Next={true} />);
 
 
@@ -493,15 +495,16 @@ function NewMenu() {
 				setContent(<SelectThemesDark />);
 				return 4;
 			}
+			return 1;
 		});
 	}
 
 	function prev() {
 		setBarState(old => {
 			if (old === 2) {
-				setPrevButton();
+				setPrevButton(<></>);
 				setTitle('Choix de la date');
-				setContent(<EnterDate date={JSON.parse(window.sessionStorage.getItem('date'))} />);
+				setContent(<EnterDate />);
 				return 1;
 			} else if (old === 3) {
 				setTitle('Saisie du menu');
@@ -513,6 +516,7 @@ function NewMenu() {
 				setContent(<SelectThemes />);
 				return 3;
 			}
+			return 1;
 		});
 	}
 

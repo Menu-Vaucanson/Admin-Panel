@@ -1,14 +1,14 @@
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState, useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+// @ts-ignore
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
 
 function NumberRate() {
-
-	const color: string = '#4775FF';
+	const color = '#4775FF';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
@@ -19,8 +19,8 @@ function NumberRate() {
 		</div>
 	);
 
-	function drawData(dataset) {
-		const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+	function drawData(dataset: any) {
+		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 			if (active && payload && payload.length) {
 				const date: Date = new Date(payload[0].payload.Date);
@@ -70,10 +70,10 @@ function NumberRate() {
 	}
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
-			const D: Date = new Date();
+			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ Date: Date, Number: number }> = []
-				res.data.data.forEach(element => {
+				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let number = element[1].length;
 					dataset.push({ Date: date, Number: number })
@@ -97,11 +97,8 @@ function NumberRate() {
 		});
 	}
 
-	function refresh(month?) {
+	function refresh(month: number) {
 		startRefreshAnimation();
-		if (typeof month == 'undefined') {
-			month = new Date().getMonth() + 1;
-		}
 		return getData(month).then(data => {
 			stopRefreshAnimation();
 			if (data) {
@@ -130,7 +127,7 @@ function NumberRate() {
 	}
 
 	useEffect(() => {
-		refresh();
+		refresh(new Date().getMonth() + 1);
 		//!\\ Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

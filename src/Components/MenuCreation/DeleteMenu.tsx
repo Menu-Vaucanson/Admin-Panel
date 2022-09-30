@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-let date;
+let date: any;
 function DeleteMenu() {
 	const [Next, setNext] = useState();
 	const [Content, setContent] = useState(<EnterDate />);
@@ -9,7 +9,7 @@ function DeleteMenu() {
 	function EnterDate() {
 		return (
 			<input onChange={() => {
-				date = document.getElementById("date").value;
+				date = ((document.getElementById("date") as HTMLInputElement).value);
 				setNext(
 					<div onClick={click} className="NavButtonNext">
 						<div className="NextButton">

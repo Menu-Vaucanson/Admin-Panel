@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import react, { useState } from "react";
 
 import CustomCheck from './CustomCheck';
 import MenuProgressBar from "./MenuProgressBar";
@@ -10,10 +10,10 @@ import '../../Themes/Dark';
 
 function NewMenu() {
 	function EnterDate() {
-		const date = JSON.parse(window.sessionStorage.getItem('date'));
+		const date: string = JSON.parse(window.sessionStorage.getItem('date') as string);
 		return (
 			<input onChange={() => {
-				window.sessionStorage.setItem('date', JSON.stringify(document.getElementById("date").value))
+				window.sessionStorage.setItem('date', JSON.stringify((document.getElementById("date") as HTMLInputElement).value))
 			}} defaultValue={date} className="MenuDateSelection" id="date" type="date" />
 		)
 	}

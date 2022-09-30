@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const url = 'https://menuvox.fr:8081/';
+const url: string = 'https://menuvox.fr:8081/';
 
 
 function DeleteMenuValid() {
 	const [Content, setContent] = useState('Suppression en cours...');
 
 	useEffect(() => {
-		const date = JSON.parse(window.sessionStorage.getItem('date'));
+		const date: string = JSON.parse(window.sessionStorage.getItem('date') as string);
 		function DeleteMenu() {
 			return new Promise(resolve => {
-				axios.post(url + `deleteMenus/${date.split('/')[1]}/${date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).catch(err => {
+				axios.post(url + `deleteMenus/${date.split('/')[1]}/${date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).catch(err => {
 					console.log(err);
 					resolve(null);
 				}).then(res => {
@@ -24,17 +24,17 @@ function DeleteMenuValid() {
 			window.sessionStorage.clear();
 			if (res) {
 				setContent(
-					<>
+					<div>
 						<div>Supprimé !</div>
 						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
-					</>
+					</div>
 				);
 			} else {
 				setContent(
-					<>
+					<div>
 						<div>Erreur, le menu n'a pas pu être supprimé, consultez la console pour plus d'infos.</div>
 						<Link to={'/'} className='MenuSentButton'> Retourner au menu</Link>
-					</>);
+					</div >);
 			}
 		})
 	}, [setContent]);

@@ -12,9 +12,14 @@ function NumberRate() {
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 	const [Rate, setRate] = useState(
-		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} pingColor={color} />
-			<div className='ChartError'>Récupération des données...</div >
+		<div>
+			<div className='rotateError'>
+				veuillez retourner votre appareil
+			</div>
+			<div className='ChartContainer'>
+				<RefreshComp callback={refresh} pingColor={color} />
+				<div className='ChartError'>Récupération des données...</div >
+			</div>
 		</div>
 	);
 

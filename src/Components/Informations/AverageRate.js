@@ -11,9 +11,14 @@ function AverageRate() {
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 	const [Rate, setRate] = useState(
-		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} pingColor={color} />
-			<div className='ChartError'>Récupération des données...</div >
+		<div>
+			<div className='rotateError'>
+				veuillez retourner votre appareil
+			</div>
+			<div className='ChartContainer'>
+				<RefreshComp callback={refresh} pingColor={color} />
+				<div className='ChartError'>Récupération des données...</div >
+			</div>
 		</div>
 	);
 
@@ -119,22 +124,39 @@ function AverageRate() {
 			if (data) {
 				if (data === 404) {
 					setRate(
-						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} pingColor={color} />
-							<MonthComp callback={refresh} />
-							<div className='ChartError'>
-								Aucune donnée n'est disponible pour {Months[month]}
+						<div>
+							<div className='rotateError'>
+								veuillez retourner votre appareil
+							</div>
+							<div className='ChartContainer'>
+								<RefreshComp callback={refresh} pingColor={color} />
+								<MonthComp callback={refresh} />
+								<div className='ChartError'>
+									Aucune donnée n'est disponible pour {Months[month]}
+								</div>
 							</div>
 						</div>
 					);
 				} else {
-					setRate(drawData(data));
+					setRate(
+						<div>
+							<div className='rotateError'>
+								veuillez retourner votre appareil
+							</div>
+							{drawData(data)}
+						</div>
+					);
 				}
 			} else {
 				setRate(
-					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} pingColor={color} />
-						<div className='ChartError'>Une erreur est survenue</div>
+					<div>
+						<div className='rotateError'>
+							veuillez retourner votre appareil
+						</div>
+						<div className='ChartContainer'>
+							<RefreshComp callback={refresh} pingColor={color} />
+							<div className='ChartError'>Une erreur est survenue</div>
+						</div>
 					</div>
 				)
 			}

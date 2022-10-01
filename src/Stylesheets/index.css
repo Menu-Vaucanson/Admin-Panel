@@ -797,7 +797,15 @@ a {
 	}
 }
 
-@media (max-width: 600px) {}
+@media (max-width: 600px) {
+	.homeButtons {
+		width: 70vw;
+	}
+
+	.homeButtons:hover {
+		width: 60vw;
+	}
+}
 
 
 /* phone  */
@@ -817,5 +825,9 @@ a {
 
 	.LoginPage input {
 		margin-top: 5vh;
+	}
+
+	.homeButtons {
+		width: 50vw;
 	}
 }

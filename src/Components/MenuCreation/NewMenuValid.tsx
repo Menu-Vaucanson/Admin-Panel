@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import CustomCheck from './CustomCheck.tsx';
+import CustomCheck from './CustomCheck';
 
 
 function RenderMenu() {

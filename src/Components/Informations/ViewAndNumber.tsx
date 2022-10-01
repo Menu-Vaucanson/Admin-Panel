@@ -2,8 +2,8 @@ import axios from 'axios';
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from 'react';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-import MonthComp from './CalendarComp.tsx';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './CalendarComp';
 
 
 function ViewAndNumber() {

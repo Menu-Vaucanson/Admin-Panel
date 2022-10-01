@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp.tsx';
-import MonthComp from './CalendarComp.tsx';
+import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
+import MonthComp from './CalendarComp';
 
 function View() {
 	const color = "#08A47C";

@@ -1,20 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 
-import MenuBar from './MenuBar.tsx';
-import Home from './Home.tsx';
-import Infos from './Infos.tsx';
-import Admin from './Admin.tsx';
-import NewMenu from './MenuCreation/NewMenu.tsx';
-import NewMenuValid from './MenuCreation/NewMenuValid.tsx';
-import E404 from './E404.tsx';
-import AverageRate from './Informations/AverageRate.tsx';
-import View from './Informations/View.tsx';
-import NumberRate from './Informations/NumberRate.tsx';
-import ViewAndNumber from './Informations/ViewAndNumber.tsx';
-import SendNewMenu from './MenuCreation/SendNewMenu.tsx';
-import DeleteMenu from './MenuCreation/DeleteMenu.tsx';
-import DeleteMenuValid from './MenuCreation/DeleteMenuValid.tsx';
-import Platform from './Informations/Platform.tsx';
+import MenuBar from './MenuBar';
+import Home from './Home';
+import Infos from './Infos';
+import Admin from './Admin';
+import NewMenu from './MenuCreation/NewMenu';
+import NewMenuValid from './MenuCreation/NewMenuValid';
+import E404 from './E404';
+import AverageRate from './Informations/AverageRate';
+import View from './Informations/View';
+import NumberRate from './Informations/NumberRate';
+import ViewAndNumber from './Informations/ViewAndNumber';
+import SendNewMenu from './MenuCreation/SendNewMenu';
+import DeleteMenu from './MenuCreation/DeleteMenu';
+import DeleteMenuValid from './MenuCreation/DeleteMenuValid';
+import Platform from './Informations/Platform';
 
 function Main() {
 	return (

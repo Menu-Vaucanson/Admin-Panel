@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart, CartesianGrid } from 'recharts';
 import { useState, useEffect } from 'react';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-import MonthComp from './CalendarComp.tsx';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './CalendarComp';
 
 
 function AverageRate() {

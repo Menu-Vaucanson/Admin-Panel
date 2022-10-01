@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import './Stylesheets/index.css';
 
-import Main from './Components/Main.tsx';
+import Main from './Components/Main';
 import Logo from './Assets/Logo.svg';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

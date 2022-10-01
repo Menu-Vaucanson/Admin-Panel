@@ -2,8 +2,8 @@ import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Re
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-import MonthComp from './CalendarComp.tsx';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './CalendarComp';
 
 function NumberRate() {
 	const color = '#4775FF';

@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-import MonthComp from './CalendarComp.tsx';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import MonthComp from './CalendarComp';
 
 function Platform() {
 	const color = '#08A47C';

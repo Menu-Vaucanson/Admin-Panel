@@ -74,9 +74,14 @@ function View() {
 		)
 	}
 	const [View, setView] = useState(
-		<div className='ChartContainer'>
-			<RefreshComp callback={refresh} pingColor={color} />
-			<div className='ChartError'>Récupération des données...</div >
+		<div>
+			<div className='rotateError'>
+				veuillez retourner votre appareil
+			</div>
+			<div className='ChartContainer'>
+				<RefreshComp callback={refresh} pingColor={color} />
+				<div className='ChartError'>Récupération des données...</div >
+			</div>
 		</div>
 	);
 
@@ -111,22 +116,39 @@ function View() {
 			if (data) {
 				if (data === 404) {
 					setView(
-						<div className='ChartContainer'>
-							<RefreshComp callback={refresh} pingColor={color} />
-							<MonthComp callback={refresh} />
-							<div className='ChartError'>
-								Aucune donnée n'est disponible pour {Months[month]}
+						<div>
+							<div className='rotateError'>
+								veuillez retourner votre appareil
+							</div>
+							<div className='ChartContainer'>
+								<RefreshComp callback={refresh} pingColor={color} />
+								<MonthComp callback={refresh} />
+								<div className='ChartError'>
+									Aucune donnée n'est disponible pour {Months[month]}
+								</div>
 							</div>
 						</div>
 					);
 				} else {
-					setView(drawData(data));
+					setView(
+						<div>
+							<div className='rotateError'>
+								veuillez retourner votre appareil
+							</div>
+							{drawData(data)}
+						</div>
+					);
 				}
 			} else {
 				setView(
-					<div className='ChartContainer'>
-						<RefreshComp callback={refresh} pingColor={color} />
-						<div className='ChartError'>Une erreur est survenue</div>
+					<div>
+						<div className='rotateError'>
+							veuillez retourner votre appareil
+						</div>
+						<div className='ChartContainer'>
+							<RefreshComp callback={refresh} pingColor={color} />
+							<div className='ChartError'>Une erreur est survenue</div>
+						</div>
 					</div>
 				);
 			}

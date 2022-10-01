@@ -8,6 +8,17 @@
 	<meta name="theme-color" content="#000000" />
 	<meta name="description" content="Site du menu de Vaucanson" />
 	<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+	<meta http-equiv="Content-Security-Policy" content="
+	connect-src 'self' https://menuvox.fr:8081 https://menuvox.fr:8080;
+	default-src 'none';
+	img-src 'self';
+	manifest-src 'self';
+	script-src-elem 'self';
+	font-src 'self';
+	style-src-elem * 'unsafe-inline';
+	base-uri 'none';
+	form-action 'none';
+	" />
 	<title>Menu Vaucanson Admin</title>
 </head>
 

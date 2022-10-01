@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
-import MonthComp from './CalendarComp';
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+// @ts-ignore
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
 
 function Platform() {
-
 	const color = '#08A47C';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-	function renderActiveShape(props) {
+	function renderActiveShape(props: any) {
 		const RADIAN = Math.PI / 180;
 		const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
 		const sin = Math.sin(-RADIAN * midAngle);
@@ -58,8 +59,8 @@ function Platform() {
 	};
 
 	function DrawData({ data }) {
-		const [ActiveIndex, setActiveIndex] = useState('');
-		function onPieEnter(_, index) {
+		const [ActiveIndex, setActiveIndex] = useState(0);
+		function onPieEnter(_: any, index: any) {
 			setActiveIndex(index);
 		};
 
@@ -97,10 +98,10 @@ function Platform() {
 		</div>
 	);
 
-	function getData(month) {
+	function getData(month: number) {
 		return new Promise(async (resolve) => {
-			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-				const data = [
+			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+				const data: Array<{ name: string, value: number }> = [
 					{
 						name: 'PC',
 						value: 0
@@ -112,7 +113,7 @@ function Platform() {
 						value: 0
 					}
 				];
-				res.data.data.forEach(d => {
+				res.data.data.forEach((d: { pc: boolean; }) => {
 					if (d.pc === true) {
 						data[0].value++;
 					} else if (d.pc === false) {
@@ -129,11 +130,8 @@ function Platform() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month: number) {
 		startRefreshAnimation();
-		if (typeof month == 'undefined') {
-			month = new Date().getMonth() + 1;
-		}
 		return getData(month).then(data => {
 			stopRefreshAnimation();
 			if (data) {
@@ -162,7 +160,7 @@ function Platform() {
 	}
 
 	useEffect(() => {
-		refresh();
+		refresh(new Date().getMonth() + 1);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

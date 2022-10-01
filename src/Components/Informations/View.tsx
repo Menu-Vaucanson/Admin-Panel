@@ -1,21 +1,22 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+// @ts-ignore
+import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
 
 function View() {
 
-	const color = "#08A47C";
+	const color: string = "#08A47C";
 
-	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+	const Months: Array<string> = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 
 	function find(array, query) {
-		let index = null
-		array.forEach((element, i) => {
+		let index: number | null = null
+		array.forEach((element: { Date: Date }, i: number) => {
 			if (new Date(element.Date).getDate() === query) {
 				index = i;
 			}
@@ -24,11 +25,11 @@ function View() {
 	}
 
 	function drawData(dataset) {
-		const CustomTooltip = ({ active, payload }) => {
-			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
+			const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
-				const value = payload[0].payload.Number;
+				const value: number = payload[0].payload.Number;
 				return (
 					<div className="customTooltip">
 						{`${dateToText[date.getDay()]}: ${value}`}
@@ -87,11 +88,11 @@ function View() {
 
 	function getData(month) {
 		return new Promise(async (resolve) => {
-			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-				let dataset = []
+			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+				let dataset: Array<{ globalAvrage?, Date?, Number?}> = []
 				res.data.data.forEach(element => {
-					const date = new Date(element.date);
-					const index = find(dataset, date.getDate());
+					const date: Date = new Date(element.date);
+					const index: number | null = find(dataset, date.getDate());
 					if (index != null) {
 						dataset[index].Number = dataset[index].Number + 1
 					} else {
@@ -106,7 +107,7 @@ function View() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month?) {
 		startRefreshAnimation();
 		if (typeof month == 'undefined') {
 			month = new Date().getMonth() + 1;

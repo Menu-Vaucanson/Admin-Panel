@@ -1,19 +1,21 @@
 import axios from 'axios';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState, useEffect } from 'react';
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from 'react';
+
+// @ts-ignore
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
+
 
 function ViewAndNumber() {
-
 	const color = '#E74855';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-
-	function drawData(dataset) {
+	function drawData(dataset: any) {
 		const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-		const CustomTooltip = ({ active, payload }) => {
+		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.date);
 				let rate = payload[0].payload.rate;
@@ -79,9 +81,9 @@ function ViewAndNumber() {
 			</div>
 		</div>
 	);
-	function getData(month) {
+	function getData(month: number) {
 		return new Promise(async (resolve) => {
-			await axios.post('https://menuvox.fr:8081/ratesLogs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/ratesLogs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				resolve(res.data.data);
 			}).catch(err => {
 				console.log(err);
@@ -90,11 +92,8 @@ function ViewAndNumber() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month: number) {
 		startRefreshAnimation();
-		if (typeof month == 'undefined') {
-			month = new Date().getMonth() + 1;
-		}
 		return getData(month).then(data => {
 			stopRefreshAnimation();
 			if (data) {
@@ -140,7 +139,7 @@ function ViewAndNumber() {
 	}
 
 	useEffect(() => {
-		refresh();
+		refresh(new Date().getMonth() + 1);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

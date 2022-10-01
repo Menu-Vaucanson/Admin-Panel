@@ -1,23 +1,26 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import CustomCheck from './CustomCheck';
+
+// @ts-ignore
+import CustomCheck from './CustomCheck.tsx';
 
 
 function RenderMenu() {
 	const initial = 'DishStyleNone';
-	const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
-	const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
-	const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
-	const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
-	const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
-	const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
-	const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
-	const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+	const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
+	const dish2 = JSON.parse(window.sessionStorage.getItem('dish2') as string);
+	const dish3 = JSON.parse(window.sessionStorage.getItem('dish3') as string);
+	const dish4 = JSON.parse(window.sessionStorage.getItem('dish4') as string);
+	const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e') as string);
+	const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e') as string);
+	const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e') as string);
+	const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e') as string);
 
-	const error1 = JSON.parse(window.sessionStorage.getItem('error1'));
-	const error2 = JSON.parse(window.sessionStorage.getItem('error2'));
+	const error1 = JSON.parse(window.sessionStorage.getItem('error1') as string);
+	const error2 = JSON.parse(window.sessionStorage.getItem('error2') as string);
 
-	let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
-	let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+	let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1') as string);
+	let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2') as string);
 	if (isErrored1 == null) {
 		isErrored1 = false;
 	}
@@ -25,17 +28,17 @@ function RenderMenu() {
 		isErrored2 = false;
 	}
 
-	const theme1 = JSON.parse(window.sessionStorage.getItem('dish1Style')) ? JSON.parse(window.sessionStorage.getItem('dish1Style')) : initial;
-	const theme2 = JSON.parse(window.sessionStorage.getItem('dish2Style')) ? JSON.parse(window.sessionStorage.getItem('dish2Style')) : initial;
-	const theme3 = JSON.parse(window.sessionStorage.getItem('dish3Style')) ? JSON.parse(window.sessionStorage.getItem('dish3Style')) : initial;
-	const theme4 = JSON.parse(window.sessionStorage.getItem('dish4Style')) ? JSON.parse(window.sessionStorage.getItem('dish4Style')) : initial;
+	const theme1 = JSON.parse(window.sessionStorage.getItem('dish1Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish1Style') as string) : initial;
+	const theme2 = JSON.parse(window.sessionStorage.getItem('dish2Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish2Style') as string) : initial;
+	const theme3 = JSON.parse(window.sessionStorage.getItem('dish3Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish3Style') as string) : initial;
+	const theme4 = JSON.parse(window.sessionStorage.getItem('dish4Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish4Style') as string) : initial;
 
-	const theme1e = JSON.parse(window.sessionStorage.getItem('dish1eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle')) : initial;
-	const theme2e = JSON.parse(window.sessionStorage.getItem('dish2eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle')) : initial;
-	const theme3e = JSON.parse(window.sessionStorage.getItem('dish3eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle')) : initial;
-	const theme4e = JSON.parse(window.sessionStorage.getItem('dish4eStyle')) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle')) : initial;
+	const theme1e = JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) : initial;
+	const theme2e = JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) : initial;
+	const theme3e = JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) : initial;
+	const theme4e = JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) : initial;
 
-	const content = [];
+	const content: Array<any> = [];
 
 	if (isErrored1) {
 		if (error1) {
@@ -120,19 +123,19 @@ function NewMenuValid() {
 	let error = '';
 	let warn = '';
 
-	const date = JSON.parse(window.sessionStorage.getItem('date'));
+	const date = JSON.parse(window.sessionStorage.getItem('date') as string);
 
-	const dish1 = JSON.parse(window.sessionStorage.getItem('dish1'));
-	const dish2 = JSON.parse(window.sessionStorage.getItem('dish2'));
-	const dish3 = JSON.parse(window.sessionStorage.getItem('dish3'));
-	const dish4 = JSON.parse(window.sessionStorage.getItem('dish4'));
-	const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e'));
-	const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e'));
-	const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e'));
-	const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e'));
+	const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
+	const dish2 = JSON.parse(window.sessionStorage.getItem('dish2') as string);
+	const dish3 = JSON.parse(window.sessionStorage.getItem('dish3') as string);
+	const dish4 = JSON.parse(window.sessionStorage.getItem('dish4') as string);
+	const dish1e = JSON.parse(window.sessionStorage.getItem('dish1e') as string);
+	const dish2e = JSON.parse(window.sessionStorage.getItem('dish2e') as string);
+	const dish3e = JSON.parse(window.sessionStorage.getItem('dish3e') as string);
+	const dish4e = JSON.parse(window.sessionStorage.getItem('dish4e') as string);
 
-	let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1'));
-	let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2'));
+	let isErrored1 = JSON.parse(window.sessionStorage.getItem('isErrored1') as string);
+	let isErrored2 = JSON.parse(window.sessionStorage.getItem('isErrored2') as string);
 	if (isErrored1 == null) {
 		isErrored1 = false;
 	}
@@ -141,23 +144,23 @@ function NewMenuValid() {
 	}
 
 
-	const theme1 = JSON.parse(window.sessionStorage.getItem('dish1Style'));
-	const theme2 = JSON.parse(window.sessionStorage.getItem('dish2Style'));
-	const theme3 = JSON.parse(window.sessionStorage.getItem('dish3Style'));
-	const theme4 = JSON.parse(window.sessionStorage.getItem('dish4Style'));
-	const theme1Dark = JSON.parse(window.sessionStorage.getItem('dish1Styledark'));
-	const theme2Dark = JSON.parse(window.sessionStorage.getItem('dish2Styledark'));
-	const theme3Dark = JSON.parse(window.sessionStorage.getItem('dish3Styledark'));
-	const theme4Dark = JSON.parse(window.sessionStorage.getItem('dish4Styledark'));
+	const theme1 = JSON.parse(window.sessionStorage.getItem('dish1Style') as string);
+	const theme2 = JSON.parse(window.sessionStorage.getItem('dish2Style') as string);
+	const theme3 = JSON.parse(window.sessionStorage.getItem('dish3Style') as string);
+	const theme4 = JSON.parse(window.sessionStorage.getItem('dish4Style') as string);
+	const theme1Dark = JSON.parse(window.sessionStorage.getItem('dish1Styledark') as string);
+	const theme2Dark = JSON.parse(window.sessionStorage.getItem('dish2Styledark') as string);
+	const theme3Dark = JSON.parse(window.sessionStorage.getItem('dish3Styledark') as string);
+	const theme4Dark = JSON.parse(window.sessionStorage.getItem('dish4Styledark') as string);
 
-	const theme1e = JSON.parse(window.sessionStorage.getItem('dish1eStyle'));
-	const theme2e = JSON.parse(window.sessionStorage.getItem('dish2eStyle'));
-	const theme3e = JSON.parse(window.sessionStorage.getItem('dish3eStyle'));
-	const theme4e = JSON.parse(window.sessionStorage.getItem('dish4eStyle'));
-	const theme1eDark = JSON.parse(window.sessionStorage.getItem('dish1eStyledark'));
-	const theme2eDark = JSON.parse(window.sessionStorage.getItem('dish2eStyledark'));
-	const theme3eDark = JSON.parse(window.sessionStorage.getItem('dish3eStyledark'));
-	const theme4eDark = JSON.parse(window.sessionStorage.getItem('dish4eStyledark'));
+	const theme1e = JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string);
+	const theme2e = JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string);
+	const theme3e = JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string);
+	const theme4e = JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string);
+	const theme1eDark = JSON.parse(window.sessionStorage.getItem('dish1eStyledark') as string);
+	const theme2eDark = JSON.parse(window.sessionStorage.getItem('dish2eStyledark') as string);
+	const theme3eDark = JSON.parse(window.sessionStorage.getItem('dish3eStyledark') as string);
+	const theme4eDark = JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string);
 
 	if (!date || date === '') {
 		valid = 0;
@@ -252,7 +255,7 @@ function NewMenuValid() {
 		</div>
 	)
 
-	let button = '';
+	let button = <></>;
 	if (valid) {
 		button = (
 			<Link to={'/SendNewMenu'} className="ValidButtonNav">

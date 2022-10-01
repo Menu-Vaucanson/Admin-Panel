@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart, CartesianGrid } from 'recharts';
-import { useState, useEffect } from 'react';
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import React, { useState, useEffect } from 'react';
+// @ts-ignore
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
+// @ts-ignore
+import MonthComp from './CalendarComp.tsx';
+
 
 function AverageRate() {
-
 	const color = '#FFC482';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
@@ -22,9 +24,9 @@ function AverageRate() {
 		</div>
 	);
 
-	const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-	function drawData(dataset) {
+	function drawData(dataset: any) {
 		const CustomTooltip = ({ active, payload }) => {
+			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
 				const value = payload[0].payload.Average;
@@ -41,7 +43,7 @@ function AverageRate() {
 				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Moyenne de note
+					Moyenne des notes
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -58,46 +60,47 @@ function AverageRate() {
 							<CartesianGrid strokeDasharray="10 10" />
 							<XAxis dataKey={(v) => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} domain={[0, 5]} />
+							{/*@ts-ignore*/}
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Bar dataKey="Average" fill="#FFC482" />
-							<Line type="monotone" dataKey="globalAvrage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} />
+							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} />
 						</ComposedChart>
 					</ResponsiveContainer>
-					<div className='legend'><div className='legendTickLine'></div>Moyenne : {dataset[0].globalAvrage}</div>
+					<div className='legend'><div className='legendTickLine'></div>Moyenne : {dataset[0].globalAverage}</div>
 				</div>
 			</div>
 		)
 	}
 
-	function getData(month) {
+	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt')) }).then(res => {
-				let dataset = []
+			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
 				let averageMonth = 0;
-				let numberAvrage = 0;
-				res.data.data.forEach(element => {
+				let numberAverage = 0;
+				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
 					let average = 0
-					element[1].forEach(rate => {
+					element[1].forEach((rate: { rate: number }) => {
 						average += rate.rate;
 					});
 					if (average) {
-						average = (average / element[1].length).toFixed(1);
+						average = parseFloat((average / element[1].length).toFixed(1));
 					}
 					dataset.push({ Date: date, Average: average });
-					averageMonth += parseFloat(parseFloat(average).toFixed(2));
+					averageMonth += parseFloat(average.toFixed(2));
 					// to fixed is unfunctional in this place
-					numberAvrage++;
+					numberAverage++;
 
 				})
-				averageMonth = averageMonth / numberAvrage;
+				averageMonth = averageMonth / numberAverage;
 				dataset.forEach(element => {
-					element.globalAvrage = parseFloat(averageMonth.toFixed(2));
+					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
 				dataset.sort((a, b) => {
-					const nameA = a.Date;
-					const nameB = b.Date;
+					const nameA: Date = a.Date;
+					const nameB: Date = b.Date;
 					if (nameA < nameB) {
 						return -1;
 					}
@@ -114,11 +117,8 @@ function AverageRate() {
 		});
 	}
 
-	function refresh(month) {
+	function refresh(month: number) {
 		startRefreshAnimation();
-		if (typeof month == 'undefined') {
-			month = new Date().getMonth() + 1;
-		}
 		return getData(month).then(data => {
 			stopRefreshAnimation();
 			if (data) {
@@ -164,7 +164,7 @@ function AverageRate() {
 	}
 
 	useEffect(() => {
-		refresh();
+		refresh(new Date().getMonth() + 1);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

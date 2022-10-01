@@ -24,17 +24,17 @@ function DeleteMenuValid() {
 			window.sessionStorage.clear();
 			if (res) {
 				setContent(
-					<div>
+					<>
 						<div>Supprimé !</div>
 						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
-					</div>
+					</>
 				);
 			} else {
 				setContent(
-					<div>
+					<>
 						<div>Erreur, le menu n'a pas pu être supprimé, consultez la console pour plus d'infos.</div>
 						<Link to={'/'} className='MenuSentButton'> Retourner au menu</Link>
-					</div >);
+					</>);
 			}
 		})
 	}, [setContent]);

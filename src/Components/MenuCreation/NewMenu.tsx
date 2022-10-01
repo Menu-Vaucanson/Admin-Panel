@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom';
-import React, { useState } from "react";
+import { useState } from "react";
 
-// @ts-ignore
 import CustomCheck from './CustomCheck.tsx';
-// @ts-ignore
 import MenuProgressBar from "./MenuProgressBar.tsx";
-// @ts-ignore
 import getThemes from '../../Themes/Selection/index.ts';
-// @ts-ignore
 import getThemesDark from '../../Themes/SelectionDark/index.ts';
 import '../../Themes/Light/index.ts';
 import '../../Themes/Dark/index.ts';
@@ -19,11 +15,11 @@ function NewMenu() {
 			<input onChange={() => {
 				window.sessionStorage.setItem('date', JSON.stringify((document.getElementById("date") as HTMLInputElement).value))
 			}} defaultValue={date} className="MenuDateSelection" id="date" type="date" />
-		)
+		);
 	}
 
 	function MenuContent({ evening, error }) {
-		const change = (event: any) => {
+		function change(event: { target: any }) {
 			window.sessionStorage.setItem(event.target.id, JSON.stringify(event.target.value));
 		}
 		const dish1 = JSON.parse(window.sessionStorage.getItem('dish1') as string);
@@ -45,7 +41,7 @@ function NewMenu() {
 						Motif:
 						<textarea onChange={change} id='error2' defaultValue={error2} spellCheck={true}></textarea>
 					</div>
-				)
+				);
 			}
 			return (
 				<div className="EnterMenuContent">
@@ -54,7 +50,7 @@ function NewMenu() {
 					<textarea className="EnterMenuContentContent" key={3} onChange={change} id='dish3e' defaultValue={dish3e} spellCheck={true}></textarea>
 					<textarea className="EnterMenuContentContent" key={4} onChange={change} id='dish4e' defaultValue={dish4e} spellCheck={true}></textarea>
 				</div>
-			)
+			);
 		} else {
 			if (error) {
 				return (
@@ -62,7 +58,7 @@ function NewMenu() {
 						Motif:
 						<textarea onChange={change} id='error1' defaultValue={error1} spellCheck={true}></textarea>
 					</div>
-				)
+				);
 			}
 			return (
 				<div className="EnterMenuContent">
@@ -71,7 +67,7 @@ function NewMenu() {
 					<textarea className="EnterMenuContentContent" key={3} onChange={change} id='dish3' defaultValue={dish3} spellCheck={true}></textarea>
 					<textarea className="EnterMenuContentContent" key={4} onChange={change} id='dish4' defaultValue={dish4} spellCheck={true}></textarea>
 				</div>
-			)
+			);
 		}
 	}
 
@@ -134,7 +130,7 @@ function NewMenu() {
 					{MenuContent2}
 				</div>
 			</div>
-		)
+		);
 	}
 
 	function SelectThemes() {

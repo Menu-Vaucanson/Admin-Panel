@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart, CartesianGrid } from 'recharts';
-import React, { useState, useEffect } from 'react';
-// @ts-ignore
+import { useState, useEffect } from 'react';
+
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-// @ts-ignore
 import MonthComp from './CalendarComp.tsx';
 
 
@@ -15,7 +14,7 @@ function AverageRate() {
 	const [Rate, setRate] = useState(
 		<div>
 			<div className='rotateError'>
-				veuillez retourner votre appareil
+				Veuillez tourner votre appareil
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -126,7 +125,7 @@ function AverageRate() {
 					setRate(
 						<div>
 							<div className='rotateError'>
-								veuillez retourner votre appareil
+								Veuillez tourner votre appareil
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
@@ -141,7 +140,7 @@ function AverageRate() {
 					setRate(
 						<div>
 							<div className='rotateError'>
-								veuillez retourner votre appareil
+								Veuillez tourner votre appareil
 							</div>
 							{drawData(data)}
 						</div>
@@ -151,7 +150,7 @@ function AverageRate() {
 				setRate(
 					<div>
 						<div className='rotateError'>
-							veuillez retourner votre appareil
+							Veuillez tourner votre appareil
 						</div>
 						<div className='ChartContainer'>
 							<RefreshComp callback={refresh} pingColor={color} />

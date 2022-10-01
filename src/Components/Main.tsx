@@ -1,35 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
-import React from 'react';
 
-// @ts-ignore
 import MenuBar from './MenuBar.tsx';
-// @ts-ignore
 import Home from './Home.tsx';
-// @ts-ignore
 import Infos from './Infos.tsx';
-// @ts-ignore
 import Admin from './Admin.tsx';
-// @ts-ignore
 import NewMenu from './MenuCreation/NewMenu.tsx';
-// @ts-ignore
 import NewMenuValid from './MenuCreation/NewMenuValid.tsx';
-// @ts-ignore
 import E404 from './E404.tsx';
-// @ts-ignore
 import AverageRate from './Informations/AverageRate.tsx';
-// @ts-ignore
 import View from './Informations/View.tsx';
-// @ts-ignore
 import NumberRate from './Informations/NumberRate.tsx';
-// @ts-ignore
 import ViewAndNumber from './Informations/ViewAndNumber.tsx';
-// @ts-ignore
 import SendNewMenu from './MenuCreation/SendNewMenu.tsx';
-// @ts-ignore
 import DeleteMenu from './MenuCreation/DeleteMenu.tsx';
-// @ts-ignore
 import DeleteMenuValid from './MenuCreation/DeleteMenuValid.tsx';
-// @ts-ignore
 import Platform from './Informations/Platform.tsx';
 
 function Main() {

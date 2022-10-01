@@ -1,32 +1,34 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+
 import './Stylesheets/index.css';
-// @ts-ignore
+
 import Main from './Components/Main.tsx';
-// @ts-ignore
 import Logo from './Assets/Logo.svg';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const url = 'https://menuvox.fr:8081';
 
-function Send(token: string) {
-	return new Promise(resolve => {
-		axios.post(`${url}/login`, { 'jwt': token }).catch(err => {
-			console.log(err);
-			resolve(null);
-		}).then(response => {
-			if (typeof response == 'undefined') {
-				resolve(null);
-			} else {
-				resolve(true);
-			}
-		});
-	});
-}
+
 function LoginPage() {
+	function Send(token: string) {
+		return new Promise(resolve => {
+			axios.post(`${url}/login`, { 'jwt': token }).catch(err => {
+				console.log(err);
+				resolve(null);
+			}).then(response => {
+				if (typeof response == 'undefined') {
+					resolve(null);
+				} else {
+					resolve(true);
+				}
+			});
+		});
+	}
+
 	const [LoginError, setLoginError] = useState(<div className='LoginError'></div>);
 
 	const oldToken = JSON.parse(window.localStorage.getItem('jwt') as string);

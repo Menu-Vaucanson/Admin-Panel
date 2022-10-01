@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
-// @ts-ignore
+
 import Logo from '../Assets/Logo.svg';
-// @ts-ignore
 import Logout from '../Assets/logout.svg';
 
 function MenuBar() {

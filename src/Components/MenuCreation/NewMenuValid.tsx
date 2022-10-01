@@ -1,7 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-// @ts-ignore
 import CustomCheck from './CustomCheck.tsx';
 
 

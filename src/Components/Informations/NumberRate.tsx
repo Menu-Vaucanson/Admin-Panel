@@ -1,10 +1,8 @@
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// @ts-ignore
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-// @ts-ignore
 import MonthComp from './CalendarComp.tsx';
 
 function NumberRate() {
@@ -15,7 +13,7 @@ function NumberRate() {
 	const [Rate, setRate] = useState(
 		<div>
 			<div className='rotateError'>
-				veuillez retourner votre appareil
+				Veuillez tourner votre appareil
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />

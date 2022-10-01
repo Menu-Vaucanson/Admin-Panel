@@ -1,6 +1,7 @@
-// @ts-ignore
+import { useState } from 'react';
+
 import Refresh from '../../Assets/arrow.svg';
-import React, { useState } from 'react';
+
 function stopRefreshAnimation() {
 	(document.getElementById('RefreshButton') as HTMLElement).className = 'refreshIcon';
 }

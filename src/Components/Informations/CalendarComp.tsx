@@ -1,4 +1,3 @@
-import React from 'react';
 function MonthComp({ callback }) {
 	function change() {
 		const date = (document.getElementById("month") as HTMLInputElement).value.split('-');
@@ -7,7 +6,7 @@ function MonthComp({ callback }) {
 
 	return (
 		<input onChange={change} className="monthSelection" id="month" type="month" />
-	)
+	);
 }
 
 export default MonthComp;

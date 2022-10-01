@@ -1,10 +1,8 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
-// @ts-ignore
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp.tsx';
-// @ts-ignore
 import MonthComp from './CalendarComp.tsx';
 
 function Platform() {

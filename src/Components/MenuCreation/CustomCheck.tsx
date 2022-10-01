@@ -1,4 +1,3 @@
-import React from 'react';
 function CustomCheck({ type }) {
 	if (type === 1) {
 		return (
@@ -7,7 +6,7 @@ function CustomCheck({ type }) {
 					<polyline points="20 6 9 17 4 12"></polyline>
 				</svg>
 			</div>
-		)
+		);
 	} else if (type === 2) {
 		return (
 			<div className="check" style={{ backgroundColor: '#AC5050' }}>
@@ -16,17 +15,17 @@ function CustomCheck({ type }) {
 					<polyline points="18 18 6 6"></polyline>
 				</svg>
 			</div>
-		)
+		);
 	} if (type === 3) {
 		return (
 			<div className="check" style={{ backgroundColor: '#DBAC5B' }}>
 				<div className="smallDot"></div>
 			</div>
-		)
+		);
 	} else {
 		return (
 			<div className="check" style={{ backgroundColor: '#505155' }}></div>
-		)
+		);
 	}
 }
 

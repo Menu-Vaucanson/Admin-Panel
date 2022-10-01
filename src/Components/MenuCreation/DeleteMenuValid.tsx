@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const url: string = 'https://menuvox.fr:8081/';
+const url = 'https://menuvox.fr:8081/';
 
 
 function DeleteMenuValid() {
 	const [Content, setContent] = useState(<>Suppression en cours...</>);
 
 	useEffect(() => {
-		const date: string = JSON.parse(window.sessionStorage.getItem('date') as string);
+		const date = JSON.parse(window.sessionStorage.getItem('date') as string);
 		function DeleteMenu() {
 			return new Promise(resolve => {
 				axios.post(url + `deleteMenus/${date.split('/')[1]}/${date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).catch(err => {

@@ -1,20 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-// @ts-ignore
 import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp.tsx';
-// @ts-ignore
 import MonthComp from './CalendarComp.tsx';
 
 function View() {
+	const color = "#08A47C";
 
-	const color: string = "#08A47C";
-
-	const Months: Array<string> = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
 
-	function find(array, query) {
+	function find(array: Array<any>, query: number) {
 		let index: number | null = null
 		array.forEach((element: { Date: Date }, i: number) => {
 			if (new Date(element.Date).getDate() === query) {
@@ -24,9 +21,9 @@ function View() {
 		return index;
 	}
 
-	function drawData(dataset) {
-		const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
-			const dateToText: Array<string> = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+	function drawData(dataset: any) {
+		function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
+			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
 				const value: number = payload[0].payload.Number;
@@ -77,7 +74,7 @@ function View() {
 	const [View, setView] = useState(
 		<div>
 			<div className='rotateError'>
-				veuillez retourner votre appareil
+				Veuillez tourner votre appareil
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -86,13 +83,13 @@ function View() {
 		</div>
 	);
 
-	function getData(month) {
+	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ globalAvrage?, Date?, Number?}> = []
-				res.data.data.forEach(element => {
-					const date: Date = new Date(element.date);
-					const index: number | null = find(dataset, date.getDate());
+				let dataset: Array<{ globalAvrage?: number, Date: Date, Number: number }> = []
+				res.data.data.forEach((element: any) => {
+					const date = new Date(element.date);
+					const index = find(dataset, date.getDate());
 					if (index != null) {
 						dataset[index].Number = dataset[index].Number + 1
 					} else {
@@ -107,11 +104,8 @@ function View() {
 		});
 	}
 
-	function refresh(month?) {
+	function refresh(month: number) {
 		startRefreshAnimation();
-		if (typeof month == 'undefined') {
-			month = new Date().getMonth() + 1;
-		}
 		return getData(month).then(data => {
 			stopRefreshAnimation();
 			if (data) {
@@ -119,7 +113,7 @@ function View() {
 					setView(
 						<div>
 							<div className='rotateError'>
-								veuillez retourner votre appareil
+								Veuillez tourner votre appareil
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
@@ -134,7 +128,7 @@ function View() {
 					setView(
 						<div>
 							<div className='rotateError'>
-								veuillez retourner votre appareil
+								Veuillez tourner votre appareil
 							</div>
 							{drawData(data)}
 						</div>
@@ -144,7 +138,7 @@ function View() {
 				setView(
 					<div>
 						<div className='rotateError'>
-							veuillez retourner votre appareil
+							Veuillez tourner votre appareil
 						</div>
 						<div className='ChartContainer'>
 							<RefreshComp callback={refresh} pingColor={color} />
@@ -157,7 +151,7 @@ function View() {
 	}
 
 	useEffect(() => {
-		refresh();
+		refresh(new Date().getMonth() + 1);
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

@@ -286,6 +286,7 @@ a {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	margin-bottom: 2vh;
 }
 
 .PasswordLogo {
@@ -295,7 +296,6 @@ a {
 .passwordText {
 	font-size: 10vh;
 	text-align: center;
-	margin-bottom: 2vh;
 }
 
 .NumberRate {
@@ -312,11 +312,12 @@ a {
 
 .LoginPage {
 	width: 100vw;
-	height: 100vh;
+	height: 98vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	margin-bottom: 2vh;
 }
 
 .LoginPage input {
@@ -333,6 +334,8 @@ a {
 	font-size: 5vmax;
 	color: #F5FEF5;
 	text-align: center;
+	margin-left: 5vw;
+	margin-right: 5vw;
 }
 
 .LoginButton {
@@ -773,4 +776,105 @@ a {
 .PingAnimate {
 	animation-duration: 3000ms;
 	animation-name: popUp;
+}
+
+.rotateError {
+	margin-top: 15vh;
+	width: 100vw;
+	text-align: center;
+	visibility: hidden;
+	color: #D9D9D9;
+}
+
+
+/* pc  */
+@media (max-width: 1000px) {
+	.LoginLogo {
+		width: 50vw;
+	}
+
+	.LoginTitle {
+		font-size: 4.5vmax;
+	}
+
+	.passwordBox {
+		width: 45vw;
+	}
+
+	.LoginPage input {
+		margin-top: 5vh;
+	}
+}
+
+/* phone  */
+@media (max-width: 600px) {
+	.homeButtons {
+		width: 70vw;
+	}
+
+	.homeButtons:hover {
+		width: 60vw;
+	}
+
+	.infoBox {
+		width: 70vw;
+	}
+
+	.infoBox:hover {
+		width: 75vw;
+	}
+}
+
+
+@media (max-width: 500px) {
+	.LoginLogo {
+		width: 70vw;
+		margin-top: 1vh;
+	}
+
+	.LoginTitle {
+		font-size: 4.5vmax;
+	}
+
+	.passwordBox {
+		width: 45vw;
+	}
+
+	.LoginPage input {
+		margin-top: 5vh;
+	}
+
+	.homeButtons {
+		width: 50vw;
+	}
+
+}
+
+@media (orientation: landscape) and (max-width: 500px) {
+	.ChartContainer {
+		visibility: visible;
+	}
+
+	.Chart {
+		visibility: visible;
+	}
+
+	.rotateError {
+		visibility: hidden;
+	}
+
+}
+
+@media (orientation: portrait) and (max-width: 500px) {
+	.ChartContainer {
+		visibility: hidden;
+	}
+
+	.Chart {
+		visibility: hidden;
+	}
+
+	.rotateError {
+		visibility: visible;
+	}
 }

@@ -43,7 +43,7 @@ function NumberRate() {
 				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
-					Nombres de note
+					Nombres de notes
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -111,7 +111,7 @@ function NumberRate() {
 					setRate(
 						<div>
 							<div className='rotateError'>
-								veuillez retourner votre appareil
+								Veuillez tourner votre appareil
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
@@ -125,7 +125,7 @@ function NumberRate() {
 				} else {
 					setRate(<div>
 						<div className='rotateError'>
-							veuillez retourner votre appareil
+							Veuillez tourner votre appareil
 						</div>
 						{drawData(data)}
 					</div>);
@@ -134,7 +134,7 @@ function NumberRate() {
 				setRate(
 					<div>
 						<div className='rotateError'>
-							veuillez retourner votre appareil
+							Veuillez tourner votre appareil
 						</div>
 						<div className='ChartContainer'>
 							<RefreshComp callback={refresh} pingColor={color} />

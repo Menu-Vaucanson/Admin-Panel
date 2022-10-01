@@ -5,10 +5,12 @@ import React, { useState } from "react";
 import CustomCheck from './CustomCheck.tsx';
 // @ts-ignore
 import MenuProgressBar from "./MenuProgressBar.tsx";
-import getThemes from '../../Themes/Selection';
-import getThemesDark from '../../Themes/SelectionDark';
-import '../../Themes/Light';
-import '../../Themes/Dark';
+// @ts-ignore
+import getThemes from '../../Themes/Selection/index.ts';
+// @ts-ignore
+import getThemesDark from '../../Themes/SelectionDark/index.ts';
+import '../../Themes/Light/index.ts';
+import '../../Themes/Dark/index.ts';
 
 function NewMenu() {
 	function EnterDate() {
@@ -160,14 +162,22 @@ function NewMenu() {
 		const themes = getThemes();
 
 		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish1Style') as string) : 'DishStyleblue';
+		window.sessionStorage.setItem('dish1Style', JSON.stringify(theme1Default));
 		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish2Style') as string) : 'DishStylered';
+		window.sessionStorage.setItem('dish2Style', JSON.stringify(theme2Default));
 		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish3Style') as string) : 'DishStylegreen';
+		window.sessionStorage.setItem('dish3Style', JSON.stringify(theme3Default));
 		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Style') as string) ? JSON.parse(window.sessionStorage.getItem('dish4Style') as string) : 'DishStyleyellow';
+		window.sessionStorage.setItem('dish4Style', JSON.stringify(theme4Default));
 
 		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish1eStyle') as string) : 'DishStyleblue';
+		window.sessionStorage.setItem('dish1eStyle', JSON.stringify(theme1eDefault));
 		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish2eStyle') as string) : 'DishStylered';
+		window.sessionStorage.setItem('dish2eStyle', JSON.stringify(theme2eDefault));
 		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish3eStyle') as string) : 'DishStylegreen';
+		window.sessionStorage.setItem('dish3eStyle', JSON.stringify(theme3eDefault));
 		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) ? JSON.parse(window.sessionStorage.getItem('dish4eStyle') as string) : 'DishStyleyellow';
+		window.sessionStorage.setItem('dish4eStyle', JSON.stringify(theme4eDefault));
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);
@@ -312,14 +322,22 @@ function NewMenu() {
 		const themes = getThemesDark();
 
 		const theme1Default = JSON.parse(window.sessionStorage.getItem('dish1Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish1Styledark') as string) : 'DishStyleblueDark';
+		window.sessionStorage.setItem('dish1Styledark', JSON.stringify(theme1Default));
 		const theme2Default = JSON.parse(window.sessionStorage.getItem('dish2Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish2Styledark') as string) : 'DishStyleredDark';
+		window.sessionStorage.setItem('dish2Styledark', JSON.stringify(theme2Default));
 		const theme3Default = JSON.parse(window.sessionStorage.getItem('dish3Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish3Styledark') as string) : 'DishStylegreenDark';
+		window.sessionStorage.setItem('dish3Styledark', JSON.stringify(theme3Default));
 		const theme4Default = JSON.parse(window.sessionStorage.getItem('dish4Styledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish4Styledark') as string) : 'DishStyleyellowDark';
+		window.sessionStorage.setItem('dish4Styledark', JSON.stringify(theme4Default));
 
 		const theme1eDefault = JSON.parse(window.sessionStorage.getItem('dish1eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish1eStyledark') as string) : 'DishStyleblueDark';
+		window.sessionStorage.setItem('dish1eStyledark', JSON.stringify(theme1eDefault));
 		const theme2eDefault = JSON.parse(window.sessionStorage.getItem('dish2eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish2eStyledark') as string) : 'DishStyleredDark';
+		window.sessionStorage.setItem('dish2eStyledark', JSON.stringify(theme2eDefault));
 		const theme3eDefault = JSON.parse(window.sessionStorage.getItem('dish3eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish3eStyledark') as string) : 'DishStylegreenDark';
+		window.sessionStorage.setItem('dish3eStyledark', JSON.stringify(theme3eDefault));
 		const theme4eDefault = JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string) ? JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string) : 'DishStyleyellowDark';
+		window.sessionStorage.setItem('dish4eStyledark', JSON.stringify(theme4eDefault));
 		const [theme1, setTheme1] = useState(theme1Default);
 		const [theme2, setTheme2] = useState(theme2Default);
 		const [theme3, setTheme3] = useState(theme3Default);

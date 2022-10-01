@@ -160,7 +160,6 @@ a {
 
 .Admin {
 	width: 100vw;
-	height: calc(100vh - 3vmax - 1.5vmax);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -203,10 +202,12 @@ a {
 
 .AdminBoxes {
 	width: 100vw;
+	gap: 2vh;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	gap: 2vw;
+	flex-wrap: wrap;
 }
 
 .AdminBox {
@@ -804,25 +805,34 @@ a {
 	.LoginPage input {
 		margin-top: 5vh;
 	}
+
+	.AdminBox {
+		width: 40vw;
+	}
+
+	.AdminBox:hover {
+		width: 50vw;
+	}
 }
 
 /* phone  */
 @media (max-width: 600px) {
+
+	.infoBox,
+	.AdminBox,
 	.homeButtons {
 		width: 70vw;
+		padding: 20vh 0;
 	}
 
+	.infoBox:hover,
+	.AdminBox:hover,
 	.homeButtons:hover {
-		width: 60vw;
-	}
-
-	.infoBox {
-		width: 70vw;
-	}
-
-	.infoBox:hover {
 		width: 75vw;
+		padding: 20vh 0;
 	}
+
+
 }
 
 

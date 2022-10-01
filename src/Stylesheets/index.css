@@ -778,6 +778,15 @@ a {
 	animation-name: popUp;
 }
 
+.rotateError {
+	margin-top: 15vh;
+	width: 100vw;
+	text-align: center;
+	visibility: hidden;
+	color: #D9D9D9;
+}
+
+
 /* pc  */
 @media (max-width: 1000px) {
 	.LoginLogo {
@@ -837,5 +846,35 @@ a {
 
 	.homeButtons {
 		width: 50vw;
+	}
+
+}
+
+@media (orientation: landscape) and (max-width: 500px) {
+	.ChartContainer {
+		visibility: visible;
+	}
+
+	.Chart {
+		visibility: visible;
+	}
+
+	.rotateError {
+		visibility: hidden;
+	}
+
+}
+
+@media (orientation: portrait) and (max-width: 500px) {
+	.ChartContainer {
+		visibility: hidden;
+	}
+
+	.Chart {
+		visibility: hidden;
+	}
+
+	.rotateError {
+		visibility: visible;
 	}
 }

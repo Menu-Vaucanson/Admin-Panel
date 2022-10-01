@@ -41,6 +41,10 @@
 	}
 }
 
+:root {
+	color-scheme: only light;
+}
+
 *:focus {
 	outline: none;
 }

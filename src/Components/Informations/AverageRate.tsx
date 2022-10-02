@@ -65,7 +65,10 @@ function AverageRate() {
 							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} />
 						</ComposedChart>
 					</ResponsiveContainer>
-					<div className='legend'><div className='legendTickLine'></div>Moyenne : {dataset[0].globalAverage}</div>
+					<div className='legend'>
+						<div className='legendTickLine'></div>
+						Moyenne : {dataset[0].globalAverage}
+					</div>
 				</div>
 			</div>
 		)
@@ -79,8 +82,8 @@ function AverageRate() {
 				let averageMonth = 0;
 				let numberAverage = 0;
 				res.data.data.forEach((element: any) => {
-					const date = new Date(D.getFullYear(), D.getMonth(), element[0]);
-					let average = 0
+					const date = new Date(D.getFullYear(), month - 1, element[0]);
+					let average = 0;
 					element[1].forEach((rate: { rate: number }) => {
 						average += rate.rate;
 					});

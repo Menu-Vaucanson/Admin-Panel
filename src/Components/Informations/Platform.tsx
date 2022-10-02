@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import MonthComp from './MonthComp';
 
 function Platform() {
 	const color = '#08A47C';

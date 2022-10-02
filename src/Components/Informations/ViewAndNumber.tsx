@@ -3,7 +3,7 @@ import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Re
 import { useState, useEffect } from 'react';
 
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import MonthComp from './MonthComp';
 
 
 function ViewAndNumber() {

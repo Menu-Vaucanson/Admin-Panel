@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import MonthComp from './MonthComp';
 
 function NumberRate() {
 	const color = '#4775FF';

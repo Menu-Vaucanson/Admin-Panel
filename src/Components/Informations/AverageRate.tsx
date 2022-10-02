@@ -3,10 +3,11 @@ import { Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart, C
 import { useState, useEffect } from 'react';
 
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import MonthComp from './MonthComp';
 
 
 function AverageRate() {
+	let selectedMonth = new Date().getMonth();
 	const color = '#FFC482';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
@@ -24,7 +25,7 @@ function AverageRate() {
 	);
 
 	function drawData(dataset: any) {
-		const CustomTooltip = ({ active, payload }) => {
+		function CustomTooltip({ active, payload }) {
 			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
@@ -74,15 +75,15 @@ function AverageRate() {
 		)
 	}
 
-	function getData(month: number) {
+	function getData() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/rates/' + (selectedMonth + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
 				let averageMonth = 0;
 				let numberAverage = 0;
 				res.data.data.forEach((element: any) => {
-					const date = new Date(D.getFullYear(), month - 1, element[0]);
+					const date = new Date(D.getFullYear(), selectedMonth, element[0]);
 					let average = 0;
 					element[1].forEach((rate: { rate: number }) => {
 						average += rate.rate;
@@ -94,15 +95,14 @@ function AverageRate() {
 					averageMonth += parseFloat(average.toFixed(2));
 					// to fixed is unfunctional in this place
 					numberAverage++;
-
-				})
+				});
 				averageMonth = averageMonth / numberAverage;
 				dataset.forEach(element => {
 					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
-				dataset.sort((a, b) => {
-					const nameA: Date = a.Date;
-					const nameB: Date = b.Date;
+				dataset.sort((a: { Date: Date }, b: { Date: Date }) => {
+					const nameA = a.Date;
+					const nameB = b.Date;
 					if (nameA < nameB) {
 						return -1;
 					}
@@ -119,12 +119,16 @@ function AverageRate() {
 		});
 	}
 
-	function refresh(month: number) {
+	function refresh(month: number = selectedMonth) {
 		startRefreshAnimation();
-		return getData(month).then(data => {
+		if (month) {
+			selectedMonth = month;
+		}
+		return getData().then(data => {
 			stopRefreshAnimation();
 			if (data) {
 				if (data === 404) {
+					console.log(selectedMonth);
 					setRate(
 						<div>
 							<div className='rotateError'>
@@ -134,7 +138,7 @@ function AverageRate() {
 								<RefreshComp callback={refresh} pingColor={color} />
 								<MonthComp callback={refresh} />
 								<div className='ChartError'>
-									Aucune donnée n'est disponible pour {Months[month]}
+									Aucune donnée n'est disponible pour {Months[selectedMonth]}
 								</div>
 							</div>
 						</div>
@@ -166,7 +170,7 @@ function AverageRate() {
 	}
 
 	useEffect(() => {
-		refresh(new Date().getMonth() + 1);
+		refresh();
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

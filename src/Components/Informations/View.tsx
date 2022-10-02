@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
-import MonthComp from './CalendarComp';
+import MonthComp from './MonthComp';
 
 function View() {
 	const color = "#08A47C";

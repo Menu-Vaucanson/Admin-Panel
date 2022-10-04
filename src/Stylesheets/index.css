@@ -784,10 +784,10 @@ a {
 }
 
 .rotateError {
-	margin-top: 15vh;
-	width: 100vw;
+	margin-top: 0vh;
+	width: 0vw;
+	display: none;
 	text-align: center;
-	visibility: hidden;
 	color: #D9D9D9;
 }
 
@@ -866,29 +866,34 @@ a {
 
 @media (orientation: landscape) and (max-width: 500px) {
 	.ChartContainer {
-		visibility: visible;
+		display: initial;
 	}
 
 	.Chart {
-		visibility: visible;
+		display: initial;
 	}
 
 	.rotateError {
-		visibility: hidden;
+		display: none;
 	}
 
 }
 
 @media (orientation: portrait) and (max-width: 500px) {
 	.ChartContainer {
-		visibility: hidden;
+		display: none;
 	}
 
 	.Chart {
-		visibility: hidden;
+		display: none;
 	}
 
 	.rotateError {
-		visibility: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 15vh;
+		width: 100vw;
+		text-align: center;
 	}
 }

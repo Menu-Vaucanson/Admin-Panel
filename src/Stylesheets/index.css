@@ -133,10 +133,10 @@ a {
 }
 
 .homeButtons {
-	width: 30vw;
+	width: 25vw;
 	height: 16vh;
 	background-color: #B3B3B3;
-	font-size: 4.5vw;
+	font-size: 4.5vh;
 	font-weight: bold;
 	border-radius: 2.5vh;
 	padding: 20vh 8vh;
@@ -761,8 +761,7 @@ a {
 }
 
 
-/* pc  */
-@media (min-width: 1000px) {
+@media (min-width: 600px) {
 	.green:hover {
 		background-color: #08A47C;
 	}
@@ -780,7 +779,7 @@ a {
 	}
 
 	.homeButtons:hover {
-		width: 34vw;
+		width: 30vw;
 		height: 20vh;
 	}
 
@@ -792,60 +791,6 @@ a {
 	.infoBox:hover {
 		width: 30vw;
 		height: 20vh;
-	}
-}
-
-@media (max-width: 1000px) and (min-width: 600px) {
-	.LoginLogo {
-		width: 47vw;
-	}
-
-	.LoginTitle {
-		font-size: 4.5vmax;
-	}
-
-	.passwordBox {
-		width: 45vw;
-	}
-
-	.LoginPage input {
-		margin-top: 5vh;
-	}
-
-	.AdminBox {
-		width: 40vw;
-
-	}
-
-	.homeButtons:hover {
-		width: 34vw;
-		height: 20vh;
-	}
-
-	.AdminBox:hover {
-		width: 44vw;
-		height: 16vh;
-	}
-
-	.infoBox:hover {
-		width: 30vw;
-		height: 20vh;
-	}
-
-	.green:hover {
-		background-color: #08A47C;
-	}
-
-	.blue:hover {
-		background-color: #4775FF;
-	}
-
-	.red:hover {
-		background-color: #E74855;
-	}
-
-	.yellow:hover {
-		background-color: #FFC482;
 	}
 }
 
@@ -863,10 +808,6 @@ a {
 	.homeButtons {
 		font-size: 6vw;
 	}
-}
-
-
-@media (max-width: 501px) {
 
 	.LoginTitle {
 		font-size: 4.5vmax;
@@ -885,6 +826,9 @@ a {
 		padding: 0px 8vh;
 	}
 
+	.infoBox {
+		padding: 0px 8vh;
+	}
 }
 
 @media (orientation: landscape) and (max-width: 500px) {

@@ -136,7 +136,7 @@ a {
 	width: 30vw;
 	height: 16vh;
 	background-color: #B3B3B3;
-	font-size: 4.5vh;
+	font-size: 4.5vw;
 	font-weight: bold;
 	border-radius: 2.5vh;
 	padding: 20vh 8vh;
@@ -147,11 +147,6 @@ a {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-}
-
-.homeButtons:hover {
-	width: 34vw;
-	height: 20vh;
 }
 
 .Info {
@@ -199,11 +194,6 @@ a {
 	transition-duration: 200ms;
 }
 
-.infoBox:hover {
-	width: 30vw;
-	height: 20vh;
-}
-
 .AdminBoxes {
 	width: 100vw;
 	gap: 2vh;
@@ -231,11 +221,6 @@ a {
 	justify-content: center;
 }
 
-.AdminBox:hover {
-	width: 34vw;
-	height: 20vh;
-}
-
 .E404 {
 	width: 100vw;
 	height: calc(100vh - 3vmax - 1.5vmax);
@@ -244,22 +229,6 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.green:hover {
-	background-color: #08A47C;
-}
-
-.blue:hover {
-	background-color: #4775FF;
-}
-
-.red:hover {
-	background-color: #E74855;
-}
-
-.yellow:hover {
-	background-color: #FFC482;
 }
 
 .Index {
@@ -793,9 +762,42 @@ a {
 
 
 /* pc  */
-@media (max-width: 1000px) {
+@media (min-width: 1000px) {
+	.green:hover {
+		background-color: #08A47C;
+	}
+
+	.blue:hover {
+		background-color: #4775FF;
+	}
+
+	.red:hover {
+		background-color: #E74855;
+	}
+
+	.yellow:hover {
+		background-color: #FFC482;
+	}
+
+	.homeButtons:hover {
+		width: 34vw;
+		height: 20vh;
+	}
+
+	.AdminBox:hover {
+		width: 44vw;
+		height: 16vh;
+	}
+
+	.infoBox:hover {
+		width: 30vw;
+		height: 20vh;
+	}
+}
+
+@media (max-width: 1000px) and (min-width: 600px) {
 	.LoginLogo {
-		width: 50vw;
+		width: 47vw;
 	}
 
 	.LoginTitle {
@@ -812,39 +814,59 @@ a {
 
 	.AdminBox {
 		width: 40vw;
+
+	}
+
+	.homeButtons:hover {
+		width: 34vw;
+		height: 20vh;
 	}
 
 	.AdminBox:hover {
-		width: 50vw;
+		width: 44vw;
+		height: 16vh;
+	}
+
+	.infoBox:hover {
+		width: 30vw;
+		height: 20vh;
+	}
+
+	.green:hover {
+		background-color: #08A47C;
+	}
+
+	.blue:hover {
+		background-color: #4775FF;
+	}
+
+	.red:hover {
+		background-color: #E74855;
+	}
+
+	.yellow:hover {
+		background-color: #FFC482;
 	}
 }
 
 /* phone  */
 @media (max-width: 600px) {
-
-	.infoBox,
-	.AdminBox,
-	.homeButtons {
-		width: 70vw;
-		padding: 20vh 0;
-	}
-
-	.infoBox:hover,
-	.AdminBox:hover,
-	.homeButtons:hover {
-		width: 75vw;
-		padding: 20vh 0;
-	}
-
-
-}
-
-
-@media (max-width: 500px) {
 	.LoginLogo {
 		width: 70vw;
 		margin-top: 1vh;
 	}
+
+	.HomeBoxes {
+		margin: 0px;
+	}
+
+	.homeButtons {
+		font-size: 6vw;
+	}
+}
+
+
+@media (max-width: 501px) {
 
 	.LoginTitle {
 		font-size: 4.5vmax;
@@ -859,7 +881,8 @@ a {
 	}
 
 	.homeButtons {
-		width: 50vw;
+		width: 60vw;
+		padding: 0px 8vh;
 	}
 
 }

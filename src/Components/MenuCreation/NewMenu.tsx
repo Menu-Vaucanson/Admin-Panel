@@ -536,13 +536,16 @@ function NewMenu() {
 
 
 	return (
-		<div className="NewMenu">
-			<MenuProgressBar state={BarState} />
-			<div className="NewMenuTitle">{Title}</div>
-			<div className="NewMenuContent">{Content}</div>
-			{PrevButton}
-			{NextButton}
-		</div>
+		<>
+			<div className='NewMenuRotateError'> cette pages n'est pas disponible sur mobile</div>
+			<div className="NewMenu">
+				<MenuProgressBar state={BarState} />
+				<div className="NewMenuTitle">{Title}</div>
+				<div className="NewMenuContent">{Content}</div>
+				{PrevButton}
+				{NextButton}
+			</div>
+			</>
 	);
 }
 

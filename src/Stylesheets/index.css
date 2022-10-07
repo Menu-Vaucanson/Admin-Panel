@@ -760,6 +760,13 @@ a {
 	color: #D9D9D9;
 }
 
+.NewMenuRotateError {
+	margin-top: 15vh;
+	width: 100vw;
+	display: none;
+	text-align: center;
+	color: white;
+}
 
 @media (min-width: 600px) {
 	.green:hover {
@@ -838,9 +845,19 @@ a {
 		width: 55vw;
 		padding: 0vh 0;
 	}
+
+	.NewMenu {
+		display: none;
+	}
+
+	.NewMenuRotateError {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
-@media (orientation: landscape) and (max-width: 500px) {
+@media (orientation: landscape) and (max-width: 600px) {
 	.ChartContainer {
 		display: initial;
 	}
@@ -855,7 +872,7 @@ a {
 
 }
 
-@media (orientation: portrait) and (max-width: 500px) {
+@media (orientation: portrait) and (max-width: 600px) {
 	.ChartContainer {
 		display: none;
 	}

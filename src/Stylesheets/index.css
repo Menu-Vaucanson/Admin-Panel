@@ -833,6 +833,11 @@ a {
 	.infoBox {
 		padding: 0px 8vh;
 	}
+
+	.AdminBox {
+		width: 55vw;
+		padding: 0vh 0;
+	}
 }
 
 @media (orientation: landscape) and (max-width: 500px) {

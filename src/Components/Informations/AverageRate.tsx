@@ -72,7 +72,7 @@ function AverageRate() {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 
 	function getData() {
@@ -164,7 +164,7 @@ function AverageRate() {
 							<div className='ChartError'>Une erreur est survenue</div>
 						</div>
 					</div>
-				)
+				);
 			}
 		});
 	}

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import Menu, { Dish } from './MenuClass';
+
 const url = 'https://menuvox.fr:8081/';
 
 function setDatas() {
@@ -47,140 +49,82 @@ function setDatas() {
 	const theme4eDark = JSON.parse(window.sessionStorage.getItem('dish4eStyledark') as string);
 
 	const d = date.split('-');
-	const data = {
-		error: isErrored1 ? 1 : 0,
-		errorEvening: isErrored2 ? 1 : 0,
-		date: new Date(d[0], d[1] - 1, d[2]).toLocaleDateString(),
-		menu: [{
-			"name": "",
-			"content": "",
-			"style": "",
-			"styleDark": ""
-		}],
-		errorMessage: "",
-		evening: [{
-			"name": "",
-			"content": "",
-			"style": "",
-			"styleDark": ""
-		}],
-		errorEveningMessage: ""
-	};
+	const data = new Menu(d, isErrored1, isErrored2);
 
 	if (!isErrored1) {
-		data.menu = [
-			{
-				"name": "Entrée",
-				'content': dish1,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Plat",
-				'content': dish2,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Légume",
-				'content': dish3,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Dessert",
-				'content': dish4,
-				"style": "",
-				"styleDark": ""
-			}
-		]
+		data.setMenu([
+			new Dish("Entrée", dish1),
+			new Dish("Plat", dish2),
+			new Dish("Légume", dish3),
+			new Dish("Dessert", dish4),
+		]);
 
 		if (theme1) {
-			data.menu[0].style = theme1.replace('DishStyle', '');
+			data.setMenuStyle(0, theme1.replace('DishStyle', ''));
 		}
 		if (theme2) {
-			data.menu[1].style = theme2.replace('DishStyle', '');
+			data.setMenuStyle(1, theme2.replace('DishStyle', ''));
 		}
 		if (theme3) {
-			data.menu[2].style = theme3.replace('DishStyle', '');
+			data.setMenuStyle(2, theme3.replace('DishStyle', ''));
 		}
 		if (theme4) {
-			data.menu[3].style = theme4.replace('DishStyle', '');
+			data.setMenuStyle(3, theme4.replace('DishStyle', ''));
 		}
 
 		if (theme1Dark) {
-			data.menu[0].styleDark = theme1Dark.replace('DishStyle', '');
+			data.setMenuStyleDark(0, theme1Dark.replace('DishStyle', ''));
 		}
 		if (theme2Dark) {
-			data.menu[1].styleDark = theme2Dark.replace('DishStyle', '');
+			data.setMenuStyleDark(1, theme2Dark.replace('DishStyle', ''));
 		}
 		if (theme3Dark) {
-			data.menu[2].styleDark = theme3Dark.replace('DishStyle', '');
+			data.setMenuStyleDark(2, theme3Dark.replace('DishStyle', ''));
 		}
 		if (theme4Dark) {
-			data.menu[3].styleDark = theme4Dark.replace('DishStyle', '');
+			data.setMenuStyleDark(3, theme4Dark.replace('DishStyle', ''));
 		}
 	} else {
 		if (error1) {
-			data.errorMessage = error1;
+			data.setErrorMessage(error1);
 		}
 	}
 
 	if (!isErrored2) {
-		data.evening = [
-			{
-				"name": "Entrée",
-				'content': dish1e,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Plat",
-				'content': dish2e,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Légume",
-				'content': dish3e,
-				"style": "",
-				"styleDark": ""
-			},
-			{
-				"name": "Dessert",
-				'content': dish4e,
-				"style": "",
-				"styleDark": ""
-			}
-		]
+		data.setEvening([
+			new Dish("Entrée", dish1e),
+			new Dish("Plat", dish2e),
+			new Dish("Légume", dish3e),
+			new Dish("Dessert", dish4e),
+		]);
 		if (theme1e) {
-			data.evening[0].style = theme1e.replace('DishStyle', '');
+			data.setEveningStyle(0, theme1e.replace('DishStyle', ''));
 		}
 		if (theme2e) {
-			data.evening[1].style = theme2e.replace('DishStyle', '');
+			data.setEveningStyle(1, theme2e.replace('DishStyle', ''));
 		}
 		if (theme3e) {
-			data.evening[2].style = theme3e.replace('DishStyle', '');
+			data.setEveningStyle(2, theme3e.replace('DishStyle', ''));
 		}
 		if (theme4e) {
-			data.evening[3].style = theme4e.replace('DishStyle', '');
+			data.setEveningStyle(3, theme4e.replace('DishStyle', ''));
 		}
 
 		if (theme1eDark) {
-			data.evening[0].styleDark = theme1eDark.replace('DishStyle', '');
+			data.setEveningStyleDark(0, theme1eDark.replace('DishStyle', ''));
 		}
 		if (theme2eDark) {
-			data.evening[1].styleDark = theme2eDark.replace('DishStyle', '');
+			data.setEveningStyleDark(1, theme2eDark.replace('DishStyle', ''));
 		}
 		if (theme3eDark) {
-			data.evening[2].styleDark = theme3eDark.replace('DishStyle', '');
+			data.setEveningStyleDark(2, theme3eDark.replace('DishStyle', ''));
 		}
 		if (theme4eDark) {
-			data.evening[3].styleDark = theme4eDark.replace('DishStyle', '');
+			data.setEveningStyleDark(3, theme4eDark.replace('DishStyle', ''));
 		}
 	} else {
 		if (error1) {
-			data.errorEveningMessage = error2;
+			data.setErrorEveningMessage(error2);
 		}
 	}
 	return data;
@@ -213,7 +157,7 @@ function SendNewMenu() {
 				setContent(
 					<>
 						<div>Erreur, le menu n'a pas pu être distribué, consultez la console pour plus d'infos.</div>
-						<Link to={'/'} className='MenuSentButton'> Retourner au menu</Link>
+						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
 					</>);
 			}
 		})

@@ -70,14 +70,14 @@ function Platform() {
 					Plateformes
 				</div >
 				<div className='ChartContainer'>
-					<ResponsiveContainer width="100%" height="100%">
-						<PieChart width={400} height={400}>
+					<ResponsiveContainer width="800%" height="100%">
+						<PieChart>
 							<Pie
 								activeIndex={ActiveIndex}
 								activeShape={renderActiveShape}
 								data={data}
-								innerRadius={120}
-								outerRadius={210}
+								innerRadius={'60%'}
+								outerRadius={'70%'}
 								fill="#08A47C"
 								dataKey="value"
 								onMouseEnter={onPieEnter}

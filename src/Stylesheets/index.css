@@ -334,7 +334,8 @@ a {
 	font-size: 5vh;
 }
 
-.ChartContainer {
+.ChartContainer,
+.ChartContainerAlways {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -667,7 +668,8 @@ a {
 	font-size: 2vmax;
 }
 
-.Chart {
+.Chart,
+.ChartAlways {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -676,7 +678,8 @@ a {
 	width: 100vw;
 }
 
-.Chart div {
+.Chart div,
+.ChartAlways div {
 	margin: 0;
 }
 

@@ -10,9 +10,8 @@ function Platform() {
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-	function renderActiveShape(props: any) {
+	function renderActiveShape({ cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value }) {
 		const RADIAN = Math.PI / 180;
-		const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
 		const sin = Math.sin(-RADIAN * midAngle);
 		const cos = Math.cos(-RADIAN * midAngle);
 		const sx = cx + (outerRadius + 10) * cos;
@@ -54,7 +53,7 @@ function Platform() {
 				</text>
 			</g>
 		);
-	};
+	}
 
 	function DrawData({ data }) {
 		const [ActiveIndex, setActiveIndex] = useState(0);
@@ -63,21 +62,21 @@ function Platform() {
 		};
 
 		return (
-			<div className='Chart'>
+			<div className='ChartAlways'>
 				<RefreshComp callback={refresh} pingColor={color} />
 				<MonthComp callback={refresh} />
 				<div className='PageTitle'>
 					Plateformes
-				</div >
-				<div className='ChartContainer'>
-					<ResponsiveContainer width="800%" height="100%">
-						<PieChart>
+				</div>
+				<div className='ChartContainerAlways'>
+					<ResponsiveContainer>
+						<PieChart width={400} height={400}>
 							<Pie
 								activeIndex={ActiveIndex}
 								activeShape={renderActiveShape}
 								data={data}
-								innerRadius={'60%'}
-								outerRadius={'70%'}
+								innerRadius={110}
+								outerRadius={160}
 								fill="#08A47C"
 								dataKey="value"
 								onMouseEnter={onPieEnter}
@@ -90,7 +89,7 @@ function Platform() {
 	}
 
 	const [View, setView] = useState(
-		<div className='ChartContainer'>
+		<div className='ChartContainerAlways'>
 			<RefreshComp callback={refresh} pingColor={color} />
 			<div className='ChartError'>Récupération des données...</div >
 		</div>
@@ -135,7 +134,7 @@ function Platform() {
 			if (data) {
 				if (data === 404) {
 					setView(
-						<div className='ChartContainer'>
+						<div className='ChartContainerAlways'>
 							<RefreshComp callback={refresh} pingColor={color} />
 							<MonthComp callback={refresh} />
 							<div className='ChartError'>
@@ -148,7 +147,7 @@ function Platform() {
 				}
 			} else {
 				setView(
-					<div className='ChartContainer'>
+					<div className='ChartContainerAlways'>
 						<RefreshComp callback={refresh} pingColor={color} />
 						<div className='ChartError'>Une erreur est survenue</div>
 					</div>
@@ -165,8 +164,6 @@ function Platform() {
 
 	return View;
 }
-
-
 
 
 export default Platform;

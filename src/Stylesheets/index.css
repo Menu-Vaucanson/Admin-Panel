@@ -157,20 +157,6 @@ a {
 	align-items: center;
 }
 
-.Admin {
-	width: 100vw;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	color: #F5FEF5;
-	font-size: 4.5vh;
-	font-weight: bold;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-around;
-}
-
 .infosButons {
 	width: max-content;
 	text-align: center;
@@ -192,33 +178,6 @@ a {
 	display: flex;
 	align-items: center;
 	transition-duration: 200ms;
-}
-
-.AdminBoxes {
-	width: 100vw;
-	gap: 2vh;
-	margin-top: 2vh;
-	margin-bottom: 2vh;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
-.AdminBox {
-	background-color: #B3B3B3;
-	padding: 25vh 0;
-	width: 30vw;
-	height: 16vh;
-	font-size: 4.5vh;
-	font-weight: bold;
-	border-radius: 2.5vh;
-	cursor: pointer;
-	box-shadow: 0 0 1vh rgba(0, 0, 0, 0.75);
-	transition-duration: 200ms;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .E404 {
@@ -787,21 +746,6 @@ a {
 	.yellow:hover {
 		background-color: #FFC482;
 	}
-
-	.homeButtons:hover {
-		width: 30vw;
-		height: 20vh;
-	}
-
-	.AdminBox:hover {
-		width: 44vw;
-		height: 16vh;
-	}
-
-	.infoBox:hover {
-		width: 30vw;
-		height: 20vh;
-	}
 }
 
 /* phone  */
@@ -842,11 +786,6 @@ a {
 
 	.infoBox {
 		padding: 0px 8vh;
-	}
-
-	.AdminBox {
-		width: 55vw;
-		padding: 0vh 0;
 	}
 
 	.NewMenu {

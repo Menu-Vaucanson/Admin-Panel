@@ -25,7 +25,7 @@ function AverageRate() {
 	);
 
 	function drawData(dataset: any) {
-		function CustomTooltip({ active, payload }) {
+		function CustomTooltip({ active, payload }): JSX.Element {
 			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 			if (active && payload && payload.length) {
 				const date = new Date(payload[0].payload.Date);
@@ -36,8 +36,9 @@ function AverageRate() {
 					</div>
 				);
 			}
-			return null;
+			return <></>;
 		};
+
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -86,7 +87,7 @@ function AverageRate() {
 				let averageMonth = 0;
 				let numberAverage = 0;
 				res.data.data.forEach((element: any) => {
-					const date = new Date(D.getFullYear(), month, element[0]);
+					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let average = 0;
 					element[1].forEach((rate: { rate: number }) => {
 						average += rate.rate;

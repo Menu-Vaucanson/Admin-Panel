@@ -6,6 +6,7 @@ import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './Refr
 import MonthComp from './MonthComp';
 
 function Platform() {
+	let month = new Date().getMonth() + 1;
 	const color = '#08A47C';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
@@ -64,7 +65,10 @@ function Platform() {
 		return (
 			<div className='ChartAlways'>
 				<RefreshComp callback={refresh} pingColor={color} />
-				<MonthComp callback={refresh} />
+				<MonthComp callback={(m: number) => {
+					month = m;
+					refresh();
+				}} />
 				<div className='PageTitle'>
 					Plateformes
 				</div>
@@ -127,7 +131,7 @@ function Platform() {
 		});
 	}
 
-	function refresh(month: number) {
+	function refresh() {
 		startRefreshAnimation();
 		return getData(month).then(data => {
 			stopRefreshAnimation();
@@ -136,7 +140,10 @@ function Platform() {
 					setView(
 						<div className='ChartContainerAlways'>
 							<RefreshComp callback={refresh} pingColor={color} />
-							<MonthComp callback={refresh} />
+							<MonthComp callback={(m: number) => {
+								month = m;
+								refresh();
+							}} />
 							<div className='ChartError'>
 								Aucune donnée n'est disponible pour {Months[month]}
 							</div>
@@ -157,7 +164,7 @@ function Platform() {
 	}
 
 	useEffect(() => {
-		refresh(new Date().getMonth() + 1);
+		refresh();
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

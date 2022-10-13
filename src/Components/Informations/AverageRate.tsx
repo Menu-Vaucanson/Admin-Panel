@@ -7,7 +7,7 @@ import MonthComp from './MonthComp';
 
 
 function AverageRate() {
-	let selectedMonth = new Date().getMonth();
+	let month = new Date().getMonth() + 1;
 	const color = '#FFC482';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
@@ -41,7 +41,10 @@ function AverageRate() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
-				<MonthComp callback={refresh} />
+				<MonthComp callback={(m: number) => {
+					month = m;
+					refresh();
+				}} />
 				<div className='PageTitle'>
 					Moyenne des notes
 				</div>
@@ -78,12 +81,12 @@ function AverageRate() {
 	function getData() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + (selectedMonth + 1), { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
 				let averageMonth = 0;
 				let numberAverage = 0;
 				res.data.data.forEach((element: any) => {
-					const date = new Date(D.getFullYear(), selectedMonth, element[0]);
+					const date = new Date(D.getFullYear(), month, element[0]);
 					let average = 0;
 					element[1].forEach((rate: { rate: number }) => {
 						average += rate.rate;
@@ -119,16 +122,12 @@ function AverageRate() {
 		});
 	}
 
-	function refresh(month: number = selectedMonth) {
+	function refresh() {
 		startRefreshAnimation();
-		if (month) {
-			selectedMonth = month;
-		}
 		return getData().then(data => {
 			stopRefreshAnimation();
 			if (data) {
 				if (data === 404) {
-					console.log(selectedMonth);
 					setRate(
 						<div>
 							<div className='rotateError'>
@@ -136,9 +135,12 @@ function AverageRate() {
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
-								<MonthComp callback={refresh} />
+								<MonthComp callback={(m: number) => {
+									month = m;
+									refresh();
+								}} />
 								<div className='ChartError'>
-									Aucune donnée n'est disponible pour {Months[selectedMonth]}
+									Aucune donnée n'est disponible pour {Months[month]}
 								</div>
 							</div>
 						</div>

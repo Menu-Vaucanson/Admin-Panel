@@ -7,6 +7,7 @@ import MonthComp from './MonthComp';
 
 
 function ViewAndNumber() {
+	let month = new Date().getMonth() + 1;
 	const color = '#E74855';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
@@ -39,7 +40,10 @@ function ViewAndNumber() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
-				<MonthComp callback={refresh} />
+				<MonthComp callback={(m: number) => {
+					month = m;
+					refresh();
+				}} />
 				<div className='PageTitle'>
 					Nombres de note
 				</div>
@@ -90,7 +94,7 @@ function ViewAndNumber() {
 		});
 	}
 
-	function refresh(month: number) {
+	function refresh() {
 		startRefreshAnimation();
 		return getData(month).then(data => {
 			stopRefreshAnimation();
@@ -103,7 +107,10 @@ function ViewAndNumber() {
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
-								<MonthComp callback={refresh} />
+								<MonthComp callback={(m: number) => {
+									month = m;
+									refresh();
+								}} />
 								<div className='ChartError'>
 									Aucune donnée n'est disponible pour {Months[month]}
 								</div>
@@ -137,7 +144,7 @@ function ViewAndNumber() {
 	}
 
 	useEffect(() => {
-		refresh(new Date().getMonth() + 1);
+		refresh();
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

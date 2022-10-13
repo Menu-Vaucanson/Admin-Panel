@@ -6,20 +6,11 @@ import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './Refr
 import MonthComp from './MonthComp';
 
 function View() {
+	let month = new Date().getMonth() + 1;
 	const color = "#08A47C";
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-
-	function find(array: Array<any>, query: number) {
-		let index: number | null = null
-		array.forEach((element: { Date: Date }, i: number) => {
-			if (new Date(element.Date).getDate() === query) {
-				index = i;
-			}
-		});
-		return index;
-	}
 
 	function drawData(dataset: any) {
 		function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
@@ -39,7 +30,10 @@ function View() {
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
-				<MonthComp callback={refresh} />
+				<MonthComp callback={(m: number) => {
+					month = m;
+					refresh();
+				}} />
 				<div className='PageTitle'>
 					Nombres de vues
 				</div>
@@ -89,9 +83,9 @@ function View() {
 				let dataset: Array<{ globalAvrage?: number, Date: Date, Number: number }> = []
 				res.data.data.forEach((element: any) => {
 					const date = new Date(element.date);
-					const index = find(dataset, date.getDate());
-					if (index != null) {
-						dataset[index].Number = dataset[index].Number + 1
+					const index = dataset.findIndex(v => new Date(v.Date).getDate() === date.getDate());
+					if (index !== -1) {
+						dataset[index].Number++;
 					} else {
 						dataset.push({ Date: date, Number: 1 })
 					}
@@ -104,7 +98,7 @@ function View() {
 		});
 	}
 
-	function refresh(month: number) {
+	function refresh() {
 		startRefreshAnimation();
 		return getData(month).then(data => {
 			stopRefreshAnimation();
@@ -117,7 +111,10 @@ function View() {
 							</div>
 							<div className='ChartContainer'>
 								<RefreshComp callback={refresh} pingColor={color} />
-								<MonthComp callback={refresh} />
+								<MonthComp callback={(m: number) => {
+									month = m;
+									refresh();
+								}} />
 								<div className='ChartError'>
 									Aucune donnée n'est disponible pour {Months[month]}
 								</div>
@@ -151,7 +148,7 @@ function View() {
 	}
 
 	useEffect(() => {
-		refresh(new Date().getMonth() + 1);
+		refresh();
 		// Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

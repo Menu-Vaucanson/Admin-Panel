@@ -89,7 +89,11 @@ function View() {
 				//avrange
 				let averageMonth : number = 0;
 				let numberAverage: number = 0;
-				res.data.data.forEach((element: any) => {
+				res.data.data.forEach((element: { ip: string, date: Date, request: { any } }) => {
+					if (Object.keys(element.request).length === 0) { 
+						console.log('test');
+						return;
+					}
 					//avrange
 					averageMonth ++;
 					const date = new Date(element.date);
@@ -98,7 +102,7 @@ function View() {
 						dataset[index].Number++;
 					} else {
 						dataset.push({ Date: date, Number: 1 })
-						//if is first datat of this day
+						//if is first datat of this day  
 						numberAverage++;
 					}
 				});

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TooltipProps, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ComposedChart, Line } from 'recharts';
 
 import RefreshComp, { stopRefreshAnimation, startRefreshAnimation } from './RefreshComp';
 import MonthComp from './MonthComp';
@@ -39,29 +39,34 @@ function View() {
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
-						<AreaChart
+						<ComposedChart
 							data={dataset}
 							margin={{
-								top: 5,
-								bottom: 5,
+								top: 10,
 								right: 30,
-								left: 0
+								left: 0,
+								bottom: 0,
 							}}
 						>
 							<defs>
 								<linearGradient id="ColorNumber" x1="0" y1="0" x2="0" y2="2">
+									<stop offset="5%" stopColor="#08A47C" stopOpacity={0.4} />
 									<stop offset="95%" stopColor="#08A47C" stopOpacity={0} />
 								</linearGradient>
-
 							</defs>
 							<CartesianGrid strokeDasharray="10 10" />
 							<XAxis dataKey={v => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
-							<Area strokeWidth={10} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
-						</AreaChart>
+							<Area strokeWidth={4} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
+							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="80%"/>
+						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
+				<div className='legend'>
+					<div className='legendTickLine'></div>
+						Moyenne : {dataset[0].globalAverage}
+					</div>
 			</div>
 		)
 	}
@@ -80,15 +85,27 @@ function View() {
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ globalAvrage?: number, Date: Date, Number: number }> = []
+				let dataset: Array<{ Date: Date, Number: number, globalAverage?:number }> = []
+				//avrange
+				let averageMonth : number = 0;
+				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
+					//avrange
+					averageMonth ++;
 					const date = new Date(element.date);
 					const index = dataset.findIndex(v => new Date(v.Date).getDate() === date.getDate());
 					if (index !== -1) {
 						dataset[index].Number++;
 					} else {
 						dataset.push({ Date: date, Number: 1 })
+						//if is first datat of this day
+						numberAverage++;
 					}
+				});
+				//avrange
+				averageMonth = averageMonth / numberAverage;
+				dataset.forEach(element  => {
+					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
 				resolve(Array.from(dataset));
 			}).catch(err => {

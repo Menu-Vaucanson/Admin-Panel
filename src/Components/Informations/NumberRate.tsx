@@ -75,7 +75,7 @@ function NumberRate() {
 					</ResponsiveContainer>
 				</div>
 				<div className='legend'>
-						<div className='legendTickLine'></div>
+					<div className='legendTickLine'></div>
 						Moyenne : {dataset[0].globalAverage}
 					</div>
 			</div>

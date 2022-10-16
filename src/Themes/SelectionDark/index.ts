@@ -1,11 +1,8 @@
-// @ts-ignore
-import blueDark from './blueDark.ts';
-// @ts-ignore
-import redDark from './redDark.ts';
-// @ts-ignore
-import greenDark from './greenDark.ts';
-// @ts-ignore
-import yellowDark from './yellowDark.ts';
+import blueDark from './blueDark';
+import redDark from './redDark';
+import greenDark from './greenDark';
+import yellowDark from './yellowDark';
+import halloweenDark from './halloweenDark';
 
 function getThemesDark() {
 	const themes = [
@@ -16,7 +13,8 @@ function getThemesDark() {
 		blueDark,
 		redDark,
 		greenDark,
-		yellowDark
+		yellowDark,
+		halloweenDark
 	];
 
 	return themes;

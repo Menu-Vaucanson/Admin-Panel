@@ -1,11 +1,8 @@
-// @ts-ignore
-import blue from './blue.ts';
-// @ts-ignore
-import red from './red.ts';
-// @ts-ignore
-import green from './green.ts';
-// @ts-ignore
-import yellow from './yellow.ts';
+import blue from './blue';
+import red from './red';
+import green from './green';
+import yellow from './yellow';
+import halloween from './halloween';
 
 function getThemes() {
 	const themes = [
@@ -16,7 +13,8 @@ function getThemes() {
 		blue,
 		red,
 		green,
-		yellow
+		yellow,
+		halloween
 	];
 
 	return themes;

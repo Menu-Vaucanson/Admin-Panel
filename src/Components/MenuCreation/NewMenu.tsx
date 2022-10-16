@@ -545,7 +545,7 @@ function NewMenu() {
 				{PrevButton}
 				{NextButton}
 			</div>
-			</>
+		</>
 	);
 }
 

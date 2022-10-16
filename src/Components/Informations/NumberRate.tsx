@@ -70,7 +70,7 @@ function NumberRate() {
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
-							<Line type="monotone" dataKey="globalAverage" stroke="#E7485595" strokeWidth={4} dot={false} activeDot={false} />
+							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="80%"/>
 						</ComposedChart>
 					</ResponsiveContainer>
 				</div>

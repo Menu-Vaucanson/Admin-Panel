@@ -1,4 +1,4 @@
-import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { TooltipProps, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, ComposedChart } from 'recharts';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -37,6 +37,7 @@ function NumberRate() {
 			}
 			return null;
 		};
+		console.log(dataset);
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -49,7 +50,7 @@ function NumberRate() {
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
-						<AreaChart
+						<ComposedChart
 							data={dataset}
 							margin={{
 								top: 10,
@@ -69,9 +70,14 @@ function NumberRate() {
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
-						</AreaChart>
+							<Line type="monotone" dataKey="globalAverage" stroke="#E7485595" strokeWidth={4} dot={false} activeDot={false} />
+						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
+				<div className='legend'>
+						<div className='legendTickLine'></div>
+						Moyenne : {dataset[0].globalAverage}
+					</div>
 			</div>
 		)
 	}
@@ -79,11 +85,16 @@ function NumberRate() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ Date: Date, Number: number }> = []
+				let dataset: Array<{ Date: Date, Number: number, globalAverage?:number }> = [];
+				let averageMonth : number = 0;
+				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let number = element[1].length;
-					dataset.push({ Date: date, Number: number })
+					//avrange
+					averageMonth += parseFloat(element[1].length);
+					numberAverage++;
+					dataset.push({ Date: date, Number: number})
 				});
 				dataset.sort((a, b) => {
 					const nameA: Date = a.Date;
@@ -95,6 +106,11 @@ function NumberRate() {
 						return 1;
 					}
 					return 0;
+				});
+				//avrange
+				averageMonth = averageMonth / numberAverage;
+				dataset.forEach(element  => {
+					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
 				resolve(dataset);
 			}).catch(err => {

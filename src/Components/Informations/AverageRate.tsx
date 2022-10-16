@@ -67,7 +67,7 @@ function AverageRate() {
 							{/*@ts-ignore*/}
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Bar dataKey="Average" fill="#FFC482" />
-							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} />
+							<Line type="monotone" dataKey="globalAverage" stroke="#E7485595" strokeWidth={4} dot={false} activeDot={false} />
 						</ComposedChart>
 					</ResponsiveContainer>
 					<div className='legend'>
@@ -84,8 +84,8 @@ function AverageRate() {
 			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
-				let averageMonth = 0;
-				let numberAverage = 0;
+				let averageMonth : number = 0;
+				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let average = 0;

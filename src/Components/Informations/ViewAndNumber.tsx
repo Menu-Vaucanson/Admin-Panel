@@ -59,7 +59,10 @@ function ViewAndNumber() {
 							}}
 						>
 							<CartesianGrid strokeDasharray="3 3" />
-							<XAxis dataKey={(v) => new Date(v.date).getDate()} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => {
+								const date = new Date(v.date).toLocaleDateString("fr").split("/");
+								return date[0] + '/' + date[1];
+							} } style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis stroke='#82CA9D' yAxisId="right" orientation="right" type="number" dataKey="rate" />
 							<YAxis stroke='#8884D8' yAxisId="left" type="number" dataKey="view" />
 							<Tooltip content={<CustomTooltip />} />

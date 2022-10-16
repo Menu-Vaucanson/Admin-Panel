@@ -62,7 +62,10 @@ function AverageRate() {
 								left: 20,
 							}}>
 							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={(v) => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => {
+								const date = new Date(v.Date).toLocaleDateString("fr").split("/");
+								return date[0] + '/' + date[1];
+							}} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Average" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} domain={[0, 5]} />
 							{/*@ts-ignore*/}
 							<Tooltip cursor={false} content={<CustomTooltip />} />

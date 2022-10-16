@@ -55,7 +55,10 @@ function View() {
 								</linearGradient>
 							</defs>
 							<CartesianGrid strokeDasharray="10 10" />
-							<XAxis dataKey={v => v = new Date(v.Date).getDate()} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							<XAxis dataKey={(v) => {
+								const date = new Date(v.Date).toLocaleDateString("fr").split("/");
+								return date[0] + '/' + date[1];
+							}} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
 							<Area strokeWidth={4} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
@@ -91,7 +94,6 @@ function View() {
 				let numberAverage: number = 0;
 				res.data.data.forEach((element: { ip: string, date: Date, request: { any } }) => {
 					if (Object.keys(element.request).length === 0) { 
-						console.log('test');
 						return;
 					}
 					//avrange

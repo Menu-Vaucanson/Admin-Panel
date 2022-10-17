@@ -71,7 +71,7 @@ function View() {
 					Moyenne : {dataset[0].globalAverage}
 				</div>
 			</div>
-		)
+		);
 	}
 	const [View, setView] = useState(
 		<div>

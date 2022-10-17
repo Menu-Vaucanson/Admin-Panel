@@ -680,7 +680,7 @@ a {
 }
 
 .legendTickLine {
-	background-color: #E74855;
+	background-color: rgba(231, 70, 83, 0.8);
 	width: 2vmax;
 	height: 0.2vmax;
 }

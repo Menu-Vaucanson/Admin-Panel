@@ -45,7 +45,7 @@ function ViewAndNumber() {
 					refresh();
 				}} />
 				<div className='PageTitle'>
-					Nombres de note
+					Vues et notes
 				</div>
 				<div className='ChartContainer'>
 					<ResponsiveContainer width="100%" height="89%">
@@ -62,7 +62,7 @@ function ViewAndNumber() {
 							<XAxis dataKey={(v) => {
 								const date = new Date(v.date).toLocaleDateString("fr").split("/");
 								return date[0] + '/' + date[1];
-							} } style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							}} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis stroke='#82CA9D' yAxisId="right" orientation="right" type="number" dataKey="rate" />
 							<YAxis stroke='#8884D8' yAxisId="left" type="number" dataKey="view" />
 							<Tooltip content={<CustomTooltip />} />

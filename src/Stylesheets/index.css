@@ -680,14 +680,13 @@ a {
 }
 
 .legendTickLine {
-	background-color: rgba(255, 0, 0, 0.7);
+	background-color: #E74855;
 	width: 2vmax;
 	height: 0.2vmax;
 }
 
 .legend {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	gap: 2vmax;
 	color: #F5FEF5;

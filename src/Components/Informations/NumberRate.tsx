@@ -69,18 +69,18 @@ function NumberRate() {
 							<XAxis dataKey={(v) => {
 								const date = new Date(v.Date).toLocaleDateString("fr").split("/");
 								return date[0] + '/' + date[1];
-							}} style={{ 'color': 'lime' }} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
+							}} tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip cursor={false} content={<CustomTooltip />} />
 							<Area type="monotone" dataKey="Number" stroke="#4775FF" fillOpacity={1} fill="url(#ColorNumber)" />
-							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="80%"/>
+							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="90%" />
 						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
 				<div className='legend'>
 					<div className='legendTickLine'></div>
-						Moyenne : {dataset[0].globalAverage}
-					</div>
+					Moyenne : {dataset[0].globalAverage}
+				</div>
 			</div>
 		)
 	}
@@ -88,8 +88,8 @@ function NumberRate() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ Date: Date, Number: number, globalAverage?:number }> = [];
-				let averageMonth : number = 0;
+				let dataset: Array<{ Date: Date, Number: number, globalAverage?: number }> = [];
+				let averageMonth: number = 0;
 				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);
@@ -97,7 +97,7 @@ function NumberRate() {
 					//avrange
 					averageMonth += parseFloat(element[1].length);
 					numberAverage++;
-					dataset.push({ Date: date, Number: number})
+					dataset.push({ Date: date, Number: number })
 				});
 				dataset.sort((a, b) => {
 					const nameA: Date = a.Date;
@@ -112,7 +112,7 @@ function NumberRate() {
 				});
 				//avrange
 				averageMonth = averageMonth / numberAverage;
-				dataset.forEach(element  => {
+				dataset.forEach(element => {
 					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
 				resolve(dataset);

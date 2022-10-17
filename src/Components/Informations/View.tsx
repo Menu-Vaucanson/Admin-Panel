@@ -62,14 +62,14 @@ function View() {
 							<YAxis dataKey="Number" tick={{ fill: '#F5FEF5' }} tickLine={{ stroke: '#F5FEF5' }} />
 							<Tooltip content={<CustomTooltip />} />
 							<Area strokeWidth={4} type="monotone" dataKey="Number" stroke="#08A47C" dot={{ strokeWidth: 1 }} fillOpacity={1} fill="url(#ColorNumber)" />
-							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="80%"/>
+							<Line type="monotone" dataKey="globalAverage" stroke="#E74855" strokeWidth={4} dot={false} activeDot={false} opacity="90%" />
 						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
 				<div className='legend'>
 					<div className='legendTickLine'></div>
-						Moyenne : {dataset[0].globalAverage}
-					</div>
+					Moyenne : {dataset[0].globalAverage}
+				</div>
 			</div>
 		)
 	}
@@ -88,16 +88,16 @@ function View() {
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ Date: Date, Number: number, globalAverage?:number }> = []
+				let dataset: Array<{ Date: Date, Number: number, globalAverage?: number }> = []
 				//avrange
-				let averageMonth : number = 0;
+				let averageMonth: number = 0;
 				let numberAverage: number = 0;
 				res.data.data.forEach((element: { ip: string, date: Date, request: { any } }) => {
-					if (Object.keys(element.request).length === 0) { 
+					if (Object.keys(element.request).length === 0) {
 						return;
 					}
 					//avrange
-					averageMonth ++;
+					averageMonth++;
 					const date = new Date(element.date);
 					const index = dataset.findIndex(v => new Date(v.Date).getDate() === date.getDate());
 					if (index !== -1) {
@@ -110,7 +110,7 @@ function View() {
 				});
 				//avrange
 				averageMonth = averageMonth / numberAverage;
-				dataset.forEach(element  => {
+				dataset.forEach(element => {
 					element.globalAverage = parseFloat(averageMonth.toFixed(2));
 				});
 				resolve(Array.from(dataset));

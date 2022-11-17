@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function MenuProgressBar({ state }) {
 	const [P1, setP1] = useState("noneBar");

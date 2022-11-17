@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Menu, { Dish } from './MenuClass';
@@ -141,7 +141,7 @@ function SendNewMenu() {
 					resolve(null);
 				}).then(res => {
 					resolve(res);
-				})
+				});
 			});
 		}
 		SendMenu(setDatas()).then(res => {
@@ -160,14 +160,14 @@ function SendNewMenu() {
 						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
 					</>);
 			}
-		})
+		});
 	}, [setContent]);
 
 	return (
 		<div className='SendNewMenu'>
 			{Content}
 		</div>
-	)
+	);
 }
 
 export default SendNewMenu;

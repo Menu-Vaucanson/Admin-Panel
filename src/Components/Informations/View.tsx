@@ -11,7 +11,6 @@ function View() {
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
 
-
 	function drawData(dataset: any) {
 		function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
 			const dateToText = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
@@ -26,7 +25,6 @@ function View() {
 			}
 			return null;
 		};
-
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -66,11 +64,16 @@ function View() {
 						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
-				<div className='legend'>
-					<div className='legendTickLine'></div>
-					Moyenne : {dataset[0].globalAverage}
+				<div className='legends'>
+					<div className='legend'>
+						<div className='legendTickLine'></div>
+						Moyenne : {dataset[0].globalAverage}
+					</div>
+					<div className='legend'>
+						Total : {dataset[0].Numberview}
+					</div>
 				</div>
-			</div>
+			</div >
 		);
 	}
 	const [View, setView] = useState(
@@ -88,7 +91,9 @@ function View() {
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			await axios.post('https://menuvox.fr:8081/logs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ Date: Date, Number: number, globalAverage?: number }> = []
+				let dataset: Array<{
+					Date: Date, Number: number, Numberview?: number, globalAverage?: number
+				}> = []
 				//avrange
 				let averageMonth: number = 0;
 				let numberAverage: number = 0;
@@ -112,6 +117,7 @@ function View() {
 				averageMonth = averageMonth / numberAverage;
 				dataset.forEach(element => {
 					element.globalAverage = parseFloat(averageMonth.toFixed(2));
+					element.Numberview = res.data.data.length;
 				});
 				resolve(Array.from(dataset));
 			}).catch(err => {

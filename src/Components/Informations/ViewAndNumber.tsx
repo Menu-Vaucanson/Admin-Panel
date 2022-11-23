@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { TooltipProps, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './MonthComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 
 function ViewAndNumber() {

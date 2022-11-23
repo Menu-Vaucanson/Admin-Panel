@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ComposedChart, CartesianGrid } from 'recharts';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './MonthComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 
 function AverageRate() {
@@ -87,7 +87,7 @@ function AverageRate() {
 			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
-				let averageMonth : number = 0;
+				let averageMonth: number = 0;
 				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);

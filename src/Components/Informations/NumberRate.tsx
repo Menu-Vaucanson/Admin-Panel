@@ -1,9 +1,9 @@
-import { TooltipProps, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, ComposedChart } from 'recharts';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './MonthComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 function NumberRate() {
 	let month = new Date().getMonth() + 1;

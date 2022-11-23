@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from 'react';
+import { Pie, PieChart, ResponsiveContainer, Sector } from 'recharts';
 
-import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 import MonthComp from './MonthComp';
+import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 function Platform() {
 	let month = new Date().getMonth() + 1;

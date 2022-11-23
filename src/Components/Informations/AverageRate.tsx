@@ -120,7 +120,7 @@ function AverageRate() {
 				});
 				resolve(dataset);
 			}).catch(err => {
-				console.log(err);
+				console.error(err);
 				resolve(err.request.status);
 			});
 		});

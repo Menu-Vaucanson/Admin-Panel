@@ -91,7 +91,7 @@ function ViewAndNumber() {
 			await axios.post('https://menuvox.fr:8081/ratesLogs/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				resolve(res.data.data);
 			}).catch(err => {
-				console.log(err);
+				console.error(err);
 				resolve(err.request.status);
 			});
 		});

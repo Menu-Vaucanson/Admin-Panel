@@ -37,7 +37,6 @@ function NumberRate() {
 			}
 			return null;
 		};
-		console.log(dataset);
 		return (
 			<div className='Chart'>
 				<RefreshComp callback={refresh} pingColor={color} />
@@ -77,9 +76,14 @@ function NumberRate() {
 						</ComposedChart>
 					</ResponsiveContainer>
 				</div>
-				<div className='legend'>
-					<div className='legendTickLine'></div>
-					Moyenne : {dataset[0].globalAverage}
+				<div className='legends'>
+					<div className='legend'>
+						<div className='legendTickLine'></div>
+						Moyenne : {dataset[0].globalAverage}
+					</div>
+					<div className='legend'>
+						Total : {dataset[0].Numberview}
+					</div>
 				</div>
 			</div>
 		)
@@ -88,7 +92,10 @@ function NumberRate() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
 			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
-				let dataset: Array<{ Date: Date, Number: number, globalAverage?: number }> = [];
+				let dataset: Array<{
+					Date: Date, Number: number, globalAverage?: number, Numberview?: number;
+				}> = [];
+				let NumberRate = 0;
 				let averageMonth: number = 0;
 				let numberAverage: number = 0;
 				res.data.data.forEach((element: any) => {
@@ -98,6 +105,7 @@ function NumberRate() {
 					averageMonth += parseFloat(element[1].length);
 					numberAverage++;
 					dataset.push({ Date: date, Number: number })
+					NumberRate += number;
 				});
 				dataset.sort((a, b) => {
 					const nameA: Date = a.Date;
@@ -114,6 +122,7 @@ function NumberRate() {
 				averageMonth = averageMonth / numberAverage;
 				dataset.forEach(element => {
 					element.globalAverage = parseFloat(averageMonth.toFixed(2));
+					element.Numberview = NumberRate;
 				});
 				resolve(dataset);
 			}).catch(err => {

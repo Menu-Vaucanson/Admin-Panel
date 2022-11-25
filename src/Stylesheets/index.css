@@ -737,6 +737,18 @@ a {
 	color: white;
 }
 
+.DayEvening {
+	width: 6vh;
+	height: 6vh;
+	position: absolute;
+	top: 9.5vh;
+	right: 6vw;
+	cursor: pointer;
+	padding: 2vh 2vh;
+	border-radius: 50%;
+}
+
+
 @media (min-width: 600px) {
 	.green:hover {
 		background-color: #08A47C;

@@ -1,16 +1,23 @@
+/*todo
+resolve issu with useState (isEvening)
+remove callback 2 in DayEvening
+*/
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
+import DayEvening from './dayEveningComp';
 
 import MonthComp from './MonthComp';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
 
 function NumberRate() {
+	// const dayEvening = <DayEvening callback={refresh} />;
 	let month = new Date().getMonth() + 1;
 	const color = '#4775FF';
 
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
-
+	const [isEvening, setEvening] = useState(false);
 	const [Rate, setRate] = useState(
 		<div>
 			<div className='rotateError'>
@@ -18,6 +25,7 @@ function NumberRate() {
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />
+				<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
 				<div className='ChartError'>Récupération des données...</div >
 			</div>
 		</div>
@@ -44,6 +52,7 @@ function NumberRate() {
 					month = m;
 					refresh();
 				}} />
+				<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
 				<div className='PageTitle'>
 					Nombres de notes
 				</div>
@@ -91,7 +100,9 @@ function NumberRate() {
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+			console.log('get', isEvening);
+			const link = isEvening ? 'https://menuvox.fr:8081/ratesEvening/' : 'https://menuvox.fr:8081/rates/'
+			await axios.post(link + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{
 					Date: Date, Number: number, globalAverage?: number, Numberview?: number;
 				}> = [];
@@ -149,6 +160,7 @@ function NumberRate() {
 									month = m;
 									refresh();
 								}} />
+								<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
 								<div className='ChartError'>
 									Aucune donnée n'est disponible pour {Months[month]}
 								</div>
@@ -184,7 +196,6 @@ function NumberRate() {
 		//!\\ Don't pass any arg that need the "RefreshComp" component, to prevent infinite refresh
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
 
 	return Rate;
 }

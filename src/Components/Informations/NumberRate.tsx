@@ -1,23 +1,23 @@
-/*todo
-resolve issu with useState (isEvening)
-remove callback 2 in DayEvening
-*/
-
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts';
-import DayEvening from './dayEveningComp';
 
 import MonthComp from './MonthComp';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
+import DayEvening from './dayEveningComp';
 
 function NumberRate() {
-	// const dayEvening = <DayEvening callback={refresh} />;
 	let month = new Date().getMonth() + 1;
 	const color = '#4775FF';
-
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
-	const [isEvening, setEvening] = useState(false);
+
+	let isEvening = false;
+
+	function dayEvenSwitch(v: boolean) {
+		isEvening = v;
+		refresh();
+	}
+
 	const [Rate, setRate] = useState(
 		<div>
 			<div className='rotateError'>
@@ -25,7 +25,7 @@ function NumberRate() {
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />
-				<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
+				<DayEvening callback={dayEvenSwitch} />
 				<div className='ChartError'>Récupération des données...</div >
 			</div>
 		</div>
@@ -52,7 +52,7 @@ function NumberRate() {
 					month = m;
 					refresh();
 				}} />
-				<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
+				<DayEvening callback={dayEvenSwitch} />
 				<div className='PageTitle'>
 					Nombres de notes
 				</div>
@@ -100,9 +100,8 @@ function NumberRate() {
 	function getData(month: number) {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			console.log('get', isEvening);
-			const link = isEvening ? 'https://menuvox.fr:8081/ratesEvening/' : 'https://menuvox.fr:8081/rates/'
-			await axios.post(link + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+			const address = isEvening ? 'https://menuvox.fr:8081/ratesEvening/' : 'https://menuvox.fr:8081/rates/';
+			await axios.post(address + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{
 					Date: Date, Number: number, globalAverage?: number, Numberview?: number;
 				}> = [];
@@ -112,7 +111,7 @@ function NumberRate() {
 				res.data.data.forEach((element: any) => {
 					const date = new Date(D.getFullYear(), month - 1, element[0]);
 					let number = element[1].length;
-					//avrange
+					// Average
 					averageMonth += parseFloat(element[1].length);
 					numberAverage++;
 					dataset.push({ Date: date, Number: number })
@@ -160,9 +159,9 @@ function NumberRate() {
 									month = m;
 									refresh();
 								}} />
-								<DayEvening callback={setEvening} callback2={refresh} state={isEvening} />
+								<DayEvening callback={dayEvenSwitch} />
 								<div className='ChartError'>
-									Aucune donnée n'est disponible pour {Months[month]}
+									{Months[month] ? `Aucune donnée n'est disponible pour {Months[month]}` : 'Aucune donnée n\'est disponible'}
 								</div>
 							</div>
 						</div>

@@ -1,15 +1,17 @@
-import Refresh from '../../Assets/arrow.svg';
+import { useState } from 'react';
 
-function DayEvening({ callback, callback2, state }) {
-    function active() {
-        console.log(state);
-        callback(!state);
-        console.log(!state);
-        callback2();
+import Moon from '../../Assets/Moon.svg';
+import Sun from '../../Assets/Sun.svg';
 
-    }
-    return (
-        <img src={Refresh} alt='days night' className='DayEvening' onClick={active} id='DayEveningButton' />
-    )
+function DayEvening({ callback }) {
+	const [isEven, setIsEven] = useState(false);
+	function active() {
+		setIsEven(old => !old);
+		callback(!isEven);
+	}
+
+	return (
+		<img src={isEven ? Moon : Sun} alt='Alterner la vue midi/soir' className='DayEvening' onClick={active} />
+	);
 }
 export default DayEvening;

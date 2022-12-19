@@ -156,7 +156,7 @@ function SendNewMenu() {
 			} else {
 				setContent(
 					<>
-						<div>Erreur, le menu n'a pas pu être distribué, consultez la console pour plus d'infos.</div>
+						<div>Erreur, le menu n'a pas pu être distribué, vos permissions sont insuffisantes.</div>
 						<Link to={'/'} className='MenuSentButton'>Retourner au menu</Link>
 					</>);
 			}

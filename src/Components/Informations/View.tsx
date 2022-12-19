@@ -8,8 +8,8 @@ import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './Refr
 function View() {
 	let month = new Date().getMonth() + 1;
 	const color = "#08A47C";
-
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+
 
 	function drawData(dataset: any) {
 		function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
@@ -145,7 +145,7 @@ function View() {
 									refresh();
 								}} />
 								<div className='ChartError'>
-									Aucune donnée n'est disponible pour {Months[month]}
+									{Months[month] ? `Aucune donnée n'est disponible pour {Months[month]}` : 'Aucune donnée n\'est disponible'}
 								</div>
 							</div>
 						</div>

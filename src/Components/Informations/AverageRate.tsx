@@ -4,13 +4,19 @@ import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, 
 
 import MonthComp from './MonthComp';
 import RefreshComp, { startRefreshAnimation, stopRefreshAnimation } from './RefreshComp';
-
+import DayEvening from './dayEveningComp';
 
 function AverageRate() {
 	let month = new Date().getMonth() + 1;
 	const color = '#FFC482';
-
 	const Months = ['Décembre', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre'];
+
+	let isEvening = false;
+
+	function dayEvenSwitch(v: boolean) {
+		isEvening = v;
+		refresh();
+	}
 
 	const [Rate, setRate] = useState(
 		<div>
@@ -19,6 +25,7 @@ function AverageRate() {
 			</div>
 			<div className='ChartContainer'>
 				<RefreshComp callback={refresh} pingColor={color} />
+				<DayEvening callback={dayEvenSwitch} />
 				<div className='ChartError'>Récupération des données...</div >
 			</div>
 		</div>
@@ -46,6 +53,7 @@ function AverageRate() {
 					month = m;
 					refresh();
 				}} />
+				<DayEvening callback={dayEvenSwitch} />
 				<div className='PageTitle'>
 					Moyenne des notes
 				</div>
@@ -85,7 +93,8 @@ function AverageRate() {
 	function getData() {
 		return new Promise(async (resolve) => {
 			const D = new Date();
-			await axios.post('https://menuvox.fr:8081/rates/' + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
+			const address = isEvening ? 'https://menuvox.fr:8081/ratesEvening/' : 'https://menuvox.fr:8081/rates/';
+			await axios.post(address + month, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).then(res => {
 				let dataset: Array<{ globalAverage?: any, Date: any, Average: any }> = [];
 				let averageMonth: number = 0;
 				let numberAverage: number = 0;
@@ -143,8 +152,9 @@ function AverageRate() {
 									month = m;
 									refresh();
 								}} />
+								<DayEvening callback={dayEvenSwitch} />
 								<div className='ChartError'>
-									Aucune donnée n'est disponible pour {Months[month]}
+									{Months[month] ? `Aucune donnée n'est disponible pour {Months[month]}` : 'Aucune donnée n\'est disponible'}
 								</div>
 							</div>
 						</div>

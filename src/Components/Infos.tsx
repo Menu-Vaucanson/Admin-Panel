@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 function Infos() {
 	return (
 		<div className="Info">

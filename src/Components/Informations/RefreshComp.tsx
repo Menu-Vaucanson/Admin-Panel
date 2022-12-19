@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Refresh from '../../Assets/arrow.svg';
+import Refresh from '../../Assets/Arrow.svg';
 
 function stopRefreshAnimation() {
 	(document.getElementById('RefreshButton') as HTMLElement).className = 'refreshIcon';

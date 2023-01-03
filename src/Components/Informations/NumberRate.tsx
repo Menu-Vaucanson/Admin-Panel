@@ -145,6 +145,9 @@ function NumberRate() {
 	function refresh() {
 		startRefreshAnimation();
 		return getData(month).then(data => {
+			console.log({ month });
+			console.log({ Months });
+			console.log(Months[month]);
 			stopRefreshAnimation();
 			if (data) {
 				if (data === 404) {
@@ -161,7 +164,7 @@ function NumberRate() {
 								}} />
 								<DayEvening callback={dayEvenSwitch} />
 								<div className='ChartError'>
-									{Months[month] ? `Aucune donnée n'est disponible pour {Months[month]}` : 'Aucune donnée n\'est disponible'}
+									{Months[month] ? `Aucune donnée n'est disponible pour ${Months[month]}` : 'Aucune donnée n\'est disponible'}
 								</div>
 							</div>
 						</div>

@@ -145,7 +145,7 @@ function View() {
 									refresh();
 								}} />
 								<div className='ChartError'>
-									{Months[month] ? `Aucune donnée n'est disponible pour {Months[month]}` : 'Aucune donnée n\'est disponible'}
+									{Months[month] ? `Aucune donnée n'est disponible pour ${Months[month]}` : 'Aucune donnée n\'est disponible'}
 								</div>
 							</div>
 						</div>

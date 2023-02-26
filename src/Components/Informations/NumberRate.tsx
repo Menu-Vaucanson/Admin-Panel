@@ -145,9 +145,6 @@ function NumberRate() {
 	function refresh() {
 		startRefreshAnimation();
 		return getData(month).then(data => {
-			console.log({ month });
-			console.log({ Months });
-			console.log(Months[month]);
 			stopRefreshAnimation();
 			if (data) {
 				if (data === 404) {

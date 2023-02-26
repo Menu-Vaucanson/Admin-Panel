@@ -137,7 +137,7 @@ function SendNewMenu() {
 		function SendMenu(data: any) {
 			return new Promise(resolve => {
 				axios.post(url + `menus/${data.date.split('/')[1]}/${data.date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string), menu: data }).catch(err => {
-					console.log(err);
+					console.error(err);
 					resolve(null);
 				}).then(res => {
 					resolve(res);

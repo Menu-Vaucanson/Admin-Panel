@@ -17,7 +17,7 @@ function LoginPage() {
 	function Send(token: string): Promise<Array<any>> {
 		return new Promise(resolve => {
 			axios.post(`${url}/login`, { 'jwt': token }).catch(err => {
-				console.log(err);
+				console.error(err);
 				resolve([false, err]);
 			}).then(response => {
 				if (typeof response == 'undefined') {

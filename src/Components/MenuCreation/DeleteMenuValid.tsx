@@ -13,7 +13,7 @@ function DeleteMenuValid() {
 		function DeleteMenu() {
 			return new Promise(resolve => {
 				axios.post(url + `deleteMenus/${date.split('/')[1]}/${date.split('/')[0]}`, { jwt: JSON.parse(window.localStorage.getItem('jwt') as string) }).catch(err => {
-					console.log(err);
+					console.error(err);
 					resolve(null);
 				}).then(res => {
 					resolve(res);

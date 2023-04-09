@@ -1,8 +1,8 @@
 import blueDark from './blueDark';
-import redDark from './redDark';
 import greenDark from './greenDark';
-import yellowDark from './yellowDark';
 import halloweenDark from './halloweenDark';
+import redDark from './redDark';
+import yellowDark from './yellowDark';
 
 function getThemesDark() {
 	const themes = [

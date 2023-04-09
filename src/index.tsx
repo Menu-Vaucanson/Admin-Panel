@@ -1,12 +1,12 @@
+import axios from 'axios';
+import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { useState } from 'react';
-import axios from 'axios';
 
 import './Stylesheets/index.css';
 
-import Main from './Components/Main';
 import Logo from './Assets/Logo.svg';
+import Main from './Components/Main';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 

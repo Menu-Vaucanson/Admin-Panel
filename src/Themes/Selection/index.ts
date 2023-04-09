@@ -1,8 +1,8 @@
 import blue from './blue';
-import red from './red';
 import green from './green';
-import yellow from './yellow';
 import halloween from './halloween';
+import red from './red';
+import yellow from './yellow';
 
 function getThemes() {
 	const themes = [

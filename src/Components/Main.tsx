@@ -1,20 +1,20 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import MenuBar from './MenuBar';
-import Home from './Home';
-import Infos from './Infos';
 import Admin from './Admin';
-import NewMenu from './MenuCreation/NewMenu';
-import NewMenuValid from './MenuCreation/NewMenuValid';
 import E404 from './E404';
+import Home from './Home';
 import AverageRate from './Informations/AverageRate';
-import View from './Informations/View';
 import NumberRate from './Informations/NumberRate';
+import Platform from './Informations/Platform';
+import View from './Informations/View';
 import ViewAndNumber from './Informations/ViewAndNumber';
-import SendNewMenu from './MenuCreation/SendNewMenu';
+import Infos from './Infos';
+import MenuBar from './MenuBar';
 import DeleteMenu from './MenuCreation/DeleteMenu';
 import DeleteMenuValid from './MenuCreation/DeleteMenuValid';
-import Platform from './Informations/Platform';
+import NewMenu from './MenuCreation/NewMenu';
+import NewMenuValid from './MenuCreation/NewMenuValid';
+import SendNewMenu from './MenuCreation/SendNewMenu';
 
 function Main() {
 	return (

@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
-import CustomCheck from './CustomCheck';
-import MenuProgressBar from './MenuProgressBar';
 import getThemes from '../../Themes/Selection/index';
 import getThemesDark from '../../Themes/SelectionDark/index';
+import CustomCheck from './CustomCheck';
+import MenuProgressBar from './MenuProgressBar';
+
 import '../../Themes/Light/index.ts';
 import '../../Themes/Dark/index.ts';
 

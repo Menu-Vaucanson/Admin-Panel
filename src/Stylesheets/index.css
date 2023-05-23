@@ -335,7 +335,7 @@ a {
 
 .MenuProgressBar div:nth-child(2n) {
 	width: 30vw;
-	height: 2vh;
+	height: 1vw;
 	z-index: 0;
 }
 
@@ -373,7 +373,7 @@ a {
 .NextButton {
 	background-color: black;
 	width: 4vw;
-	height: 1vh;
+	height: 0.5vw;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
